@@ -1,4 +1,5 @@
 
+
 ::NewChess <- function () {
 
     local table = {
@@ -9,9 +10,7 @@
         }
 
         function update() {
-
             board.update();
-            board.draw();
         }
     }
 

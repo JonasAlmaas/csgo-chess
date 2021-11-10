@@ -4,28 +4,41 @@
 ::MODULE_EXT <- ".nut";
 ::IS_DEBUGGING <- true;
 
+::ALPHABET <- {
+    UPPER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+    LOWER = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+}
 
 /*
     Global includes
 */
 ::SCRIPTS_MANIFEST_UTILITIES <- [
-    "utilities/console.nut",
+    "utilities/console",
+    "utilities/custom_entities"
     "utilities/dynamic_text",
-    "utilities/eventlistener.nut",
-    "utilities/player.nut",
-    "utilities/utils.nut",
+    "utilities/eventlistener",
+    "utilities/player",
+    "utilities/utils",
 ]
 
 ::SCRIPTS_MANIFEST_CHESS <- [
-    "chess/main.nut",
-    "chess/board.nut",
+    "chess/main",
+    "chess/board/main",
+    "chess/board/renderer",
+    "chess/pieces/base",
+    "chess/pieces/pawn",
+    "chess/pieces/knight",
+    "chess/pieces/rook",
+    "chess/pieces/bishop",
+    "chess/pieces/queen",
+    "chess/pieces/king",
 ]
 
 ::include_scripts <- function() {
 
-    local include_manifest = function(manifest){
+    local include_manifest = function(manifest) {
         foreach(script in manifest){
-            DoIncludeScript(BASE_FOLDER + script, null);
+            DoIncludeScript(BASE_FOLDER + script + MODULE_EXT, null);
         }
     }
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)

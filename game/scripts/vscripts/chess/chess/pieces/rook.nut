@@ -1,8 +1,8 @@
 
-::NewPawn <- function (team, pos) {
+::NewRook <- function (team, pos) {
 
     local model = NewPropDynamic();
-    model.setModel("models/chess/pieces/pawn.mdl");
+    model.setModel("models/chess/pieces/rook.mdl");
     if (team == "white") {
         model.setColor([230, 230, 230]);
     } else {
@@ -10,7 +10,7 @@
     }
 
     local piece = {
-        type = "pawn",
+        type = "rook",
         team = team,
         model = model,
         pos = pos,
