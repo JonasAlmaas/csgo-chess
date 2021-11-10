@@ -1,0 +1,47 @@
+# ignore everything
+*
+
+# except folders
+!*/
+
+# except files folder
+!game/**
+!images/**
+
+# except map
+!maps/**/*.vmf
+!maps/**/*.unpacked
+
+# except Material Source
+!source_files/materials/**/*.blend
+!source_files/materials/**/*.psd
+!source_files/materials/**/*.png
+!source_files/materials/**/*.jpg
+!source_files/materials/**/*.tga
+!source_files/materials/**/*.bmp
+!source_files/materials/**/*.exr
+!source_files/materials/**/*.sbs
+!source_files/materials/**/*.sbsar
+!source_files/materials/**/*.tgd
+!source_files/materials/**/*.ai
+
+# except Model Source
+!source_files/models/**/*.blend
+!source_files/models/**/*.max
+!source_files/models/**/*.fbx
+!source_files/models/**/*.obj
+
+# except Misc Source
+!source_files/misc/**
+
+# except Sound Source
+!source_files/sound/**/*.mp3
+!source_files/sound/**/*.wav
+
+# except files
+!.gitignore
+!.gitattributes
+!/**.txt
+
+# ignore autosave
+**/.autosave/
