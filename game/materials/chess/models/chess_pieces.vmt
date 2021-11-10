@@ -1,0 +1,4 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/chess_pieces"
+}
