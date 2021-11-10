@@ -1,0 +1,6 @@
+UnlitGeneric
+{
+	$basetexture "models/text/text_sheet_kanit_semibold_c"
+
+	$translucent 1
+}
