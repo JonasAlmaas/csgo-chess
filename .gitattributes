@@ -1,0 +1,27 @@
+# normalize line endings
+* text=auto
+# maps
+*.kv binary
+*.txt text
+# mapsrc
+*.vmf text
+# materials
+*.vmt text
+*.vtf binary
+# materialsrc
+*.psd binary
+*.png binary
+*.tga binary
+*.sbs binary
+# models
+*.mdl binary
+*.vvd binary
+*.phy binary
+*.sw.vtx binary
+*.dx80.vtx binary
+*.dx90.vtx binary
+# modelsrc
+*.blend binary
+# misc
+*.gitattributes text
+*.gitignore text
