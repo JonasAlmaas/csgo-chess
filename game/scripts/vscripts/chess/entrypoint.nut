@@ -40,4 +40,3 @@ function Precache() {
     self.PrecacheModel("models/text/kanit_semibold/upper/G.mdl")
     self.PrecacheModel("models/text/kanit_semibold/upper/H.mdl")
 }
-
