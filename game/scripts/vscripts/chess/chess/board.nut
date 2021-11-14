@@ -5,6 +5,10 @@
         pos = in_pos,
         scale = in_scale,
 
+        function reset() {
+            // Well, reset!
+        }
+
         function debug_draw() {
             local size = scale * 8;
 

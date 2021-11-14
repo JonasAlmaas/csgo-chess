@@ -44,14 +44,6 @@ include_scripts();
 
 ::initialized <- false;
 
-::reset_session <- function () {
-
-    utils_remove_decals();
-
-    if (player1) { player1.teleport(player1.spawn_pos); }
-    if (player2) { player2.teleport(player2.spawn_pos); }
-}
-
 ::update <- function () {
 
     calculate_tickrate();
@@ -72,6 +64,16 @@ include_scripts();
     game.update();
 
     dispatch_events();
+}
+
+::reset_session <- function () {
+
+    utils_remove_decals();
+
+    game.reset();
+
+    if (player1) { player1.teleport(player1.spawn_pos); }
+    if (player2) { player2.teleport(player2.spawn_pos); }
 }
 
 ::reset_player_references <- function () {

@@ -12,6 +12,10 @@
         function update() {
             board.debug_draw();
         }
+
+        function reset() {
+            board.reset();
+        }
     }
 
     return game;
