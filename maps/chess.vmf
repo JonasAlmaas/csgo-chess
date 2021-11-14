@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9122"
-	"mapversion" "70"
+	"mapversion" "82"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -14,13 +14,13 @@ viewsettings
 	"bSnapToGrid" "1"
 	"bShowGrid" "1"
 	"bShowLogicalGrid" "0"
-	"nGridSpacing" "128"
+	"nGridSpacing" "16"
 	"bShow3DGrid" "0"
 }
 world
 {
 	"id" "1"
-	"mapversion" "70"
+	"mapversion" "82"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -9040,7 +9040,7 @@ world
 		side
 		{
 			"id" "1015"
-			"plane" "(256 240 1408) (256 256 1408) (2304 256 1408)"
+			"plane" "(2304 256 1408) (2304 240 1408) (256 240 1408)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9051,7 +9051,7 @@ world
 		side
 		{
 			"id" "1016"
-			"plane" "(256 256 240) (256 240 240) (2304 240 240)"
+			"plane" "(2304 240 240) (2304 256 240) (256 256 240)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9062,7 +9062,7 @@ world
 		side
 		{
 			"id" "1017"
-			"plane" "(256 240 240) (256 256 240) (256 256 1408)"
+			"plane" "(256 256 1408) (256 240 1408) (256 240 240)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9073,7 +9073,7 @@ world
 		side
 		{
 			"id" "1018"
-			"plane" "(2304 256 240) (2304 240 240) (2304 240 1408)"
+			"plane" "(2304 240 1408) (2304 256 1408) (2304 256 240)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9084,7 +9084,7 @@ world
 		side
 		{
 			"id" "1019"
-			"plane" "(256 256 240) (2304 256 240) (2304 256 1408)"
+			"plane" "(2304 256 1408) (256 256 1408) (256 256 240)"
 			"material" "TOOLS/TOOLSSKYBOX"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9095,7 +9095,7 @@ world
 		side
 		{
 			"id" "1020"
-			"plane" "(2304 240 240) (256 240 240) (256 240 1408)"
+			"plane" "(256 240 1408) (2304 240 1408) (2304 240 240)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9115,8 +9115,8 @@ world
 		"id" "3407"
 		side
 		{
-			"id" "1032"
-			"plane" "(256 256 1408) (256 2048 1408) (256 2048 1424)"
+			"id" "1248"
+			"plane" "(256 2048 1408) (256 2048 1424) (256 256 1424)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 0 1 32] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9126,8 +9126,8 @@ world
 		}
 		side
 		{
-			"id" "1031"
-			"plane" "(2304 2048 1408) (2304 256 1408) (2304 256 1424)"
+			"id" "1247"
+			"plane" "(2304 256 1408) (2304 256 1424) (2304 2048 1424)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 0 1 32] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9137,8 +9137,8 @@ world
 		}
 		side
 		{
-			"id" "1030"
-			"plane" "(256 2048 1408) (256 256 1408) (2304 256 1408)"
+			"id" "1246"
+			"plane" "(256 256 1408) (2304 256 1408) (2304 2048 1408)"
 			"material" "TOOLS/TOOLSSKYBOX"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[1 0 0 -32] 0.25"
@@ -9148,8 +9148,8 @@ world
 		}
 		side
 		{
-			"id" "1029"
-			"plane" "(256 256 1424) (256 2048 1424) (2304 2048 1424)"
+			"id" "1245"
+			"plane" "(256 2048 1424) (2304 2048 1424) (2304 256 1424)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[1 0 0 -32] 0.25"
@@ -9159,8 +9159,8 @@ world
 		}
 		side
 		{
-			"id" "1028"
-			"plane" "(256 2048 1424) (256 2048 1408) (2304 2048 1408)"
+			"id" "1244"
+			"plane" "(256 2048 1408) (2304 2048 1408) (2304 2048 1424)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 0 1 32] 0.25"
 			"vaxis" "[1 0 0 -32] 0.25"
@@ -9170,8 +9170,8 @@ world
 		}
 		side
 		{
-			"id" "1027"
-			"plane" "(2304 256 1424) (2304 256 1408) (256 256 1408)"
+			"id" "1243"
+			"plane" "(2304 256 1408) (256 256 1408) (256 256 1424)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 0 1 32] 0.25"
 			"vaxis" "[1 0 0 -32] 0.25"
@@ -9192,7 +9192,7 @@ world
 		side
 		{
 			"id" "25"
-			"plane" "(240 256 1408) (240 2048 1408) (256 2048 1408)"
+			"plane" "(240 2048 1408) (256 2048 1408) (256 256 1408)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9203,7 +9203,7 @@ world
 		side
 		{
 			"id" "26"
-			"plane" "(240 2048 240) (240 256 240) (256 256 240)"
+			"plane" "(240 256 240) (256 256 240) (256 2048 240)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
@@ -9214,7 +9214,7 @@ world
 		side
 		{
 			"id" "27"
-			"plane" "(240 256 240) (240 2048 240) (240 2048 1408)"
+			"plane" "(240 2048 240) (240 2048 1408) (240 256 1408)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9225,7 +9225,7 @@ world
 		side
 		{
 			"id" "28"
-			"plane" "(256 2048 240) (256 256 240) (256 256 1408)"
+			"plane" "(256 256 240) (256 256 1408) (256 2048 1408)"
 			"material" "TOOLS/TOOLSSKYBOX"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9236,7 +9236,7 @@ world
 		side
 		{
 			"id" "29"
-			"plane" "(240 2048 240) (256 2048 240) (256 2048 1408)"
+			"plane" "(256 2048 240) (256 2048 1408) (240 2048 1408)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -9247,7 +9247,7 @@ world
 		side
 		{
 			"id" "30"
-			"plane" "(256 256 240) (240 256 240) (240 256 1408)"
+			"plane" "(240 256 240) (240 256 1408) (256 256 1408)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
@@ -10256,37 +10256,12 @@ entity
 }
 entity
 {
-	"id" "2582"
-	"classname" "light"
-	"_constant_attn" "0"
-	"_distance" "0"
-	"_fifty_percent_distance" "0"
-	"_hardfalloff" "0"
-	"_light" "255 255 255 200"
-	"_lightHDR" "-1 -1 -1 1"
-	"_lightscaleHDR" "1"
-	"_linear_attn" "0"
-	"_quadratic_attn" "1"
-	"_zero_percent_distance" "0"
-	"spawnflags" "0"
-	"style" "0"
-	"origin" "-768 1152 304"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 0]"
-	}
-}
-entity
-{
 	"id" "24"
 	"classname" "info_player_counterterrorist"
 	"angles" "0 180 0"
 	"enabled" "1"
 	"priority" "0"
-	"origin" "2080 1152 1040"
+	"origin" "2064 1152 1040"
 	editor
 	{
 		"color" "220 30 220"
@@ -10301,7 +10276,7 @@ entity
 	"classname" "info_player_counterterrorist"
 	"angles" "0 0 0"
 	"enabled" "1"
-	"origin" "480 1152 1040"
+	"origin" "496 1152 1040"
 	editor
 	{
 		"color" "220 30 220"
@@ -10317,7 +10292,7 @@ entity
 	"angles" "0 0 0"
 	"spawnflags" "0"
 	"targetname" "target_board"
-	"origin" "1280 1152 256"
+	"origin" "768 1664 256"
 	editor
 	{
 		"color" "220 30 220"
@@ -10331,7 +10306,7 @@ entity
 	"id" "147"
 	"classname" "env_tonemap_controller"
 	"targetname" "tonemap_global"
-	"origin" "-728 1128 264"
+	"origin" "-728 1192 280"
 	editor
 	{
 		"color" "220 30 220"
@@ -10354,7 +10329,7 @@ entity
 		"OnMapSpawn" "tonemap_globalSetTonemapPercentTarget800-1"
 		"OnMapSpawn" "tonemap_globalSetTonemapPercentBrightPixels30-1"
 	}
-	"origin" "-728 1144 264"
+	"origin" "-728 1192 296"
 	editor
 	{
 		"color" "220 30 220"
@@ -10376,7 +10351,7 @@ entity
 	"angles" "-62 93 0"
 	"pitch" "-62"
 	"SunSpreadAngle" "0"
-	"origin" "-728 1176 264"
+	"origin" "-728 1176 280"
 	editor
 	{
 		"color" "220 30 220"
@@ -10420,7 +10395,7 @@ entity
 	"rendercolor" "35 39 39"
 	"size" "32"
 	"use_angles" "1"
-	"origin" "-728 1160 264"
+	"origin" "-728 1176 264"
 	editor
 	{
 		"color" "255 0 0"
@@ -10442,7 +10417,7 @@ entity
 	"vignetteblurstrength" "0"
 	"vignetteend" "1.1"
 	"vignettestart" "0.8"
-	"origin" "-728 1112 264"
+	"origin" "-728 1192 264"
 	editor
 	{
 		"color" "255 255 255"
@@ -10459,7 +10434,7 @@ entity
 	"color" "200 208 210"
 	"disableallshadows" "0"
 	"distance" "72"
-	"origin" "-728 1192 264"
+	"origin" "-728 1160 264"
 	editor
 	{
 		"color" "220 30 220"
@@ -10474,7 +10449,7 @@ entity
 	"classname" "logic_script"
 	"Group00" "tr_orig_ply1"
 	"Group01" "tr_orig_ply2"
-	"targetname" "mainScript"
+	"targetname" "main_script"
 	"vscripts" "chess/entrypoint.nut"
 	"origin" "-808 1192 264"
 	editor
@@ -10495,7 +10470,7 @@ entity
 	"UseRandomTime" "0"
 	connections
 	{
-		"OnTimer" "mainScriptRunScriptCodeupdate()0-1"
+		"OnTimer" "main_scriptRunScriptCodeupdate()0-1"
 	}
 	"origin" "-808 1192 280"
 	editor
@@ -10523,7 +10498,7 @@ entity
 	"solid" "0"
 	"spawnflags" "256"
 	"targetname" "tr_orig_ply1"
-	"origin" "-808 1112 320"
+	"origin" "-808 1112 304"
 	editor
 	{
 		"color" "220 30 220"
@@ -10538,36 +10513,13 @@ entity
 	"classname" "info_target"
 	"angles" "0 0 0"
 	"targetname" "tr_spn_ply1"
-	"origin" "-808 1112 320"
+	"origin" "-808 1112 304"
 	editor
 	{
 		"color" "220 30 220"
 		"visgroupshown" "1"
 		"visgroupautoshown" "1"
 		"logicalpos" "[0 12500]"
-	}
-}
-entity
-{
-	"id" "2044"
-	"classname" "logic_eventlistener"
-	"EventName" "server_cvar"
-	"FetchEventData" "1"
-	"IsEnabled" "1"
-	"targetname" "event_server_cvar"
-	"TeamNum" "-1"
-	"vscripts" "chess/entrypoint.nut"
-	connections
-	{
-		"OnEventFired" "event_server_cvarRunScriptCodeOnEventFired(EVENT_SERVER_CVAR)0-1"
-	}
-	"origin" "-808 1136 280"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 1000]"
 	}
 }
 entity
@@ -10581,7 +10533,7 @@ entity
 	"targetname" "tr_lmm_ply1"
 	"TargetReference" "tr_spn_ply1"
 	"TargetScale" "1000"
-	"origin" "-808 1112 304"
+	"origin" "-808 1112 288"
 	editor
 	{
 		"color" "220 30 220"
@@ -10604,30 +10556,7 @@ entity
 	{
 		"OnEventFired" "event_bullet_impactRunScriptCodeOnEventFired(EVENT_BULLET_IMPACT)0-1"
 	}
-	"origin" "-808 1112 280"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 1000]"
-	}
-}
-entity
-{
-	"id" "2050"
-	"classname" "logic_eventlistener"
-	"EventName" "player_hurt"
-	"FetchEventData" "1"
-	"IsEnabled" "1"
-	"targetname" "event_player_hurt"
-	"TeamNum" "-1"
-	"vscripts" "chess/entrypoint.nut"
-	connections
-	{
-		"OnEventFired" "event_player_hurtRunScriptCodeOnEventFired(EVENT_PLAYER_HURT)0-1"
-	}
-	"origin" "-808 1136 264"
+	"origin" "-808 1128 264"
 	editor
 	{
 		"color" "220 30 220"
@@ -10665,7 +10594,7 @@ entity
 	"classname" "info_target"
 	"angles" "0 0 0"
 	"targetname" "tr_spn_ply2"
-	"origin" "-808 1136 320"
+	"origin" "-808 1128 304"
 	editor
 	{
 		"color" "220 30 220"
@@ -10691,7 +10620,7 @@ entity
 	"solid" "0"
 	"spawnflags" "256"
 	"targetname" "tr_orig_ply2"
-	"origin" "-808 1136 320"
+	"origin" "-808 1128 304"
 	editor
 	{
 		"color" "220 30 220"
@@ -10711,7 +10640,7 @@ entity
 	"targetname" "tr_lmm_ply2"
 	"TargetReference" "tr_spn_ply2"
 	"TargetScale" "1000"
-	"origin" "-808 1136 304"
+	"origin" "-808 1128 288"
 	editor
 	{
 		"color" "220 30 220"

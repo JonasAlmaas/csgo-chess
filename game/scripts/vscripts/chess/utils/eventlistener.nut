@@ -2,16 +2,12 @@
     Eventlistening
 */
 
-EVENT_PLAYER_HURT <- 1;
 EVENT_BULLET_IMPACT <- 2;
 EVENT_PLAYER_SAY <- 3;
-EVENT_SERVER_CVAR <- 4;
 
 event_template<-{};
-event_template[EVENT_PLAYER_HURT]<-["player_hurt",["userid","attacker","health","armor","weapon","dmg_health","dmg_armor","hitgroup"]];
 event_template[EVENT_BULLET_IMPACT]<-["bullet_impact",["userid","vector"]];
 event_template[EVENT_PLAYER_SAY]<-["player_say",["userid","text"]];
-event_template[EVENT_SERVER_CVAR]<-["server_cvar",["cvarname","cvarvalue"]];
 
 ::PLAYER_1_EVENTS <- {
     BULLET_FIERED = false,
@@ -20,7 +16,7 @@ event_template[EVENT_SERVER_CVAR]<-["server_cvar",["cvarname","cvarvalue"]];
     BULLET_FIERED = false,
 }
 
-::DispatchEvents <- function() {
+::dispatch_events <- function() {
     PLAYER_1_EVENTS.BULLET_FIERED = false;
     PLAYER_2_EVENTS.BULLET_FIERED = false;
 }
@@ -31,11 +27,11 @@ event_template[EVENT_SERVER_CVAR]<-["server_cvar",["cvarname","cvarvalue"]];
 ::trace_orig_ply1 <- null;
 ::trace_orig_ply2 <- null;
 function update_player_traces() {
-    
+
     // Player 1
     if (player1 != null) {
         if (trace_orig_ply1 != null) {
-            player1.forwardVector = trace_orig_ply1.GetForwardVector();
+            player1.forward_vector = trace_orig_ply1.GetForwardVector();
         }
         else if (trace_orig_ply1 == null && EntityGroup) {
             trace_orig_ply1 = EntityGroup[0];
@@ -43,11 +39,11 @@ function update_player_traces() {
             EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
         }
     }
-    
+
     // Player 2
     if (player2 != null) {
         if (trace_orig_ply2 != null) {
-            player2.forwardVector = trace_orig_ply2.GetForwardVector();
+            player2.forward_vector = trace_orig_ply2.GetForwardVector();
         }
         else if (trace_orig_ply2 == null && EntityGroup) {
             trace_orig_ply2 = EntityGroup[1];
@@ -65,19 +61,13 @@ EVENT_LAST_BULLET_TIME <- Time();
     if(EVENT_LAST_BULLET_TIME != Time()){
         PLAYER_1_EVENTS.BULLET_FIERED = true;
         PLAYER_2_EVENTS.BULLET_FIERED = true;
-        
+
         EVENT_LAST_BULLET_TIME = Time();
     }
 }
 
-::OnGameEvent_player_hurt <- function(userid, attacker, health, armor, weapon, dmg_health, dmg_armor, hitgroup) {}
-
 ::OnGameEvent_player_say <- function(userid, text) {
     console.chat(userid + " : " + text);
-}
-
-::OnGameEvent_server_cvar <- function(name, value) {
-    console.chat(name + " : " + value);
 }
 
 ::OnEventFired <- function(EVENT_ID) {

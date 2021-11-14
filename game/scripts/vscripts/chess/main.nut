@@ -1,37 +1,24 @@
 /*
     Global constants
 */
-::MODULE_EXT <- ".nut";
 ::IS_DEBUGGING <- true;
 
-::ALPHABET <- {
-    UPPER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
-    LOWER = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-}
 
 /*
     Global includes
 */
 ::SCRIPTS_MANIFEST_UTILITIES <- [
-    "utilities/console",
-    "utilities/custom_entities"
-    "utilities/dynamic_text",
-    "utilities/eventlistener",
-    "utilities/player",
-    "utilities/utils",
+    "utils/console",
+    "utils/custom_entities",
+    "utils/eventlistener",
+    "utils/player",
+    "utils/utils",
 ]
 
 ::SCRIPTS_MANIFEST_CHESS <- [
-    "chess/main",
-    "chess/board/main",
-    "chess/board/renderer",
-    "chess/pieces/base",
-    "chess/pieces/pawn",
-    "chess/pieces/knight",
-    "chess/pieces/rook",
-    "chess/pieces/bishop",
-    "chess/pieces/queen",
-    "chess/pieces/king",
+    "chess/board"
+    "chess/main"
+    "chess/pieces"
 ]
 
 ::include_scripts <- function() {
@@ -53,63 +40,53 @@ include_scripts();
 ::player1 <- null;
 ::player2 <- null;
 
-::chess <- null;
+::game <- null;
 
-::Initialized <- false;
+::initialized <- false;
 
-//Reset current session to default state
-::reset_session <- function() {
+::reset_session <- function () {
 
-    remove_decals();
+    utils_remove_decals();
 
-    chess.reset()
-
-    if (player1 != null) {
-        player1.weakTeleport(player1.spawn_pos)
-    }
-    
-    if (player2 != null) {
-        player2.weakTeleport(player2.spawn_pos)
-    }
+    if (player1) { player1.teleport(player1.spawn_pos); }
+    if (player2) { player2.teleport(player2.spawn_pos); }
 }
 
-
-// Called every tick by the server
-::update <- function() {
+::update <- function () {
 
     calculate_tickrate();
-    if (!Initialized)
-    {
-        chess = NewChess();
 
-        Initialized = true;
-    }
-    else if (player1 == null || player2 == null) {
-        reset_player_references()
+    if (!initialized) {
+
+        game = new_game()
+
+        initialized = true;
     }
 
-    // First
-    update_player_traces()
+    if (player1 == null || player2 == null) {
+        reset_player_references();
+    }
 
-    chess.update()
+    update_player_traces();
 
-    // Last
-    DispatchEvents()
+    game.update();
+
+    dispatch_events();
 }
 
-::reset_player_references <- function() {
+::reset_player_references <- function () {
 
     player1 = null;
     player2 = null;
 
     local target = null;
-    while((target = Entities.FindByClassname(target, "*player*")) != null) {
+    while ((target = Entities.FindByClassname(target, "*player*")) != null) {
         if (target.GetClassname() == "player") {
             if (player1 == null) {
-                player1 = NewPlayer(target);
+                player1 = new_player(target);
             }
             else {
-                player2 = NewPlayer(target);
+                player2 = new_player(target);
             }
         }
     }
@@ -136,12 +113,4 @@ include_scripts();
             }
         }
     }
-}
-
-
-/*
-    Helper functions
-*/
-::remove_decals <- function(){
-    console.run("r_cleardecals");
 }

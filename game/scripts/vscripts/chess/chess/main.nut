@@ -1,18 +1,18 @@
 
+::new_game <- function() {
 
-::NewChess <- function () {
+    local target = null;
+    target = Entities.FindByName(target, "target_board");
+    local board_pos = target.GetOrigin();
 
-    local table = {
-        board = NewBoard(),
-
-        function reset() {
-            board.reset()
-        }
+    local game = {
+        board = new_board(board_pos, 128),
+        pieces = [],
 
         function update() {
-            board.update();
+            board.debug_draw();
         }
     }
 
-    return table;
+    return game;
 }
