@@ -7,18 +7,26 @@
 /*
     Global includes
 */
+::SCRIPTS_MANIFEST_GENERAL <- [
+    "general/eventlistener",
+    "general/player",
+]
+
 ::SCRIPTS_MANIFEST_UTILITIES <- [
     "utils/console",
+    "utils/constants",
+    "utils/convertion",
     "utils/custom_entities",
-    "utils/eventlistener",
-    "utils/player",
-    "utils/utils",
+    "utils/debug_draw",
+    "utils/helpers",
+    "utils/math",
 ]
 
 ::SCRIPTS_MANIFEST_CHESS <- [
     "chess/board"
     "chess/main"
     "chess/pieces"
+    "chess/renderer"
 ]
 
 ::include_scripts <- function() {
@@ -28,6 +36,7 @@
             DoIncludeScript(BASE_FOLDER + script + MODULE_EXT, null);
         }
     }
+    include_manifest(SCRIPTS_MANIFEST_GENERAL)
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)
     include_manifest(SCRIPTS_MANIFEST_CHESS)
 }
