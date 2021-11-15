@@ -1,3 +1,4 @@
+
 ::console <- {
     function log(str) {
         printl( "[Script] " + Time() + " : " + str)

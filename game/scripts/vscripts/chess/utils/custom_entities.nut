@@ -16,7 +16,8 @@
             EntFireByHandle(handle, "Disable", "", 0.0, null, null);
         }
         function set_color(color) {
-            EntFireByHandle(ref, "Color", utils_list_to_string(color), 0.0, null, null);
+            
+            EntFireByHandle(ref, "Color", convertion.list_to_string(color), 0.0, null, null);
         }
         function set_model(path) {
             ref.SetModel(path);

@@ -10,7 +10,7 @@
         pieces = [],
 
         function update() {
-            board.debug_draw();
+            board.draw_debug();
         }
 
         function reset() {

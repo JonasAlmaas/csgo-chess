@@ -29,7 +29,7 @@ enum PIECE_TEAM {
 
         function get_world_pos(board_pos) {
             local half_cell = scale * 0.5;
-            return board_pos + util_vec_mul(pos, scale) + Vector(half_cell, half_cell);
+            return board_pos + math.vec_mul(pos, scale) + Vector(half_cell, half_cell);
         }
     }
 

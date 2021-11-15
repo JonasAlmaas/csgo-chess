@@ -1,32 +1,30 @@
 
-::highlight_cell <- function(board_pos, scale, cell_pos, color=[255,0,255], lines=20) {
+::highlight_cell <- function(board_pos, scale, cell_pos, color=[255,0,255], lines=30) {
     lines += 1;
 
-    local half_scale = scale * 0.5;
-    local offset = util_vec_mul(cell_pos, scale);
+    local offset = math.vec_mul(cell_pos, scale);
+    local c1 = board_pos + Vector(offset.x, -offset.y, GROUND_OFFSET);
+    local c2 = c1 + Vector(0, -scale);
+    local c3 = c1 + Vector(scale, -scale);
+    local c4 = c1 + Vector(scale);
 
-    local p1 = board_pos + Vector(offset.x, -offset.y, 0.1);
-    local p2 = p1 + Vector(0, -scale);
-    local p3 = p1 + Vector(scale, -scale);
-    local p4 = p1 + Vector(scale);
-
-    local step = (scale * 2) / lines;
-    local start_pos = p1 + Vector(-scale);
+    local step_size = (scale * 2) / lines;
+    local offset_pos = c1 + Vector(-scale);
 
     for (local i = 1; i < lines; i++) {
-        local start = start_pos + Vector(i * step);
-        local target = start + Vector(1, -1)
-        local hit = util_2D_intersection(start, target, p2, p3) + Vector(0,0,p1.z);
+        local p1 = offset_pos + Vector(i * step_size);
+        local p2 = p1 + Vector(1,-1);
 
-        if (start.x < p1.x) {
-            start = util_2D_intersection(start, target, p1, p2) + Vector(0,0,p1.z);
-        }
+        local hit = math.intersection_2D(p1, p2, c2, c3) + Vector(0,0,c1.z);
 
-        if (hit.x > p3.x) {
-            hit = util_2D_intersection(start, target, p3, p4) + Vector(0,0,p1.z);
-        }
+        if (p1.x < c1.x) { p1 = math.intersection_2D(p1, p2, c1, c2); }
+        if (hit.x > c3.x) { hit = math.intersection_2D(p1, p2, c3, c4); }
         
-        util_draw_line(start, hit, color, false);
+        p1.z = c1.z;
+        hit.z = c1.z;
+
+        debug_draw.line(p1, hit, color, false);
     }
-    util_draw_square(p1, p2, p3, p4, color, false);
+
+    debug_draw.square_outline(c1, c2, c3, c4, color, false);
 }

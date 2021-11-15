@@ -7,19 +7,16 @@
 /*
     Global includes
 */
-::SCRIPTS_MANIFEST_GENERAL <- [
-    "general/eventlistener",
-    "general/player",
-]
-
 ::SCRIPTS_MANIFEST_UTILITIES <- [
     "utils/console",
     "utils/constants",
     "utils/convertion",
     "utils/custom_entities",
     "utils/debug_draw",
-    "utils/helpers",
+    "utils/eventlistener",
     "utils/math",
+    "utils/player",
+    "utils/utils",
 ]
 
 ::SCRIPTS_MANIFEST_CHESS <- [
@@ -36,7 +33,6 @@
             DoIncludeScript(BASE_FOLDER + script + MODULE_EXT, null);
         }
     }
-    include_manifest(SCRIPTS_MANIFEST_GENERAL)
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)
     include_manifest(SCRIPTS_MANIFEST_CHESS)
 }
@@ -77,7 +73,7 @@ include_scripts();
 
 ::reset_session <- function () {
 
-    utils_remove_decals();
+    utils.remove_decals();
 
     game.reset();
 
