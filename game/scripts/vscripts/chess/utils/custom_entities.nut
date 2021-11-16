@@ -1,10 +1,15 @@
 
 ::new_prop_dynamic <- function () {
-    
-    local entity = Entities.CreateByClassname("prop_dynamic");
+
+    foreach (prop in custom_entities.prop_dynamic) {
+        if (prop.is_disabled) {
+            prop.enable();
+            return prop;
+        }
+    }
 
     local prop = {
-        ref = entity,
+        ref = Entities.CreateByClassname("prop_dynamic"),
         is_disabled = false,
 
         function enable() {
@@ -14,6 +19,10 @@
         function disable() {
             is_disabled = true;
             EntFireByHandle(ref, "Disable", "", 0.0, null, null);
+        }
+        function teleport(pos=null, ang=null) {
+            if (pos) { ref.SetOrigin(pos); }
+            if (ang) { ref.SetAngles(ang.x, ang.y, ang.z); }
         }
         function set_color(color) {
             EntFireByHandle(ref, "Color", convertion.list_to_string(color), 0.0, null, null);
@@ -25,6 +34,8 @@
             ref.__KeyValueFromFloat("modelscale", scale);
         }
     }
+
+    custom_entities.prop_dynamic.append(prop);
 
     return prop;
 }

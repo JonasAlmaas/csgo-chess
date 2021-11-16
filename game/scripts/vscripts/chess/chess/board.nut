@@ -1,5 +1,5 @@
 
-::GROUND_OFFSET <- 0.05;
+::GROUND_OFFSET <- 0.5;
 
 ::new_board <- function (in_pos, in_scale) {
 
@@ -7,12 +7,14 @@
         pos = in_pos,
         scale = in_scale,
 
-        delay = 10,
+        coord_text = new_coord_text(in_pos + Vector(0,0,GROUND_OFFSET), in_scale),
+
+        delay = 1,
         last_time = 0,
         highlisted_cell = Vector(),
 
         function reset() {
-            // Well, reset!
+            coord_text.reset();
         }
 
         function draw_debug() {

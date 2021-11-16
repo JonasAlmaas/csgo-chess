@@ -13,6 +13,7 @@
     "utils/convertion",
     "utils/custom_entities",
     "utils/debug_draw",
+    "utils/dynamic_text",
     "utils/eventlistener",
     "utils/math",
     "utils/player",
@@ -20,10 +21,11 @@
 ]
 
 ::SCRIPTS_MANIFEST_CHESS <- [
-    "chess/board"
-    "chess/main"
-    "chess/pieces"
-    "chess/renderer"
+    "chess/board",
+    "chess/coord_text",
+    "chess/main",
+    "chess/pieces",
+    "chess/renderer",
 ]
 
 ::include_scripts <- function() {

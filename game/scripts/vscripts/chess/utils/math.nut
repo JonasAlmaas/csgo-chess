@@ -6,6 +6,38 @@
     function vec_copy(v) {
         return Vector(v.x, v.y, v.z);
     }
+    function vec_rotate(vec, theta) {
+        theta = theta*(PI/180);
+        local newX = vec.x*cos(theta) - vec.y*sin(theta);
+        local newY = vec.x*sin(theta) + vec.y*cos(theta);
+        return Vector(newX, newY, vec.z);
+    }
+    function vec_rotate_pitch(vec, angX) {
+        local theta = angX*(PI/180);
+        local newX = vec.x*cos(theta) + vec.z*sin(theta);
+        local newZ = vec.z*cos(theta) - vec.x*sin(theta);
+        return Vector(newX, vec.y, newZ);
+    }
+    function vec_rotate_yaw(vec, angY) {
+        local theta = angY*(PI/180);
+        local newX = vec.x*cos(theta) - vec.y*sin(theta)
+        local newY = vec.x*sin(theta) + vec.y*cos(theta)
+        return Vector(newX, newY, vec.z)
+    }
+    function vec_rotate_roll(vec, angZ) {
+        local theta = angZ*(PI/180);
+        local newY = vec.y*cos(theta) - vec.z*sin(theta);
+        local newZ = vec.z*cos(theta) + vec.y*sin(theta);
+        return Vector(vec.x, newY, newZ);
+    }
+    // Rotate vector pitch, yaw, roll
+    function vec_rotate_3d(vec, ang){
+        vec = vec_rotate_roll(vec, ang.z)
+        vec = vec_rotate_pitch(vec, ang.x)
+        vec = vec_rotate_yaw(vec, ang.y)
+        return vec
+    }
+
     function sphere_to_cartesian(vec) {
         local theta = vec.y;
         local phi = vec.x + 90;

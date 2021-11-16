@@ -16,8 +16,7 @@
 
             foreach (piece in pieces) {
                 local pos = piece.get_world_pos(board.pos);
-                debug_draw.box(pos, Vector(-2,-2,-2), Vector(2,2,2));
-                // piece.update_position();
+                piece.teleport(pos);
             }
         }
 
