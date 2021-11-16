@@ -9,18 +9,22 @@
 
         function enable() {
             is_disabled = false;
-            EntFireByHandle(handle, "Enable", "", 0.0, null, null);
+            EntFireByHandle(ref, "Enable", "", 0.0, null, null);
         }
-        function disabled() {
+        function disable() {
             is_disabled = true;
-            EntFireByHandle(handle, "Disable", "", 0.0, null, null);
+            EntFireByHandle(ref, "Disable", "", 0.0, null, null);
         }
         function set_color(color) {
-            
             EntFireByHandle(ref, "Color", convertion.list_to_string(color), 0.0, null, null);
         }
         function set_model(path) {
             ref.SetModel(path);
         }
+        function set_scale(scale) {
+            ref.__KeyValueFromFloat("modelscale", scale);
+        }
     }
+
+    return prop;
 }
