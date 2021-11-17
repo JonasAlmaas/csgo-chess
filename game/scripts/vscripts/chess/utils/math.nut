@@ -3,7 +3,7 @@
     function vec_mul(vec, factor) {
         return Vector(vec.x * factor, vec.y * factor, vec.z * factor);
     }
-    function vec_copy(v) {
+    function vec_clone(v) {
         return Vector(v.x, v.y, v.z);
     }
     function vec_rotate(vec, theta) {

@@ -152,7 +152,7 @@ char_size_factor <- {
         width = width,
 
         function create(pos, ang) {
-            local offset_distance = math.vec_copy(alignment_offset);
+            local offset_distance = math.vec_clone(alignment_offset);
 
             foreach (char_info in char_info_list) {
                 if (char_info["char"] != " ") {
