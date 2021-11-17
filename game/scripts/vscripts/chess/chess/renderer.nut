@@ -1,5 +1,10 @@
 
-::highlight_cell <- function(board_pos, scale, cell_pos, color=[255,0,255], lines=30) {
+::COLOR <- {
+    POSSIBLE_MOVES = [0,255,0],
+    HOVERED_CELL = [113,169,222],
+}
+
+::highlight_cell <- function(board_pos, scale, cell_pos, color=[255,0,255], lines=20) {
     lines += 1;
 
     local offset = math.vec_mul(cell_pos, scale);

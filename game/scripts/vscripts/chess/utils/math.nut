@@ -1,10 +1,50 @@
 
 ::math <- {
+    function abs(val) {
+        return sqrt(val * val);
+    }
+    function min(v1, v2) {
+        if (v1 < v2) { return v1}
+        return v2;
+    }
+    function max(v1, v2) {
+        if (v1 > v2) { return v1}
+        return v2;
+    }
+    function clamp(val, min, max) {
+        if (val <= min) { return min; }
+        if (val >= max) { return max; }
+        return val;
+    }
+    function lerp(v1, v2, percent) {
+        return v1 + (v2 - v1) * percent;
+    }
+    function vec_abs(v) {
+        return Vector(abs(v.x), abs(v.y), abs(v.z));
+    }
+    function vec_equal(v1, v2) {
+        return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
+    }
+    function vec_clamp(v, min, max) {
+        return Vector(clamp(v.x, min, max), clamp(v.y, min, max), clamp(v.z, min, max));
+    }
     function vec_mul(vec, factor) {
         return Vector(vec.x * factor, vec.y * factor, vec.z * factor);
     }
+    function vec_div(vec, divisor) {
+        return Vector(vec.x / divisor, vec.y / divisor, vec.z / divisor);
+    }
     function vec_clone(v) {
         return Vector(v.x, v.y, v.z);
+    }
+    function vec_floor(v) {
+        return Vector(floor(v.x), floor(v.y), floor(v.z));
+    }
+    function vec_lerp(v1, v2, percent) {
+        return v1 + vec_mul(vec_relative(v2, v1), percent);
+    }
+    function vec_relative(v1, v2) {
+        return v1 - v2;
     }
     function vec_rotate(vec, theta) {
         theta = theta*(PI/180);
@@ -89,18 +129,42 @@
 
         local pX = intersection_2D(
             Vector(pSource.x, pSource.z),
-            Vector(pSource.x + aSource.x, pSource.z + aSource.z),
+            Vector(aSource.x, aSource.z),
             Vector(pTarget.x, pTarget.z),
             Vector(pTarget.x + 1, pTarget.z)
         )
 
         local pY = intersection_2D(
             Vector(pSource.y, pSource.z),
-            Vector(pSource.y + aSource.y, pSource.z + aSource.z),
+            Vector(aSource.y, aSource.z),
             Vector(pTarget.y, pTarget.z),
             Vector(pTarget.y + 1, pTarget.z)
         )
 
         return Vector(pX.x, pY.x, pTarget.z);
+    }
+    /*
+        p1 is the point you want to check if is inside
+        p2 is the corner of the square you are checking within
+        size is how large the area is
+    */
+    function vec_inside_2d(p1, p2, size) {
+        local c1 = p2;
+        local c2 = c1 + size;
+
+        local within_x = (p1.x >= min(c1.x, c2.x) && p1.x <= max(c1.x, c2.x));
+        local within_y = (p1.y >= min(c1.y, c2.y) && p1.y <= max(c1.y, c2.y));
+
+        return (within_x && within_y);
+    }
+    function vec_inside_3d(p1, p2, size) {
+        local c1 = p2;
+        local c2 = c1 + size;
+
+        local within_x = (p1.x >= min(c1.x, c2.x) && p1.x <= max(c1.x, c2.x));
+        local within_y = (p1.y >= min(c1.y, c2.y) && p1.y <= max(c1.y, c2.y));
+        local within_z = (p1.z >= min(c1.z, c2.z) && p1.z <= max(c1.z, c2.z));
+
+        return (within_x && within_y && within_z);
     }
 }

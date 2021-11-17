@@ -13,9 +13,9 @@ supported_chars <- {
     lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
     number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
     char = ["&", "'", "*", "@", "\\", "(", ")", "$", "^", ":", ",", "=", "!", ">", "#", "<", "-", "%", ".", "+", "?", "\"", ";", "/", "[", "]", "{", "}", "~", "_", "|"],
-    char_name = [ "ampersand", "apostrophe", "asterisk", "at", "backslash", "bracket_left", "bracket_right", "bullet", "circumflex", "colon", "comma", "equal", "exclamation",
+    char_name = [ "ampersand", "apostrophe", "asterisk", "at", "backslash", "prentices_left", "prentices_right", "bullet", "circumflex", "colon", "comma", "equal", "exclamation",
                   "greater", "hashtag", "less", "minus", "percent", "period", "pluss", "question", "quote", "semicolon", "slash", "square_bracket_left", "square_bracket_right",
-                  "squiggly_bracket_left", "squiggly_bracket_right", "tilde", "underscore", "vertical_bar" ]
+                  "bracket_left", "bracket_right", "tilde", "underscore", "vertical_bar" ]
 }
 
 char_size_factor <- {
@@ -30,10 +30,10 @@ char_size_factor <- {
         },
         number = 1,
         char = {
-            ampersand = 1, apostrophe = 1, asterisk = 1, at = 1, backslash = 1, bracket_left = 1, bracket_right = 1, bullet = 1, circumflex = 1, colon = 1,
+            ampersand = 1, apostrophe = 1, asterisk = 1, at = 1, backslash = 1, prentices_left = 1, prentices_right = 1, bullet = 1, circumflex = 1, colon = 1,
             comma = 1, equal = 1, exclamation = 1, greater = 1, hashtag = 1, less = 1, minus = 1, percent = 1, period = 1, pluss = 1, question = 1,
-            quote = 1, semicolon = 1, slash = 1, square_bracket_left = 1, square_bracket_right = 1, squiggly_bracket_left = 1, squiggly_bracket_right = 1,
-            tilde = 1, underscore = 1, vertical_bar = 1
+            quote = 1, semicolon = 1, slash = 1, square_bracket_left = 1, square_bracket_right = 1, bracket_left = 1, bracket_right = 1, tilde = 1,
+            underscore = 1, vertical_bar = 1
         }
     },
     kanit_semibold = {
@@ -47,10 +47,10 @@ char_size_factor <- {
         },
         number = 0.825,
         char = {
-            ampersand = 0.9, apostrophe = 0.3, asterisk = 0.6, at = 1, backslash = 0.35, bracket_left = 0.3, bracket_right = 0.3, bullet = 0.6, circumflex = 0.65, colon = 0.35,
+            ampersand = 0.9, apostrophe = 0.3, asterisk = 0.6, at = 1, backslash = 0.35, prentices_left = 0.3, prentices_right = 0.3, bullet = 0.6, circumflex = 0.65, colon = 0.35,
             comma = 0.35, equal = 0.65, exclamation = 0.35, greater = 0.8, hashtag = 1, less = 0.8, minus = 0.55, percent = 1, period = 0.35, pluss = 0.75, question = 0.75,
-            quote = 0.6, semicolon = 0.35, slash = 0.35, square_bracket_left = 0.45, square_bracket_right = 0.45, squiggly_bracket_left = 0.45, squiggly_bracket_right = 0.45,
-            tilde = 0.8, underscore = 0.7, vertical_bar = 0.35
+            quote = 0.6, semicolon = 0.35, slash = 0.35, square_bracket_left = 0.45, square_bracket_right = 0.45, bracket_left = 0.45, bracket_right = 0.45, tilde = 0.8,
+            underscore = 0.7, vertical_bar = 0.35
         }
     },
 }
@@ -79,6 +79,7 @@ char_size_factor <- {
     for (local i = 0; i < message.len(); i++) {
         local char = message.slice(i, i+1);
         local offset_distance_step = 0;
+
         local sub_folder = "";
 
         if (char == " ") {

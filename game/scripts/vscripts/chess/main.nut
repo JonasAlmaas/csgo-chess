@@ -68,8 +68,10 @@ include_scripts();
 
     update_player_traces();
 
-    game.update();
-
+    if (player1 && player2) {
+        game.update();
+    }
+    
     dispatch_events();
 }
 

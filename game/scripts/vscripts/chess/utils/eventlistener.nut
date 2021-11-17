@@ -2,12 +2,16 @@
     Eventlistening
 */
 
-EVENT_BULLET_IMPACT <- 2;
-EVENT_PLAYER_SAY <- 3;
+enum EVENT_TYPE {
+    IMPACT,
+    PLAYER_SAY,
+    PLAYER_SPAWN,
+}
 
-event_template<-{};
-event_template[EVENT_BULLET_IMPACT]<-["bullet_impact",["userid","vector"]];
-event_template[EVENT_PLAYER_SAY]<-["player_say",["userid","text"]];
+event_template <- {};
+event_template[EVENT_TYPE.IMPACT] <- ["bullet_impact", ["userid","vector"]];
+event_template[EVENT_TYPE.PLAYER_SAY] <- ["player_say", ["userid","text"]];
+event_template[EVENT_TYPE.PLAYER_SPAWN] <- ["player_spawn", ["userid","teamnum"]];
 
 ::PLAYER_1_EVENTS <- {
     BULLET_FIERED = false,
@@ -59,8 +63,8 @@ function update_player_traces() {
 EVENT_LAST_BULLET_TIME <- Time();
 ::OnGameEvent_bullet_impact <- function(userid, pos) {
     if(EVENT_LAST_BULLET_TIME != Time()){
-        PLAYER_1_EVENTS.BULLET_FIERED = true;
-        PLAYER_2_EVENTS.BULLET_FIERED = true;
+        if (userid == PLAYER_1_ID) { PLAYER_1_EVENTS.BULLET_FIERED = true; }
+        else { PLAYER_2_EVENTS.BULLET_FIERED = true; }
 
         EVENT_LAST_BULLET_TIME = Time();
     }
@@ -68,6 +72,10 @@ EVENT_LAST_BULLET_TIME <- Time();
 
 ::OnGameEvent_player_say <- function(userid, text) {
     console.chat(userid + " : " + text);
+}
+
+::OnGameEvent_player_spawn <- function(userid, teamnum) {
+    PLAYER_1_ID = userid;
 }
 
 ::OnEventFired <- function(EVENT_ID) {

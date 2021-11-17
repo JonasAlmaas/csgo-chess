@@ -1,6 +1,4 @@
 
-::GROUND_OFFSET <- 0.5;
-
 ::new_board <- function (in_pos, in_scale) {
 
     local board = {
@@ -9,35 +7,26 @@
 
         coord_text = new_coord_text(in_pos + Vector(0,0,GROUND_OFFSET), in_scale),
 
-        delay = 1,
-        last_time = 0,
-        highlisted_cell = Vector(),
-
         function reset() {
             coord_text.reset();
         }
-
-        function draw_debug() {
-            local size = scale * 8;
-
-            local time = Time();
-            if (time - last_time > delay) {
-                last_time = time;
-                highlisted_cell = Vector(RandomInt(0, 7), RandomInt(0, 7));
-            }
-            highlight_cell(pos, scale, highlisted_cell);
-            
-            for (local row = 0; row < 9; row++) {
-                local p1 = pos + Vector(row * scale, 0, GROUND_OFFSET);
-                local p2 = p1 + Vector(0, -size);
-                debug_draw.line(p1, p2, [255,0,0], false);
-            }
-
-            for (local col = 0; col < 9; col++) {
-                local p1 = pos + Vector(0, -(col * scale), GROUND_OFFSET);
-                local p2 = p1 + Vector(size);
-                debug_draw.line(p1, p2, [0,0,255], false);
-            }
+        function get_relatvive_pos(p) {
+            local rel_x = math.max(p.x, pos.x) - math.min(p.x, pos.x);
+            local rel_y = math.max(p.y, pos.y) - math.min(p.y, pos.y);
+            return Vector(rel_x, rel_y);
+        }
+        function get_cell_exact_from_pos(p) {
+            return math.vec_div(get_relatvive_pos(p) ,scale);
+        }
+        function get_cell_from_pos(p) {
+            return math.vec_clamp(math.vec_floor(get_cell_exact_from_pos(p)), 0, 7);
+        }
+        function get_intersection(eyes, forward) {
+            return math.floor_plane_intersection(eyes, eyes + forward, pos);
+        }
+        function is_inside(hit) {
+            local board_size = scale * 8;
+            return math.vec_inside_2d(hit, pos, Vector(board_size, -board_size))
         }
     }
 

@@ -1,7 +1,7 @@
 
 ::new_coord_text <- function (in_board_pos, in_scale) {
 
-    local text_size = in_scale * 0.75;
+    local text_size = in_scale * 0.65;
 
     local text_list = [];
     local text_color = [40,40,40];

@@ -2,6 +2,7 @@
 ::new_player <- function (in_ref) {
 
     local player = {
+        id = null,
         ref = in_ref,
         spawn_pos = in_ref.GetOrigin(),
         forward_vector = Vector(),
@@ -14,7 +15,7 @@
         function get_pos() { return ref.GetOrigin(); }
         function get_ang() { return ref.GetAngles(); }
         function get_vel() { return ref.GetVelocity(); }
-        function get_eyes() { return ref.EyePosition(); }
+        function get_eyes() { return ref.EyePosition() + Vector(0, 0, 0.065); }
         function get_forward() { return forward_vector; }
     }
 
