@@ -14,10 +14,16 @@
 
         function enable() {
             is_disabled = false;
-            EntFireByHandle(ref, "Enable", "", 0.0, null, null);
+            show();
         }
         function disable() {
             is_disabled = true;
+            hide();
+        }
+        function show() {
+            EntFireByHandle(ref, "Enable", "", 0.0, null, null);
+        }
+        function hide() {
             EntFireByHandle(ref, "Disable", "", 0.0, null, null);
         }
         function teleport(pos=null, ang=null) {

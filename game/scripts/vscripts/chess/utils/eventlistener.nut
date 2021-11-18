@@ -6,12 +6,14 @@ enum EVENT_TYPE {
     IMPACT,
     PLAYER_SAY,
     PLAYER_SPAWN,
+    TEAM_CHANGE,
 }
 
 event_template <- {};
 event_template[EVENT_TYPE.IMPACT] <- ["bullet_impact", ["userid","vector"]];
 event_template[EVENT_TYPE.PLAYER_SAY] <- ["player_say", ["userid","text"]];
 event_template[EVENT_TYPE.PLAYER_SPAWN] <- ["player_spawn", ["userid","teamnum"]];
+event_template[EVENT_TYPE.TEAM_CHANGE] <- ["team_change", ["userid", "team", "oldteam", "disconnect", "autoteam", "silent", "isbot"]];
 
 ::PLAYER_1_EVENTS <- {
     ATTACK = false,
@@ -82,7 +84,7 @@ EVENT_LAST_BULLET_TIME <- Time();
 ::OnGameEvent_player_spawn <- function(userid, teamnum) {
     if (PLAYER_1_ID == null) {
         PLAYER_1_ID = userid;
-        if (teamnum == 0) { PLAYER_1_TEAM = TEAM.WHITE; }
+        if (teamnum == 2) { PLAYER_1_TEAM = TEAM.WHITE; }
         else { PLAYER_1_TEAM = TEAM.BLACK; }
     }
 }
@@ -90,6 +92,14 @@ EVENT_LAST_BULLET_TIME <- Time();
 ::OnGameEvent_player_attack <- function (player_number) {
     if (player_number == 1) { PLAYER_1_EVENTS.ATTACK = true; }
     else if (player_number == 2) { PLAYER_2_EVENTS.ATTACK = true; }
+}
+
+::OnGameEvent_team_change <- function (userid, team, oldteam, disconnect, autoteam, silent, isbot) {
+    if (disconnect) {
+        player2 = null;
+        game.reset();
+        game = new_game()
+    }
 }
 
 ::OnEventFired <- function(EVENT_ID) {

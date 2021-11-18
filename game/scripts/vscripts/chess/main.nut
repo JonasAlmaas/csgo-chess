@@ -23,6 +23,7 @@
 ::SCRIPTS_MANIFEST_CHESS <- [
     "chess/board",
     "chess/coord_text",
+    "chess/engine",
     "chess/main",
     "chess/pieces",
     "chess/renderer",
@@ -71,7 +72,7 @@ include_scripts();
     if (player1 && player2) {
         game.update();
     }
-    
+
     dispatch_events();
 }
 

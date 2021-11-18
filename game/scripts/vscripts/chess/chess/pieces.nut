@@ -9,11 +9,6 @@ enum PIECE_TYPE {
     KING,
 }
 
-enum TEAM {
-    WHITE,
-    BLACK,
-}
-
 ::PIECE_PATH <- {
     PAWN = "models/chess/pieces/pawn.mdl",
     ROOK = "models/chess/pieces/rook.mdl",
@@ -75,6 +70,10 @@ enum TEAM {
     list.append(new_king(TEAM.WHITE, Vector(0,4), in_scale));
     list.append(new_king(TEAM.BLACK, Vector(7,4), in_scale));
 
+    foreach (piece in list) {
+        piece.hide();
+    }
+
     local table = {
         pieces = list,
 
@@ -82,6 +81,11 @@ enum TEAM {
             foreach (piece in pieces) {
                 piece.disable();
             }
+        }
+        function show() {
+            foreach (piece in pieces) {
+                piece.show();
+            } 
         }
         function update_pos(board_pos) {
             foreach (piece in pieces) {
@@ -126,6 +130,12 @@ enum TEAM {
         }
         function teleport(pos) {
             prop.teleport(pos, angle);
+        }
+        function show() {
+            prop.show();
+        }
+        function hide() {
+            prop.hide();
         }
         function get_world_pos_from_cell(in_board_pos, in_cell) {
             local half_cell = scale * 0.5;
