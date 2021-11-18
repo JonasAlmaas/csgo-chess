@@ -14,13 +14,18 @@ event_template[EVENT_TYPE.PLAYER_SAY] <- ["player_say", ["userid","text"]];
 event_template[EVENT_TYPE.PLAYER_SPAWN] <- ["player_spawn", ["userid","teamnum"]];
 
 ::PLAYER_1_EVENTS <- {
+    ATTACK = false,
     BULLET_FIERED = false,
 }
 ::PLAYER_2_EVENTS <- {
+    ATTACK = false,
     BULLET_FIERED = false,
 }
 
 ::dispatch_events <- function() {
+    PLAYER_1_EVENTS.ATTACK = false;
+    PLAYER_2_EVENTS.ATTACK = false;
+
     PLAYER_1_EVENTS.BULLET_FIERED = false;
     PLAYER_2_EVENTS.BULLET_FIERED = false;
 }
@@ -75,7 +80,16 @@ EVENT_LAST_BULLET_TIME <- Time();
 }
 
 ::OnGameEvent_player_spawn <- function(userid, teamnum) {
-    PLAYER_1_ID = userid;
+    if (PLAYER_1_ID == null) {
+        PLAYER_1_ID = userid;
+        if (teamnum == 0) { PLAYER_1_TEAM = TEAM.WHITE; }
+        else { PLAYER_1_TEAM = TEAM.BLACK; }
+    }
+}
+
+::OnGameEvent_player_attack <- function (player_number) {
+    if (player_number == 1) { PLAYER_1_EVENTS.ATTACK = true; }
+    else if (player_number == 2) { PLAYER_2_EVENTS.ATTACK = true; }
 }
 
 ::OnEventFired <- function(EVENT_ID) {

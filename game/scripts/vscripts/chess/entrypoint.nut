@@ -2,6 +2,7 @@
 ::BASE_FOLDER <- "chess/";
 
 ::PLAYER_1_ID <- null;
+::PLAYER_1_TEAM <- null;
 
 ::custom_entities <- {
     prop_dynamic = [],

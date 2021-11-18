@@ -95,9 +95,11 @@ include_scripts();
         if (target.GetClassname() == "player") {
             if (player1 == null) {
                 player1 = new_player(target);
+                EntFireByHandle(EntityGroup[2], "Activate", "", 0.0, target, null);
             }
             else {
                 player2 = new_player(target);
+                EntFireByHandle(EntityGroup[3], "Activate", "", 0.0, target, null);
             }
         }
     }
