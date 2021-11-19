@@ -177,7 +177,7 @@ enum PIECE_TYPE {
                 return null;
             }
 
-            local offset = math.vec_relative(cell, target_cell);
+            local offset = cell - target_cell;
             local abs_offset = math.vec_abs(offset);
 
             if (abs_offset.x > abs_offset.y) {

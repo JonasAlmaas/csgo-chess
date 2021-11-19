@@ -41,10 +41,7 @@
         return Vector(floor(v.x), floor(v.y), floor(v.z));
     }
     function vec_lerp(v1, v2, percent) {
-        return v1 + vec_mul(vec_relative(v2, v1), percent);
-    }
-    function vec_relative(v1, v2) {
-        return v1 - v2;
+        return v1 + vec_mul((v2 - v1), percent);
     }
     function vec_rotate(vec, theta) {
         theta = theta*(PI/180);
