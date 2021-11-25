@@ -1,7 +1,7 @@
 
 ::new_game <- function () {
 
-    if (IS_DEBUGGING) { console.log("Create: Chess Game"); }
+    if (IS_DEBUGGING) { console.log("Create: Game"); }
     
     local target = null;
     target = Entities.FindByName(target, "target_board");
@@ -23,9 +23,8 @@
 
         turn = TEAM.WHITE,
         active_piece = null,
-        valid_moves = [],
-
         piece_moveing = false,
+        valid_moves = [],
 
         hit_ply1 = Vector(),
         hit_ply2 = Vector(),
@@ -106,6 +105,7 @@
                                     if (IS_DEBUGGING) { console.log("Valid move"); }
                                     active_piece.target_cell = cell;
                                     piece_moveing = true;
+                                    valid_moves = [];
                                 }
                             }
                         }
