@@ -20,13 +20,14 @@
     "utils/utils",
 ]
 
-::SCRIPTS_MANIFEST_CHESS <- [
-    "chess/board",
-    "chess/coord_text",
-    "chess/engine",
-    "chess/main",
-    "chess/pieces",
-    "chess/renderer",
+::SCRIPTS_MANIFEST_GAME <- [
+    "game/board/main",
+    "game/board/text",
+    "game/engine",
+    "game/main",
+    "game/pieces",
+    "game/renderer",
+    "game/utils",
 ]
 
 ::include_scripts <- function() {
@@ -37,7 +38,7 @@
         }
     }
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)
-    include_manifest(SCRIPTS_MANIFEST_CHESS)
+    include_manifest(SCRIPTS_MANIFEST_GAME)
 }
 include_scripts();
 
@@ -59,7 +60,6 @@ include_scripts();
     if (!initialized) {
 
         game = new_game()
-
         initialized = true;
     }
 
@@ -77,7 +77,7 @@ include_scripts();
 }
 
 ::reset_session <- function () {
-
+    
     utils.remove_decals();
 
     game.reset();

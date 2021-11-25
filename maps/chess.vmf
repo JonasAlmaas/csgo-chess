@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9122"
-	"mapversion" "176"
+	"mapversion" "179"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -26,7 +26,7 @@ viewsettings
 world
 {
 	"id" "1"
-	"mapversion" "176"
+	"mapversion" "179"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -1096,26 +1096,24 @@ world
 			"visgroupautoshown" "1"
 		}
 	}
-	group
+}
+entity
+{
+	"id" "14034"
+	"classname" "logic_script"
+	"Group00" "tr_orig_ply1"
+	"Group01" "tr_orig_ply2"
+	"Group02" "game_ui_ply1"
+	"Group03" "game_ui_ply2"
+	"targetname" "main_script"
+	"vscripts" "chess/entrypoint.nut"
+	"origin" "-40 40 -24"
+	editor
 	{
-		"id" "5500"
-		editor
-		{
-			"color" "132 233 0"
-			"groupid" "5568"
-			"visgroupshown" "1"
-			"visgroupautoshown" "1"
-		}
-	}
-	group
-	{
-		"id" "5568"
-		editor
-		{
-			"color" "132 233 0"
-			"visgroupshown" "1"
-			"visgroupautoshown" "1"
-		}
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 3000]"
 	}
 }
 hidden
@@ -7868,25 +7866,6 @@ entity
 		"visgroupshown" "1"
 		"visgroupautoshown" "1"
 		"logicalpos" "[1500 -9768]"
-	}
-}
-entity
-{
-	"id" "581"
-	"classname" "logic_script"
-	"Group00" "tr_orig_ply1"
-	"Group01" "tr_orig_ply2"
-	"Group02" "game_ui_ply1"
-	"Group03" "game_ui_ply2"
-	"targetname" "main_script"
-	"vscripts" "chess/entrypoint.nut"
-	"origin" "-40 40 -24"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 3000]"
 	}
 }
 entity

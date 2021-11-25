@@ -12,12 +12,12 @@
 
     reset_session();
 
-    ScriptPrintMessageChatAll(" Reloading scripts...")
+    ScriptPrintMessageChatAll(" Reloading scripts...");
     DoIncludeScript(BASE_FOLDER + "main" + MODULE_EXT, null);
-    ScriptPrintMessageChatAll(" ...successful")
-    printl("--------------")
-    printl("----RELOAD----")
-    printl("--------------")
+    ScriptPrintMessageChatAll(" ...successful");
+    printl("--------------");
+    printl("----RELOAD----");
+    printl("--------------");
 }
 DoIncludeScript(BASE_FOLDER + "main" + MODULE_EXT, null);
 
