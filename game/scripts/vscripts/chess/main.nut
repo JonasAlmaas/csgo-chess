@@ -23,9 +23,10 @@
 ::SCRIPTS_MANIFEST_GAME <- [
     "game/board/main",
     "game/board/text",
+    "game/pieces/base",
+    "game/pieces/misc",
     "game/engine",
     "game/main",
-    "game/pieces",
     "game/renderer",
     "game/utils",
 ]

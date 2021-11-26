@@ -43,7 +43,7 @@
         }
 
         function update() {
-
+            
             if (!initialized) {
                 foreach (text in waiting_text) {
                     text.kill();
@@ -71,19 +71,19 @@
         }
 
         function play(hit) {
+            // Highlight all valid moves
+            if (IS_DEBUGGING) {
+                foreach (move in valid_moves) {
+                    debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
+                }
+            }
+
             if (board.is_inside(hit)) {
                 local cell = board.get_cell_from_pos(hit);
-
-                // TODO: Display the valid moves somehow. Has to how on both clients.
 
                 if (IS_DEBUGGING) {
                     // Highlight the hovered cell
                     debug_highlight_cell(board.pos, cell, COLOR.HOVERED_CELL);
-
-                    // Highlight all valid moves
-                    foreach (move in valid_moves) {
-                        debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
-                    }
                 }
 
                 local new_piece = pieces.get_from_cell(cell);
@@ -103,7 +103,7 @@
                             else {
                                 if (utils.list_vec_contains(cell, valid_moves)) {
                                     if (IS_DEBUGGING) { console.log("Valid move"); }
-                                    active_piece.target_cell = cell;
+                                    active_piece.move_to(cell);
                                     piece_moveing = true;
                                     valid_moves = [];
                                 }
@@ -120,6 +120,9 @@
         }
 
         function flip_turn() {
+            // REMOVE THIS LATER!
+            return;
+            
             if (turn == TEAM.WHITE) {
                 turn = TEAM.BLACK;
                 if (IS_DEBUGGING) { console.log("Turn: Black"); }
@@ -147,9 +150,9 @@
         }
 
         function select_piece(in_piece) {
-            if (IS_DEBUGGING) { console.log("Selected new piece"); }
+            if (IS_DEBUGGING) { console.log("Selected a new piece"); }
             active_piece = in_piece;
-            valid_moves = engine.get_valid_moves(active_piece, board);
+            valid_moves = engine.get_valid_moves(new_simple_piece_from_piece(active_piece), new_simple_pieces_from_pieces(pieces));
         }
     }
 
