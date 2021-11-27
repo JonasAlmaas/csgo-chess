@@ -64,8 +64,9 @@
                 debug_draw.box(hit_ply2, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
             }
             
-            if (turn == PLAYER_1_TEAM) { play(hit_ply1); }
-            else { play(hit_ply2); }
+            // if (turn == PLAYER_1_TEAM) { play(hit_ply1); }
+            // else { play(hit_ply2); }
+            play(hit_ply1);
 
             pieces.update_pos(board.pos);
         }
@@ -102,10 +103,7 @@
                             }
                             else {
                                 if (utils.list_vec_contains(cell, valid_moves)) {
-                                    if (IS_DEBUGGING) { console.log("Valid move"); }
-                                    active_piece.move_to(cell);
-                                    piece_moveing = true;
-                                    valid_moves = [];
+                                    try_move(cell);
                                 }
                             }
                         }
@@ -120,9 +118,6 @@
         }
 
         function flip_turn() {
-            // REMOVE THIS LATER!
-            return;
-            
             if (turn == TEAM.WHITE) {
                 turn = TEAM.BLACK;
                 if (IS_DEBUGGING) { console.log("Turn: Black"); }
@@ -133,7 +128,27 @@
             }
         }
 
+        function try_move(in_cell) {
+            // TODO: Do some checking if it is a legual move
+
+            local valid_move = true;
+
+            if (valid_move) {
+                if (IS_DEBUGGING) { console.log("Valid move"); }
+                
+                if (turn == TEAM.WHITE) { LAST_MOVED_PIECE_WHITE = active_piece; }
+                else if (turn == TEAM.BLACK) { LAST_MOVED_PIECE_BLACK = active_piece; }
+
+                active_piece.move_to(in_cell);
+                piece_moveing = true;
+                valid_moves = [];
+            }
+        }
+
         function player_select() {
+            // TODO: Remove
+            return PLAYER_1_EVENTS.ATTACK;
+
             local ply1_select = (turn == PLAYER_1_TEAM && PLAYER_1_EVENTS.ATTACK);
             local ply2_select = (turn != PLAYER_1_TEAM && PLAYER_2_EVENTS.ATTACK);
 

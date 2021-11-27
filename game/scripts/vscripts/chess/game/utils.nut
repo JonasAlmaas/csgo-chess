@@ -1,4 +1,7 @@
 
+::LAST_MOVED_PIECE_WHITE <- null;
+::LAST_MOVED_PIECE_BLACK <- null;
+
 ::BOARD_SCALE <- 128;
 ::GROUND_OFFSET <- 0.1;
 

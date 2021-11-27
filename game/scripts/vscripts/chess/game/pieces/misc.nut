@@ -49,17 +49,17 @@
 
     local list = [];
 
-    // for (local t = 0; t < 2; t++) {
-    //     local team = TEAM.WHITE;
-    //     if (t == 1) { team = TEAM.BLACK; }
+    for (local t = 0; t < 2; t++) {
+        local team = TEAM.WHITE;
+        if (t == 1) { team = TEAM.BLACK; }
 
-    //     // Create Pawns
-    //     for (local file = 0; file < 8; file++) {
-    //         local cell = Vector(1, file);
-    //         if (team == TEAM.BLACK) { cell = Vector(6, file); }
-    //         list.append(new_pawn(team, cell));
-    //     }
-    // }
+        // Create Pawns
+        for (local file = 0; file < 8; file++) {
+            local cell = Vector(1, file);
+            if (team == TEAM.BLACK) { cell = Vector(6, file); }
+            list.append(new_pawn(team, cell));
+        }
+    }
 
     // Create Rooks
     list.append(new_rook(TEAM.WHITE, Vector(0,0)));
