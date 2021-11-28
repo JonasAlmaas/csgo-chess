@@ -23,8 +23,16 @@
 ::SCRIPTS_MANIFEST_GAME <- [
     "game/board/main",
     "game/board/text",
+
     "game/pieces/base",
+    "game/pieces/bishop",
+    "game/pieces/king",
+    "game/pieces/knight",
     "game/pieces/misc",
+    "game/pieces/pawn",
+    "game/pieces/queen",
+    "game/pieces/rook",
+    
     "game/engine",
     "game/main",
     "game/renderer",

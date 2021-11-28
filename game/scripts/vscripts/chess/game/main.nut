@@ -102,9 +102,7 @@
                                 select_piece(new_piece);
                             }
                             else {
-                                if (utils.list_vec_contains(cell, valid_moves)) {
-                                    try_move(cell);
-                                }
+                                try_move(cell);
                             }
                         }
                     }
@@ -129,13 +127,9 @@
         }
 
         function try_move(in_cell) {
-            // TODO: Do some checking if it is a legual move
-
-            local valid_move = true;
-
-            if (valid_move) {
+            if (utils.list_vec_contains(in_cell, valid_moves)) {
                 if (IS_DEBUGGING) { console.log("Valid move"); }
-                
+
                 if (turn == TEAM.WHITE) { LAST_MOVED_PIECE_WHITE = active_piece; }
                 else if (turn == TEAM.BLACK) { LAST_MOVED_PIECE_BLACK = active_piece; }
 
@@ -165,9 +159,16 @@
         }
 
         function select_piece(in_piece) {
-            if (IS_DEBUGGING) { console.log("Selected a new piece"); }
-            active_piece = in_piece;
-            valid_moves = engine.get_valid_moves(new_simple_piece_from_piece(active_piece), new_simple_pieces_from_pieces(pieces));
+            valid_moves = engine.get_valid_moves(new_simple_piece_from_piece(in_piece), new_simple_pieces_from_pieces(pieces));
+
+            if (valid_moves.len() > 0) {
+                if (IS_DEBUGGING) { console.log("Selected a new piece"); }
+                active_piece = in_piece;
+            }
+            else {
+                if (IS_DEBUGGING) { console.log("No valid moves"); }
+                active_piece = null;
+            }
         }
     }
 

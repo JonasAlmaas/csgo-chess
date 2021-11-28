@@ -1,0 +1,12 @@
+
+Pawn:
+    En Passant:
+        Some rules here pls
+
+King:
+    Castleing:
+        Can't castle when in check
+        Can't castle through a check
+        Can't castle through other pieces
+        Castleing has to happen on the kings first move
+        A rook can not be moved before castleing

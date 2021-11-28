@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9122"
-	"mapversion" "180"
+	"mapversion" "186"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -26,7 +26,7 @@ viewsettings
 world
 {
 	"id" "1"
-	"mapversion" "180"
+	"mapversion" "186"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -797,7 +797,7 @@ world
 		"id" "620"
 		side
 		{
-			"id" "49"
+			"id" "2167"
 			"plane" "(-48 48 64) (-48 64 64) (48 64 64)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
@@ -808,7 +808,7 @@ world
 		}
 		side
 		{
-			"id" "50"
+			"id" "2166"
 			"plane" "(-48 64 -32) (-48 48 -32) (48 48 -32)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
@@ -819,7 +819,7 @@ world
 		}
 		side
 		{
-			"id" "51"
+			"id" "2165"
 			"plane" "(-48 48 -32) (-48 64 -32) (-48 64 64)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
@@ -830,7 +830,7 @@ world
 		}
 		side
 		{
-			"id" "52"
+			"id" "2164"
 			"plane" "(48 64 -32) (48 48 -32) (48 48 64)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
@@ -841,7 +841,7 @@ world
 		}
 		side
 		{
-			"id" "53"
+			"id" "2163"
 			"plane" "(-48 64 -32) (48 64 -32) (48 64 64)"
 			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
@@ -852,7 +852,7 @@ world
 		}
 		side
 		{
-			"id" "54"
+			"id" "2162"
 			"plane" "(48 48 -32) (-48 48 -32) (-48 48 64)"
 			"material" "TOOLS/TOOLSSKYBOX"
 			"uaxis" "[1 0 0 -64] 0.25"

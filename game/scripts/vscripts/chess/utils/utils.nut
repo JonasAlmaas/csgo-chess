@@ -3,6 +3,12 @@
     function remove_decals() {
         console.run("r_cleardecals");
     }
+    function list_combine(l1, l2) {
+        foreach (element in l2) {
+            l1.append(element);
+        }
+        return l1;
+    }
     function list_contains(in_ref, in_list) {
         if (in_list.len() <= 0) return false;
         foreach (tempRef in in_list) {
