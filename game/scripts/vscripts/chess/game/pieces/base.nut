@@ -54,6 +54,10 @@
             target_cell = in_move_to_cell;
         }
 
+        function capture() {
+            active = false;
+        }
+
         function get_world_pos(in_board_pos) {
             if (target_cell) {
                 if (!next_cell) {
@@ -75,6 +79,15 @@
             }
 
             return engine.get_world_pos_from_cell(in_board_pos, cell);
+        }
+
+        function get_captured_world_pos(in_board_pos) {
+            if (team == TEAM.WHITE) {
+                return engine.get_world_pos_from_cell(in_board_pos, Vector(spawn_cell.y, spawn_cell.x - 3));
+            }
+            else {
+                return engine.get_world_pos_from_cell(in_board_pos, Vector(spawn_cell.y, spawn_cell.x + 3));
+            }
         }
     }
 
@@ -171,13 +184,8 @@
         local offset = cell - target_cell;
         local abs_offset = math.vec_abs(offset);
 
-        if (abs_offset.x == abs_offset.y) {
-            next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
-        }
-        else {
-            if (offset.x < 0) { next_cell = cell + Vector(1); }
-            else { next_cell = cell + Vector(-1); }
-        }
+        if (abs_offset.x == abs_offset.y) { next_cell = cell - Vector(offset.x / abs_offset.x, offset.y / abs_offset.y); }
+        else { next_cell = cell - Vector(offset.x / abs_offset.x); }
 
         time_last_cell = Time();
     }
@@ -198,28 +206,19 @@
         return engine.get_straight_moves(cell, team, in_simple_pieces);
     }
 
-
-    // TODO
     piece.get_next_cell <- function () {
         if (math.vec_equal(cell, target_cell)) {
             target_cell = null;
             return;
         }
-        
-        next_cell = target_cell;
+    
+        local offset = cell - target_cell;
+        local abs_offset = math.vec_abs(offset);
 
-        // local offset = cell - target_cell;
-        // local abs_offset = math.vec_abs(offset);
+        if (offset.x == 0) { next_cell = cell - Vector(0, offset.y / abs_offset.y); }
+        else if (offset.y == 0) { next_cell = cell - Vector(offset.x / abs_offset.x); }
 
-        // if (abs_offset.x == abs_offset.y) {
-        //     next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
-        // }
-        // else {
-        //     if (offset.x < 0) { next_cell = cell + Vector(1); }
-        //     else { next_cell = cell + Vector(-1); }
-        // }
-
-        // time_last_cell = Time();
+        time_last_cell = Time();
     }
 
     return piece;
@@ -264,27 +263,21 @@
         return moves;
     }
 
-    // TODO
     piece.get_next_cell <- function () {
         if (math.vec_equal(cell, target_cell)) {
             target_cell = null;
             return;
         }
 
-        next_cell = target_cell;
+        local total_offset = referece_cell - target_cell;
+        local abs_total_offset = math.vec_abs(total_offset);
+        local offset = cell - target_cell;
+        local abs_offset = math.vec_abs(offset);
 
-        // local offset = cell - target_cell;
-        // local abs_offset = math.vec_abs(offset);
+        if (((abs_total_offset.x > abs_total_offset.y) && (abs_offset.x > 0)) || abs_offset.y == 0) { next_cell = cell - Vector(offset.x / abs_offset.x); }
+        else { next_cell = cell - Vector(0, offset.y / abs_offset.y); }
 
-        // if (abs_offset.x == abs_offset.y) {
-        //     next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
-        // }
-        // else {
-        //     if (offset.x < 0) { next_cell = cell + Vector(1); }
-        //     else { next_cell = cell + Vector(-1); }
-        // }
-
-        // time_last_cell = Time();
+        time_last_cell = Time();
     }
 
     return piece;
@@ -303,27 +296,18 @@
         return engine.get_diagonal_moves(cell, team, in_simple_pieces);
     }
 
-    // TODO
     piece.get_next_cell <- function () {
         if (math.vec_equal(cell, target_cell)) {
             target_cell = null;
             return;
         }
 
-        next_cell = target_cell;
+        local offset = cell - target_cell;
+        local abs_offset = math.vec_abs(offset);
+
+        next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
     
-        // local offset = cell - target_cell;
-        // local abs_offset = math.vec_abs(offset);
-
-        // if (abs_offset.x == abs_offset.y) {
-        //     next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
-        // }
-        // else {
-        //     if (offset.x < 0) { next_cell = cell + Vector(1); }
-        //     else { next_cell = cell + Vector(-1); }
-        // }
-
-        // time_last_cell = Time();
+        time_last_cell = Time();
     }
 
     return piece;
@@ -344,26 +328,26 @@
         return utils.list_merge(straight_moves, diagonal_moves);
     }
 
-    // TODO
     piece.get_next_cell <- function () {
         if (math.vec_equal(cell, target_cell)) {
             target_cell = null;
             return;
         }
-        next_cell = target_cell;
+    
+        local offset = cell - target_cell;
+        local abs_offset = math.vec_abs(offset);
 
-        // local offset = cell - target_cell;
-        // local abs_offset = math.vec_abs(offset);
+        if (offset.x == 0) {
+            next_cell = cell - Vector(0, offset.y / abs_offset.y);
+        }
+        else if (offset.y == 0) {
+            next_cell = cell - Vector(offset.x / abs_offset.x);
+        }
+        else {
+            next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
+        }
 
-        // if (abs_offset.x == abs_offset.y) {
-        //     next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
-        // }
-        // else {
-        //     if (offset.x < 0) { next_cell = cell + Vector(1); }
-        //     else { next_cell = cell + Vector(-1); }
-        // }
-
-        // time_last_cell = Time();
+        time_last_cell = Time();
     }
 
     return piece;
@@ -456,14 +440,16 @@
         local offset = cell - target_cell;
         local abs_offset = math.vec_abs(offset);
 
-        if (abs_offset.x == abs_offset.y) {
-            next_cell = Vector(cell.x - offset.x, cell.y - offset.y);
+        if (offset.x == 0) {
+            next_cell = cell - Vector(0, offset.y / abs_offset.y);
+        }
+        else if (offset.y == 0) {
+            next_cell = cell - Vector(offset.x / abs_offset.x);
         }
         else {
-            if (offset.x < 0) { next_cell = cell + Vector(1); }
-            else { next_cell = cell + Vector(-1); }
+            next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
         }
-
+        
         time_last_cell = Time();
     }
 

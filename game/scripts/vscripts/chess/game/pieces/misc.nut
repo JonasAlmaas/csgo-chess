@@ -29,9 +29,7 @@
             cell = math.vec_clone(in_move_to_cell);
         }
 
-        function capture() {
-            active = false;
-        }
+        capture = in_piece.capture,
     }
     
     return piece;
@@ -59,11 +57,11 @@
 
     local list = [];
 
+    // Create Pawns
     for (local t = 0; t < 2; t++) {
         local team = TEAM.WHITE;
         if (t == 1) { team = TEAM.BLACK; }
 
-        // Create Pawns
         for (local file = 0; file < 8; file++) {
             local cell = Vector(1, file);
             if (team == TEAM.BLACK) { cell = Vector(6, file); }
@@ -118,21 +116,22 @@
         }
         function update_pos(in_board_pos) {
             foreach (piece in pieces) {
-                if (piece.active) {
-                    local pos = piece.get_world_pos(in_board_pos);
-                    piece.teleport(pos);
-                }
-                // TODO: Make this less shit
-                else {
-                    piece.hide();
-                }
+                local pos = null;
+                if (piece.active) { pos = piece.get_world_pos(in_board_pos); }
+                else { pos = piece.get_captured_world_pos(in_board_pos); }
+                piece.teleport(pos);
             }
         }
-        function get_from_cell(in_cell) {
+        function get_from_cell(in_cell, in_team_to_ignore=null) {
             foreach(piece in pieces) {
                 if (piece.active) {
                     if ((piece.cell.x == in_cell.x) && (piece.cell.y == in_cell.y)) {
-                        return piece;
+                        if (in_team_to_ignore != null) {
+                            if (piece.team != in_team_to_ignore) { return piece; }
+                        }
+                        else {
+                            return piece;
+                        }
                     };
                 }
             }

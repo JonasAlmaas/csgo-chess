@@ -92,9 +92,7 @@
                 if (active_piece) {
                     if (!active_piece.target_cell) {
                         if (piece_moveing) {
-                            piece_moveing = false;
-                            active_piece = null;
-                            flip_turn();
+                            done_moveing();
                         }
                         else if (player_select()) {
                             if (new_piece && (new_piece.team == turn)) {
@@ -129,19 +127,92 @@
         function try_move(in_cell) {
             if (utils.list_vec_contains(in_cell, valid_moves)) {
                 if (IS_DEBUGGING) { console.log("Valid move"); }
-
-                if (turn == TEAM.WHITE) { LAST_MOVED_PIECE_WHITE = active_piece; }
-                else if (turn == TEAM.BLACK) { LAST_MOVED_PIECE_BLACK = active_piece; }
-
                 active_piece.move_to(in_cell);
                 piece_moveing = true;
                 valid_moves = [];
             }
         }
 
+        function done_moveing() {
+            // Check if a piece should be captured by this move
+            local captured_piece = pieces.get_from_cell(active_piece.cell, turn);
+            if (captured_piece) {
+                if (IS_DEBUGGING) { console.log("A piece was captured"); }
+                captured_piece.capture();
+            }
+
+            // Log move
+            if (turn == TEAM.WHITE) { LAST_MOVED_PIECE_WHITE = active_piece; }
+            else if (turn == TEAM.BLACK) { LAST_MOVED_PIECE_BLACK = active_piece; }
+
+            if (active_piece.type == PIECE_TYPE.PAWN) {
+                // Check for "En Passant"
+                local en_passant_cell = null;
+                if (active_piece.cell.x == 2) { en_passant_cell = active_piece.cell + Vector(1); }
+                else if (active_piece.cell.x == 5) { en_passant_cell = active_piece.cell - Vector(1); }
+
+                if (en_passant_cell) {
+                    local en_passant_piece = pieces.get_from_cell(en_passant_cell);
+                    if (en_passant_piece) {
+                        if (en_passant_piece.times_moved == 1) {
+                            local should_capture_white = (turn == TEAM.BLACK) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_WHITE.cell)
+                            local should_capture_black = (turn == TEAM.WHITE) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_BLACK.cell)
+                            if (should_capture_white || should_capture_black) {
+                                console.log("En Passant!");
+                                en_passant_piece.capture();
+                            }
+                        }
+                    }
+                }
+
+                // TODO: Check for "Pawn Promotion"
+            }
+
+            // Check for "Castling"
+            else if (active_piece.type == PIECE_TYPE.KING) {
+                if (active_piece.times_moved == 1) {
+                    local castling_rook_cell = null;
+                    local castling_rook_target = null;
+                    if (active_piece.cell.y == 2) {
+                        castling_rook_cell = active_piece.cell - Vector(0, 2);
+                        castling_rook_target = active_piece.cell + Vector(0, 1);
+                    }
+                    else if (active_piece.cell.y == 6) {
+                        castling_rook_cell = active_piece.cell + Vector(0, 1);
+                        castling_rook_target = active_piece.cell - Vector(0, 1);
+                    }
+                    
+                    if (castling_rook_cell) {
+                        local castling_rook_piece = pieces.get_from_cell(castling_rook_cell);
+                        if (castling_rook_piece) {
+                            if (castling_rook_piece.times_moved == 0) {
+                                console.log("Castling!");
+                                active_piece = castling_rook_piece;
+                                active_piece.move_to(castling_rook_target);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+            piece_moveing = false;
+            active_piece = null;
+
+            if (engine.is_check_mate(turn, new_simple_pieces_from_pieces(pieces))) {
+                if (IS_DEBUGGING) {
+                    if (turn == TEAM.WHITE) { console.log("Check mate! White team winns!"); }
+                    else { console.log("Check mate! Black team winns!"); }
+                }
+            }
+            else {
+                flip_turn();
+            }
+        }
+
         function player_select() {
             // TODO: Remove
-            return PLAYER_1_EVENTS.ATTACK;
+            // return PLAYER_1_EVENTS.ATTACK;
 
             local ply1_select = (turn == PLAYER_1_TEAM && PLAYER_1_EVENTS.ATTACK);
             local ply2_select = (turn != PLAYER_1_TEAM && PLAYER_2_EVENTS.ATTACK);

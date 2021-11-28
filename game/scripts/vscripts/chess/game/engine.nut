@@ -251,7 +251,23 @@
         return (((cell.x >= 0) && (cell.x < 8)) && ((cell.y >= 0) && (cell.y < 8)));
     }
 
-    function is_check_mate(in_simple_pieces) {
-        return false;
+    function is_check_mate(in_team, in_simple_pieces) {
+        local opponent_team = TEAM.WHITE;
+        if (in_team == TEAM.WHITE) { opponent_team = TEAM.BLACK; }
+
+        // Check if the king still in play
+        if(!get_king_from_team(opponent_team, in_simple_pieces)) {
+            return true;
+        }
+
+        foreach (piece in in_simple_pieces.pieces) {
+            if (piece.active && (piece.team != in_team)) {
+                if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces).len() > 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
