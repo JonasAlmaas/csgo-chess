@@ -39,7 +39,7 @@
         function show() { prop.show(); }
         function hide() { prop.hide(); }
 
-        function teleport(pos) { prop.teleport(pos, angle); }
+        function teleport(pos, in_angle=null) { prop.teleport(pos, in_angle); }
 
         function set_color(color) { prop.set_color(color); }
         function set_model(path) { prop.set_model(path); }
@@ -95,11 +95,11 @@
 
     if (piece.team == TEAM.WHITE) {
         piece.set_color(COLOR_WHITE);
-        piece.angle = Vector(0,90,0);
+        piece.angle = Vector(0,90);
     }
     else if (piece.team == TEAM.BLACK) {
         piece.set_color(COLOR_BLACK);
-        piece.angle = Vector(0,270,0);
+        piece.angle = Vector(0,270);
     }
     else { piece.set_color(COLOR_ERROR); }
 

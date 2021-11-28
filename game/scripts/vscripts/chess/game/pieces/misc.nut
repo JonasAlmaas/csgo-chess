@@ -117,9 +117,17 @@
         function update_pos(in_board_pos) {
             foreach (piece in pieces) {
                 local pos = null;
-                if (piece.active) { pos = piece.get_world_pos(in_board_pos); }
-                else { pos = piece.get_captured_world_pos(in_board_pos); }
-                piece.teleport(pos);
+                local angle = null;
+                if (piece.active) {
+                    pos = piece.get_world_pos(in_board_pos);
+                    angle = piece.angle;
+                }
+                else {
+                    pos = piece.get_captured_world_pos(in_board_pos);
+                    if (piece.team == TEAM.WHITE) { angle = Vector(); }
+                    else { angle = Vector(0,180); }
+                }
+                piece.teleport(pos, angle);
             }
         }
         function get_from_cell(in_cell, in_team_to_ignore=null) {

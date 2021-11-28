@@ -64,9 +64,10 @@
                 debug_draw.box(hit_ply2, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
             }
             
+            // TODO: DEBUG_SINGLE_PLAYER
+            play(hit_ply1);
             // if (turn == PLAYER_1_TEAM) { play(hit_ply1); }
             // else { play(hit_ply2); }
-            play(hit_ply1);
 
             pieces.update_pos(board.pos);
         }
@@ -211,8 +212,8 @@
         }
 
         function player_select() {
-            // TODO: Remove
-            // return PLAYER_1_EVENTS.ATTACK;
+            // TODO: DEBUG_SINGLE_PLAYER
+            return PLAYER_1_EVENTS.ATTACK;
 
             local ply1_select = (turn == PLAYER_1_TEAM && PLAYER_1_EVENTS.ATTACK);
             local ply2_select = (turn != PLAYER_1_TEAM && PLAYER_2_EVENTS.ATTACK);
