@@ -3,7 +3,7 @@
     function remove_decals() {
         console.run("r_cleardecals");
     }
-    function list_combine(l1, l2) {
+    function list_merge(l1, l2) {
         foreach (element in l2) {
             l1.append(element);
         }

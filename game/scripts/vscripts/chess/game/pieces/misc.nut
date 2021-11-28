@@ -23,7 +23,6 @@
         cell = math.vec_clone(in_piece.cell),
         times_moved = in_piece.times_moved,
         get_all_moves = in_piece.get_all_moves,
-        // can_move = in_piece.can_move,
 
         function move_to(in_move_to_cell) {
             times_moved++;
@@ -68,8 +67,7 @@
         for (local file = 0; file < 8; file++) {
             local cell = Vector(1, file);
             if (team == TEAM.BLACK) { cell = Vector(6, file); }
-            // list.append(new_pawn(team, cell));
-            list.append(new_rook(team, cell));
+            list.append(new_pawn(team, cell));
         }
     }
 
@@ -80,30 +78,20 @@
     list.append(new_rook(TEAM.BLACK, Vector(7,0)));
 
     // Create Knights
-    list.append(new_rook(TEAM.WHITE, Vector(0,1)));
-    list.append(new_rook(TEAM.WHITE, Vector(0,6)));
-    list.append(new_rook(TEAM.BLACK, Vector(7,6)));
-    list.append(new_rook(TEAM.BLACK, Vector(7,1)));
-    // list.append(new_knight(TEAM.WHITE, Vector(0,1)));
-    // list.append(new_knight(TEAM.WHITE, Vector(0,6)));
-    // list.append(new_knight(TEAM.BLACK, Vector(7,6)));
-    // list.append(new_knight(TEAM.BLACK, Vector(7,1)));
+    list.append(new_knight(TEAM.WHITE, Vector(0,1)));
+    list.append(new_knight(TEAM.WHITE, Vector(0,6)));
+    list.append(new_knight(TEAM.BLACK, Vector(7,6)));
+    list.append(new_knight(TEAM.BLACK, Vector(7,1)));
 
     // Create Bishops
-    list.append(new_rook(TEAM.WHITE, Vector(0,2)));
-    list.append(new_rook(TEAM.WHITE, Vector(0,5)));
-    list.append(new_rook(TEAM.BLACK, Vector(7,5)));
-    list.append(new_rook(TEAM.BLACK, Vector(7,2)));
-    // list.append(new_bishop(TEAM.WHITE, Vector(0,2)));
-    // list.append(new_bishop(TEAM.WHITE, Vector(0,5)));
-    // list.append(new_bishop(TEAM.BLACK, Vector(7,5)));
-    // list.append(new_bishop(TEAM.BLACK, Vector(7,2)));
+    list.append(new_bishop(TEAM.WHITE, Vector(0,2)));
+    list.append(new_bishop(TEAM.WHITE, Vector(0,5)));
+    list.append(new_bishop(TEAM.BLACK, Vector(7,5)));
+    list.append(new_bishop(TEAM.BLACK, Vector(7,2)));
 
     // Create Queens
-    list.append(new_rook(TEAM.WHITE, Vector(0,3)));
-    list.append(new_rook(TEAM.BLACK, Vector(7,3)));
-    // list.append(new_queen(TEAM.WHITE, Vector(0,3)));
-    // list.append(new_queen(TEAM.BLACK, Vector(7,3)));
+    list.append(new_queen(TEAM.WHITE, Vector(0,3)));
+    list.append(new_queen(TEAM.BLACK, Vector(7,3)));
 
     // Create Kings
     list.append(new_king(TEAM.WHITE, Vector(0,4)));
@@ -130,8 +118,14 @@
         }
         function update_pos(in_board_pos) {
             foreach (piece in pieces) {
-                local pos = engine.get_piece_world_pos(piece, in_board_pos);
-                piece.teleport(pos);
+                if (piece.active) {
+                    local pos = piece.get_world_pos(in_board_pos);
+                    piece.teleport(pos);
+                }
+                // TODO: Make this less shit
+                else {
+                    piece.hide();
+                }
             }
         }
         function get_from_cell(in_cell) {
