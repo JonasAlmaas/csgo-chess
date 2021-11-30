@@ -1,7 +1,7 @@
 /*
     Global constants
 */
-::IS_DEBUGGING <- true;
+::IS_DEBUGGING <- false;
 
 
 /*
@@ -25,9 +25,9 @@
     "game/board/text",
     "game/pieces/base",
     "game/pieces/misc",
+    "game/highlighter"
     "game/engine",
     "game/main",
-    "game/renderer",
     "game/utils",
 ]
 

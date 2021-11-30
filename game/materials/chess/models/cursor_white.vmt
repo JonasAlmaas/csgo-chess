@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/cursor_white"
+
+	$alphatest 1
+}

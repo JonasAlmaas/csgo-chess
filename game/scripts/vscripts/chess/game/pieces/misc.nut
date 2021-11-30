@@ -1,19 +1,4 @@
 
-::PIECE_MODEL <- {
-    PAWN = "models/chess/pieces/pawn.mdl",
-    ROOK = "models/chess/pieces/rook.mdl",
-    KNIGHT = "models/chess/pieces/knight.mdl",
-    BISHOP = "models/chess/pieces/bishop.mdl",
-    QUEEN = "models/chess/pieces/queen.mdl",
-    KING = "models/chess/pieces/king.mdl",
-}
-
-::precache_chess_pieces <- function() {
-    foreach (path in PIECE_MODEL) {
-        self.PrecacheModel(path);
-    }
-}
-
 ::new_simple_piece_from_piece <- function (in_piece) {
 
     local piece = {

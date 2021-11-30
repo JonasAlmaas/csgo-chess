@@ -6,6 +6,7 @@
 
 ::custom_entities <- {
     prop_dynamic = [],
+    prop_dynamic_glow = [],
 }
 
 ::HOT_RELOAD <- function () {
@@ -23,5 +24,5 @@ DoIncludeScript(BASE_FOLDER + "main" + MODULE_EXT, null);
 
 function Precache() {
     precache_text_models(["kanit_semibold"]);
-    precache_chess_pieces();
+    precache_chess();
 }

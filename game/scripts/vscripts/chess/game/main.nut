@@ -15,11 +15,13 @@
     waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [20,20,20], "center_center", text_pos, Vector(0, 0)));
 
     local game = {
-
+        // Entities
         waiting_text = waiting_text,
+        cursors = [],
         
         board = new_board(board_pos),
         pieces = new_pieces(),
+        highlighter = new_highlighter(board_pos),
 
         turn = TEAM.WHITE,
         active_piece = null,
@@ -38,8 +40,13 @@
                 text.kill();
             }
 
+            foreach (cursor in cursors) {
+                cursor.disable();
+            }
+
             board.reset();
             pieces.reset();
+            highlighter.reset();
         }
 
         function update() {
@@ -48,6 +55,12 @@
                 foreach (text in waiting_text) {
                     text.kill();
                 }
+
+                // Create cursors for both players
+                foreach (path in CURSOR_MODEL) {
+                    cursors.append(new_cursor(path));
+                }
+
                 pieces.show();
                 initialized = true;
             }
@@ -56,12 +69,19 @@
             hit_ply1 = board.get_intersection(player1.get_eyes(), player1.get_forward());
             hit_ply2 = board.get_intersection(player2.get_eyes(), player2.get_forward());
 
-            // Place cursor for both players
-            // Use a prop as a cursor!
+            // Place cursors for both players
+            cursors[0].teleport(hit_ply1 + Vector(0, 0, GROUND_OFFSET));
+            cursors[1].teleport(hit_ply2 + Vector(0, 0, GROUND_OFFSET));
 
             if (IS_DEBUGGING) {
                 debug_draw.box(hit_ply1, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
                 debug_draw.box(hit_ply2, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
+            }
+            
+            if (IS_DEBUGGING) {
+                foreach (move in valid_moves) {
+                    debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
+                }
             }
             
             // TODO: DEBUG_SINGLE_PLAYER
@@ -73,18 +93,13 @@
         }
 
         function play(hit) {
-            // Highlight all valid moves
-            if (IS_DEBUGGING) {
-                foreach (move in valid_moves) {
-                    debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
-                }
-            }
-
             if (board.is_inside(hit)) {
                 local cell = board.get_cell_from_pos(hit);
 
+                // Highlight the hovered cell
+                highlighter.update_hoverd_cell(cell);
+
                 if (IS_DEBUGGING) {
-                    // Highlight the hovered cell
                     debug_highlight_cell(board.pos, cell, COLOR.HOVERED_CELL);
                 }
 
@@ -112,6 +127,9 @@
                     }
                 }
             }
+            else {
+                highlighter.update_hoverd_cell(null);
+            }
         }
 
         function flip_turn() {
@@ -131,6 +149,7 @@
                 active_piece.move_to(in_cell);
                 piece_moveing = true;
                 valid_moves = [];
+                highlighter.update_valid_moves(valid_moves);
             }
         }
 
@@ -235,6 +254,9 @@
 
             if (valid_moves.len() > 0) {
                 if (IS_DEBUGGING) { console.log("Selected a new piece"); }
+
+                highlighter.update_valid_moves(valid_moves);
+
                 active_piece = in_piece;
             }
             else {

@@ -158,7 +158,7 @@ char_size_factor <- {
             foreach (char_info in char_info_list) {
                 if (char_info["char"] != " ") {
                     local prop = new_prop_dynamic();
-                    prop.ref.__KeyValueFromInt("disableshadowdepth", 1);
+                    prop.disable_shadows();
 
                     offset_distance.x += char_info["offset_distance_step"];
                     local offset = math.vec_rotate_3d(Vector(0, offset_distance.x, offset_distance.y), ang);
