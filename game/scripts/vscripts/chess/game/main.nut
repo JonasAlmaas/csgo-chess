@@ -70,8 +70,15 @@
             hit_ply2 = board.get_intersection(player2.get_eyes(), player2.get_forward());
 
             // Place cursors for both players
-            cursors[0].teleport(hit_ply1 + Vector(0, 0, GROUND_OFFSET));
-            cursors[1].teleport(hit_ply2 + Vector(0, 0, GROUND_OFFSET));
+            local hald_board_size = BOARD_SCALE * 4;
+            local board_center = board.pos + Vector(hald_board_size, -hald_board_size)
+            
+            if ((math.abs(board_center.x - hit_ply1.x) < 4096) && (math.abs(board_center.y - hit_ply1.y) < 4096)) {
+                cursors[0].teleport(hit_ply1 + Vector(0, 0, GROUND_OFFSET));
+            }
+            if ((math.abs(board_center.x - hit_ply2.x) < 4096) && (math.abs(board_center.y - hit_ply2.y) < 4096)) {
+                cursors[1].teleport(hit_ply2 + Vector(0, 0, GROUND_OFFSET));
+            }
 
             if (IS_DEBUGGING) {
                 debug_draw.box(hit_ply1, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
@@ -245,7 +252,6 @@
 
                 return true;
             }
-
             return false;
         }
 
@@ -254,15 +260,14 @@
 
             if (valid_moves.len() > 0) {
                 if (IS_DEBUGGING) { console.log("Selected a new piece"); }
-
-                highlighter.update_valid_moves(valid_moves);
-
                 active_piece = in_piece;
             }
             else {
                 if (IS_DEBUGGING) { console.log("No valid moves"); }
                 active_piece = null;
             }
+
+            highlighter.update_valid_moves(valid_moves);
         }
     }
 

@@ -20,7 +20,6 @@
         }
 
         function disable_valid_moves() {
-            printl(valid_moves_props.len())
             foreach (prop in valid_moves_props) {
                 prop.disable();
             }
@@ -37,11 +36,9 @@
             disable_valid_moves();
 
             foreach (move in valid_moves) {
-                local prop = new_prop_dynamic_glow();
+                local prop = new_prop_dynamic();
                 prop.set_model("models/chess/ui/cell_outliune.mdl");
                 prop.set_color(COLOR.VALID_MOVE);
-                prop.set_glow_color(COLOR.VALID_MOVE);
-                prop.set_glow_distance(100000);
                 prop.disable_shadows();
 
                 local offset = math.vec_mul(move, BOARD_SCALE) + Vector(half_cell, half_cell);
@@ -50,18 +47,14 @@
 
                 valid_moves_props.append(prop);
             }
-
-            printl(valid_moves_props.len())
         }
 
         function update_hoverd_cell(in_cell) {
             if (in_cell) {
                 if (!hoverd_cell_prop) {
-                    hoverd_cell_prop = new_prop_dynamic_glow();
+                    hoverd_cell_prop = new_prop_dynamic();
                     hoverd_cell_prop.set_model("models/chess/ui/cell_outliune.mdl");
                     hoverd_cell_prop.set_color(COLOR.HOVERED_CELL);
-                    hoverd_cell_prop.set_glow_color(COLOR.HOVERED_CELL);
-                    hoverd_cell_prop.set_glow_distance(100000);
                     hoverd_cell_prop.disable_shadows();
                 }
                 else {
