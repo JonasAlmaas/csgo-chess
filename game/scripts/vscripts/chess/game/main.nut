@@ -11,8 +11,8 @@
     local text_pos = board_pos + Vector(half_board_size, -half_board_size, 1152)
 
     local waiting_text = [];
-    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [20,20,20], "center_center", text_pos, Vector(0, 180)));
-    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [20,20,20], "center_center", text_pos, Vector(0, 0)));
+    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [175,175,175], "center_center", text_pos, Vector(0, 180)));
+    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [175,175,175], "center_center", text_pos, Vector(0, 0)));
 
     local game = {
         // Entities
