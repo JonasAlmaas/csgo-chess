@@ -17,19 +17,14 @@ event_template[EVENT_TYPE.TEAM_CHANGE] <- ["team_change", ["userid", "team", "ol
 
 ::PLAYER_1_EVENTS <- {
     ATTACK = false,
-    BULLET_FIERED = false,
 }
 ::PLAYER_2_EVENTS <- {
     ATTACK = false,
-    BULLET_FIERED = false,
 }
 
 ::dispatch_events <- function() {
     PLAYER_1_EVENTS.ATTACK = false;
     PLAYER_2_EVENTS.ATTACK = false;
-
-    PLAYER_1_EVENTS.BULLET_FIERED = false;
-    PLAYER_2_EVENTS.BULLET_FIERED = false;
 }
 
 /*
@@ -64,26 +59,11 @@ function update_player_traces() {
     }
 }
 
-/*
-    Player attack
-*/
-EVENT_LAST_BULLET_TIME <- Time();
-::OnGameEvent_bullet_impact <- function(userid, pos) {
-    if(EVENT_LAST_BULLET_TIME != Time()){
-        if (userid == PLAYER_1_ID) { PLAYER_1_EVENTS.BULLET_FIERED = true; }
-        else { PLAYER_2_EVENTS.BULLET_FIERED = true; }
-
-        EVENT_LAST_BULLET_TIME = Time();
-    }
-}
-
-::OnGameEvent_player_say <- function(userid, text) {
-    console.chat(userid + " : " + text);
-}
-
 ::OnGameEvent_player_spawn <- function(userid, teamnum) {
     if (PLAYER_1_ID == null) {
         PLAYER_1_ID = userid;
+        // TODO: Make a system for selecting teams
+        // This doesnt really work
         if (teamnum == 2) { PLAYER_1_TEAM = TEAM.WHITE; }
         else { PLAYER_1_TEAM = TEAM.BLACK; }
     }

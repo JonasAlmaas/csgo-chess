@@ -28,6 +28,7 @@
     "game/highlighter"
     "game/engine",
     "game/main",
+    "game/pawn_promotion",
     "game/utils",
 ]
 

@@ -107,6 +107,7 @@
 
     }
     /* Only planes orthogonal to floor */
+    /* Eyes, forward, pos, ang */
     function plane_intersection(pSource, aSource, pTarget, aTarget) {
 
         local pXY = intersection_angles_2D(Vector(pSource.x, pSource.y),

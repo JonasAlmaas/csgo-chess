@@ -1,0 +1,18 @@
+RULES:
+    Pawn:
+        En Passant:
+            DONE: The captured piece has to be moved two cells on its first move
+            DONE: The piece has to be captured the following round
+            DONE: It can only captue another pawn this way
+
+        Pawn Promotion:
+            DONT: Popup where you can choose what piece you want to upgrade to
+            DONT: Everything but pawns and kings
+
+    King:
+        Castling:
+            Can't castle when in check
+            Can't castle through a check
+            DONE: Can't castle through other pieces
+            DONE: Castling has to happen on the kings first move
+            DONE: The rook can not be moved before castling

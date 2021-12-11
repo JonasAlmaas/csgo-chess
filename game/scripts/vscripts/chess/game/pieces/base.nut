@@ -68,7 +68,9 @@
                     local cell_pos = engine.get_world_pos_from_cell(in_board_pos, cell)
                     local next_cell_pos = engine.get_world_pos_from_cell(in_board_pos, next_cell);
 
-                    local percent = (Time() - time_last_cell) / time_per_cell;
+                    local calculated_time_per_cell = ((cell_pos - next_cell_pos).Length() / BOARD_SCALE) * time_per_cell
+
+                    local percent = (Time() - time_last_cell) / calculated_time_per_cell;
                     if (percent >= 1) {
                         cell = math.vec_clone(next_cell);
                         next_cell = null;
@@ -123,6 +125,11 @@
         if (team == TEAM.BLACK) { step = -1; }
 
         local move1 = Vector(cell.x + step, cell.y);
+
+        if (!engine.is_cell_on_board(move1)) {
+            return moves;
+        }
+
         local move1_piece = in_simple_pieces.get_from_cell(move1);
         if (!move1_piece) {
             // Can only move forward if there isn't a piece there

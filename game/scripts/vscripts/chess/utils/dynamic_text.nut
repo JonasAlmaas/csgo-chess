@@ -109,7 +109,7 @@ char_size_factor <- {
             sub_folder = "/char/";
         }
         else {
-            printl("ERROR: CHARACTER " + char +  " IS NOT SUPPORTED");
+            console.log("ERROR: CHARACTER " + char +  " IS NOT SUPPORTED");
             continue;
         }
 

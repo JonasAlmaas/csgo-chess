@@ -4,7 +4,7 @@
     local text_size = BOARD_SCALE * 0.65;
 
     local text_list = [];
-    local text_color = [40,40,40];
+    local text_color = [65,65,65];
 
     local board_size = BOARD_SCALE * 8;
     local half_scale = BOARD_SCALE * 0.5;

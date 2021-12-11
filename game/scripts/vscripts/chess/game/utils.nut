@@ -17,12 +17,14 @@ enum PIECE_TYPE {
 ::LAST_MOVED_PIECE_WHITE <- null;
 ::LAST_MOVED_PIECE_BLACK <- null;
 
+::IS_DEBUGGING_SINGLE_PLAYER <- true;
 ::BOARD_SCALE <- 128;
 ::GROUND_OFFSET <- 0.1;
 
 ::COLOR <- {
-    VALID_MOVE = [0,255,0],
-    HOVERED_CELL = [113,169,222],
+    VALID_MOVE = [65, 145, 111],
+    LAST_MOVE = [255, 198, 66],
+    SELECTED = [255, 227, 66],
 }
 
 /*
@@ -43,22 +45,35 @@ enum PIECE_TYPE {
     WHITE = "models/chess/ui/cursor_white.mdl",
 }
 
+::HIGHLIGHT_MODEL <- {
+    CELL_OUTLINE = "models/chess/ui/cell_outliune.mdl",
+    CAPTURE_MOVE = "models/chess/ui/capture_move.mdl",
+    VALID_MOVE = "models/chess/ui/valid_move.mdl",
+}
+
+::PAWN_PROMOTION_MODEL <- {
+    BACKGROUND = "models/chess/ui/pawn_promotion_background.mdl",
+    ROOK = "models/chess/ui/pawn_promotion_rook.mdl",
+    KNIGHT = "models/chess/ui/pawn_promotion_knight.mdl",
+    BISHOP = "models/chess/ui/pawn_promotion_bishop.mdl",
+    QUEEN = "models/chess/ui/pawn_promotion_queen.mdl",
+}
+
 /*
     FUNCTIONS
 */
 
+::precache_manifest <- function (manifest) {
+    foreach (path in manifest) {
+        self.PrecacheModel(path);
+    }
+}
+
 ::precache_chess <- function() {
-    // Pieces
-    foreach (path in PIECE_MODEL) {
-        self.PrecacheModel(path);
-    }
-
-    // Cursors
-    foreach (path in CURSOR_MODEL) {
-        self.PrecacheModel(path);
-    }
-
-    self.PrecacheModel("models/chess/ui/cell_outliune.mdl");
+    precache_manifest(PIECE_MODEL);             // Pieces
+    precache_manifest(CURSOR_MODEL);            // Cursors
+    precache_manifest(HIGHLIGHT_MODEL);         // Highlight
+    precache_manifest(PAWN_PROMOTION_MODEL);    // Pawn Promotion
 }
 
 ::new_cursor <- function (model_path) {
