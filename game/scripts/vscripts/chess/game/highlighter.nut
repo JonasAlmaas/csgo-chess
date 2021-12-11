@@ -52,7 +52,7 @@
             if (cell) {
                 selected_piece_prop.show();
                 local offset = math.vec_mul(cell, BOARD_SCALE) + Vector(half_cell, half_cell);
-                local pos = board_pos + Vector(offset.x, -offset.y, GROUND_OFFSET);
+                local pos = board_pos + Vector(offset.x, -offset.y, GROUND_OFFSET * 1.25);
                 selected_piece_prop.teleport(pos);
             }
             else {
@@ -77,10 +77,10 @@
             }
 
             local from_offset = math.vec_mul(from_cell, BOARD_SCALE) + Vector(half_cell, half_cell);
-            local from_pos = board_pos + Vector(from_offset.x, -from_offset.y, GROUND_OFFSET);
+            local from_pos = board_pos + Vector(from_offset.x, -from_offset.y, GROUND_OFFSET * 1.25);
 
             local to_offset = math.vec_mul(to_cell, BOARD_SCALE) + Vector(half_cell, half_cell);
-            local to_pos = board_pos + Vector(to_offset.x, -to_offset.y, GROUND_OFFSET);
+            local to_pos = board_pos + Vector(to_offset.x, -to_offset.y, GROUND_OFFSET * 1.25);
 
             last_move_to_prop.teleport(to_pos);
             last_move_from_prop.teleport(from_pos);

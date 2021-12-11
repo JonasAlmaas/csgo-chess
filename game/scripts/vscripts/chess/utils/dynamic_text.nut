@@ -183,8 +183,7 @@ char_size_factor <- {
 
         function kill() {
             foreach (prop in prop_list) {
-                prop.is_disabled = true;
-                EntFireByHandle(prop.ref, "Disable", "", 0.0, null, null);
+                prop.disable()
             }
             prop_list = [];
         }

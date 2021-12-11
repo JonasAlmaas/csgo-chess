@@ -10,13 +10,8 @@
     local half_board_size = BOARD_SCALE * 4;
     local text_pos = board_pos + Vector(half_board_size, -half_board_size, 1152)
 
-    local waiting_text = [];
-    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [175,175,175], "center_center", text_pos, Vector(0, 180)));
-    waiting_text.append(new_dynamic_text("Waiting for players: [1/2]", BOARD_SCALE * 0.35, "kanit_semibold", [175,175,175], "center_center", text_pos, Vector(0, 0)));
-
     local game = {
         // Entities
-        waiting_text = waiting_text,
         cursors = [],
         
         board = new_board(board_pos),
@@ -31,17 +26,13 @@
         piece_moveing = false,
         valid_moves = [],
 
-        hit_ply1 = Vector(),
-        hit_ply2 = Vector(),
+        hit_white = Vector(),
+        hit_black = Vector(),
 
         initialized = false,
 
         function reset() {
             if (IS_DEBUGGING) { console.log("Reset: Game"); }
-
-            foreach (text in waiting_text) {
-                text.kill();
-            }
 
             foreach (cursor in cursors) {
                 cursor.disable();
@@ -53,6 +44,7 @@
             pawn_promotion_handler.reset();
         }
 
+        // TODO: Implement this
         function soft_reset() {
             if (IS_DEBUGGING) { console.log("Soft Reset: Game"); }
 
@@ -81,9 +73,6 @@
         function update() {
             
             if (!initialized) {
-                foreach (text in waiting_text) {
-                    text.kill();
-                }
 
                 // Create cursors for both players
                 foreach (path in CURSOR_MODEL) {
@@ -95,23 +84,23 @@
             }
 
             // Get player hits
-            hit_ply1 = board.get_intersection(player1.get_eyes(), player1.get_forward());
-            hit_ply2 = board.get_intersection(player2.get_eyes(), player2.get_forward());
+            hit_white = board.get_intersection(player_white.get_eyes(), player_white.get_forward());
+            hit_black = board.get_intersection(player_black.get_eyes(), player_black.get_forward());
 
             // Place cursors for both players
             local hald_board_size = BOARD_SCALE * 4;
             local board_center = board.pos + Vector(hald_board_size, -hald_board_size);
             
-            if ((math.abs(board_center.x - hit_ply1.x) < 4096) && (math.abs(board_center.y - hit_ply1.y) < 4096)) {
-                cursors[0].teleport(hit_ply1 + Vector(0, 0, GROUND_OFFSET));
+            if ((math.abs(board_center.x - hit_white.x) < 4096) && (math.abs(board_center.y - hit_white.y) < 4096)) {
+                cursors[0].teleport(hit_white + Vector(0, 0, GROUND_OFFSET * 2));
             }
-            if ((math.abs(board_center.x - hit_ply2.x) < 4096) && (math.abs(board_center.y - hit_ply2.y) < 4096)) {
-                cursors[1].teleport(hit_ply2 + Vector(0, 0, GROUND_OFFSET));
+            if ((math.abs(board_center.x - hit_black.x) < 4096) && (math.abs(board_center.y - hit_black.y) < 4096)) {
+                cursors[1].teleport(hit_black + Vector(0, 0, GROUND_OFFSET * 2));
             }
 
             if (IS_DEBUGGING) {
-                debug_draw.box(hit_ply1, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
-                debug_draw.box(hit_ply2, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
+                debug_draw.box(hit_white, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
+                debug_draw.box(hit_black, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
 
                 foreach (move in valid_moves) {
                     debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
@@ -119,14 +108,14 @@
             }
 
             if (pawn_promotion_handler.waiting) {
-                if (turn == TEAM.WHITE) { pawn_promotion_handler.update(player1, player_select()); }
-                else { pawn_promotion_handler.update(player2, player_select()); }
+                if (turn == TEAM.WHITE) { pawn_promotion_handler.update(player_white, player_select()); }
+                else { pawn_promotion_handler.update(player_black, player_select()); }
             }
             else if (!game_over) {
-                if (IS_DEBUGGING_SINGLE_PLAYER) { play(hit_ply1); }
+                if (IS_DEBUGGING_SINGLE_PLAYER) { play(hit_white); }
                 else {
-                    if (turn == TEAM.WHITE) { play(hit_ply1); }
-                    else { play(hit_ply2); }
+                    if (turn == TEAM.WHITE) { play(hit_white); }
+                    else { play(hit_black); }
                 }
             }
 
@@ -271,12 +260,12 @@
                 game_over = true;
 
                 // TODO: Make something happen when you win!
-                if (turn == TEAM.WHITE) { console.log("Check mate! White team winns!"); }
-                else { console.log("Check mate! Black team winns!"); }
+                if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
+                else { console.log("Check mate! Black team wins!"); }
 
                 // if (IS_DEBUGGING) {
-                //     if (turn == TEAM.WHITE) { console.log("Check mate! White team winns!"); }
-                //     else { console.log("Check mate! Black team winns!"); }
+                //     if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
+                //     else { console.log("Check mate! Black team wins!"); }
                 // }
             }
             else {
@@ -286,11 +275,11 @@
 
         function player_select() {
             if (IS_DEBUGGING_SINGLE_PLAYER) {
-                return PLAYER_1_EVENTS.ATTACK;
+                return PLAYER_WHITE_EVENTS.ATTACK;
             }
 
-            local ply1_select = (turn == TEAM.WHITE && PLAYER_1_EVENTS.ATTACK);
-            local ply2_select = (turn != TEAM.WHITE && PLAYER_2_EVENTS.ATTACK);
+            local ply1_select = (turn == TEAM.WHITE && PLAYER_WHITE_EVENTS.ATTACK);
+            local ply2_select = (turn != TEAM.WHITE && PLAYER_BLACK_EVENTS.ATTACK);
 
             if (ply1_select || ply2_select) {
                 if (IS_DEBUGGING) {

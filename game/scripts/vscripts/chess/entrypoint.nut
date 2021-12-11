@@ -1,8 +1,7 @@
 ::MODULE_EXT <- ".nut";
 ::BASE_FOLDER <- "chess/";
 
-::PLAYER_1_ID <- null;
-::PLAYER_1_TEAM <- null;
+::ENTITY_GROUP <- EntityGroup;
 
 ::custom_entities <- {
     prop_dynamic = [],

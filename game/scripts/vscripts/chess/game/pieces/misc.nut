@@ -42,43 +42,39 @@
 
     local list = [];
 
-    // TODO: Remove this
-    list.append(new_pawn(TEAM.WHITE, Vector(6,0)));
-    list.append(new_pawn(TEAM.BLACK, Vector(6,1)));
+    // Create Pawns
+    for (local t = 0; t < 2; t++) {
+        local team = TEAM.WHITE;
+        if (t == 1) { team = TEAM.BLACK; }
 
-    // // Create Pawns
-    // for (local t = 0; t < 2; t++) {
-    //     local team = TEAM.WHITE;
-    //     if (t == 1) { team = TEAM.BLACK; }
+        for (local file = 0; file < 8; file++) {
+            local cell = Vector(1, file);
+            if (team == TEAM.BLACK) { cell = Vector(6, file); }
+            list.append(new_pawn(team, cell));
+        }
+    }
 
-    //     for (local file = 0; file < 8; file++) {
-    //         local cell = Vector(1, file);
-    //         if (team == TEAM.BLACK) { cell = Vector(6, file); }
-    //         list.append(new_pawn(team, cell));
-    //     }
-    // }
+    // Create Rooks
+    list.append(new_rook(TEAM.WHITE, Vector(0,0)));
+    list.append(new_rook(TEAM.WHITE, Vector(0,7)));
+    list.append(new_rook(TEAM.BLACK, Vector(7,7)));
+    list.append(new_rook(TEAM.BLACK, Vector(7,0)));
 
-    // // Create Rooks
-    // list.append(new_rook(TEAM.WHITE, Vector(0,0)));
-    // list.append(new_rook(TEAM.WHITE, Vector(0,7)));
-    // list.append(new_rook(TEAM.BLACK, Vector(7,7)));
-    // list.append(new_rook(TEAM.BLACK, Vector(7,0)));
+    // Create Knights
+    list.append(new_knight(TEAM.WHITE, Vector(0,1)));
+    list.append(new_knight(TEAM.WHITE, Vector(0,6)));
+    list.append(new_knight(TEAM.BLACK, Vector(7,6)));
+    list.append(new_knight(TEAM.BLACK, Vector(7,1)));
 
-    // // Create Knights
-    // list.append(new_knight(TEAM.WHITE, Vector(0,1)));
-    // list.append(new_knight(TEAM.WHITE, Vector(0,6)));
-    // list.append(new_knight(TEAM.BLACK, Vector(7,6)));
-    // list.append(new_knight(TEAM.BLACK, Vector(7,1)));
+    // Create Bishops
+    list.append(new_bishop(TEAM.WHITE, Vector(0,2)));
+    list.append(new_bishop(TEAM.WHITE, Vector(0,5)));
+    list.append(new_bishop(TEAM.BLACK, Vector(7,5)));
+    list.append(new_bishop(TEAM.BLACK, Vector(7,2)));
 
-    // // Create Bishops
-    // list.append(new_bishop(TEAM.WHITE, Vector(0,2)));
-    // list.append(new_bishop(TEAM.WHITE, Vector(0,5)));
-    // list.append(new_bishop(TEAM.BLACK, Vector(7,5)));
-    // list.append(new_bishop(TEAM.BLACK, Vector(7,2)));
-
-    // // Create Queens
-    // list.append(new_queen(TEAM.WHITE, Vector(0,3)));
-    // list.append(new_queen(TEAM.BLACK, Vector(7,3)));
+    // Create Queens
+    list.append(new_queen(TEAM.WHITE, Vector(0,3)));
+    list.append(new_queen(TEAM.BLACK, Vector(7,3)));
 
     // Create Kings
     list.append(new_king(TEAM.WHITE, Vector(0,4)));

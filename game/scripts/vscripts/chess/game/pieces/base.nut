@@ -398,7 +398,9 @@
 
         // Castling
         if (times_moved == 0) {
-            // TODO: Cant move threw a check! Maybe later
+            // TODO:
+            // Cant castle when in check
+            // Cant castle threw a check
 
             // Right
             if (utils.list_vec_contains(possible_moves[3], moves)) {

@@ -15,70 +15,41 @@ event_template[EVENT_TYPE.PLAYER_SAY] <- ["player_say", ["userid","text"]];
 event_template[EVENT_TYPE.PLAYER_SPAWN] <- ["player_spawn", ["userid","teamnum"]];
 event_template[EVENT_TYPE.TEAM_CHANGE] <- ["team_change", ["userid", "team", "oldteam", "disconnect", "autoteam", "silent", "isbot"]];
 
-::PLAYER_1_EVENTS <- {
+::PLAYER_WHITE_EVENTS <- {
     ATTACK = false,
 }
-::PLAYER_2_EVENTS <- {
+::PLAYER_BLACK_EVENTS <- {
     ATTACK = false,
 }
 
 ::dispatch_events <- function() {
-    PLAYER_1_EVENTS.ATTACK = false;
-    PLAYER_2_EVENTS.ATTACK = false;
+    PLAYER_WHITE_EVENTS.ATTACK = false;
+    PLAYER_BLACK_EVENTS.ATTACK = false;
 }
 
 /*
     Player trace
 */
-::trace_orig_ply1 <- null;
-::trace_orig_ply2 <- null;
+::trace_orig_ply_white <- null;
+::trace_orig_ply_black <- null;
 function update_player_traces() {
-
-    // Player 1
-    if (player1 != null) {
-        if (trace_orig_ply1 != null) {
-            player1.forward_vector = trace_orig_ply1.GetForwardVector();
-        }
-        else if (trace_orig_ply1 == null && EntityGroup) {
-            trace_orig_ply1 = EntityGroup[0];
-            EntFireByHandle(player1.ref, "AddOutput", "targetname ply1", 0.0, null, null);
-            EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
-        }
+    if (player_white != null && trace_orig_ply_white != null) {
+        player_white.forward_vector = trace_orig_ply_white.GetForwardVector();
     }
 
-    // Player 2
-    if (player2 != null) {
-        if (trace_orig_ply2 != null) {
-            player2.forward_vector = trace_orig_ply2.GetForwardVector();
-        }
-        else if (trace_orig_ply2 == null && EntityGroup) {
-            trace_orig_ply2 = EntityGroup[1];
-            EntFireByHandle(player2.ref, "AddOutput", "targetname ply2", 0.0, null, null);
-            EntFire("tr_lmm_ply2", "SetMeasureTarget", "ply2", 0.01, null);
-        }
-    }
-}
-
-::OnGameEvent_player_spawn <- function(userid, teamnum) {
-    if (PLAYER_1_ID == null) {
-        PLAYER_1_ID = userid;
-        // TODO: Make a system for selecting teams
-        // This doesnt really work
-        if (teamnum == 2) { PLAYER_1_TEAM = TEAM.WHITE; }
-        else { PLAYER_1_TEAM = TEAM.BLACK; }
+    if (player_black != null && trace_orig_ply_black != null) {
+        player_black.forward_vector = trace_orig_ply_black.GetForwardVector();
     }
 }
 
 ::OnGameEvent_player_attack <- function (player_number) {
-    if (player_number == 1) { PLAYER_1_EVENTS.ATTACK = true; }
-    else if (player_number == 2) { PLAYER_2_EVENTS.ATTACK = true; }
+    if (player_number == 1) { PLAYER_WHITE_EVENTS.ATTACK = true; }
+    else if (player_number == 2) { PLAYER_BLACK_EVENTS.ATTACK = true; }
 }
 
 ::OnGameEvent_team_change <- function (userid, team, oldteam, disconnect, autoteam, silent, isbot) {
     if (disconnect) {
-        player2 = null;
-        game.reset();
-        game = new_game()
+        reset_session();
     }
 }
 

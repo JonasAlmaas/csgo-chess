@@ -3,10 +3,13 @@
 */
 ::IS_DEBUGGING <- false;
 
-
 /*
     Global includes
 */
+::SCRIPTS_MANIFEST_MISC <- [
+    "lobby"
+]
+
 ::SCRIPTS_MANIFEST_UTILITIES <- [
     "utils/console",
     "utils/constants",
@@ -39,6 +42,7 @@
             DoIncludeScript(BASE_FOLDER + script + MODULE_EXT, null);
         }
     }
+    include_manifest(SCRIPTS_MANIFEST_MISC)
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)
     include_manifest(SCRIPTS_MANIFEST_GAME)
 }
@@ -48,9 +52,10 @@ include_scripts();
 /*
     Global variables
 */
-::player1 <- null;
-::player2 <- null;
+::player_white <- null;
+::player_black <- null;
 
+::lobby <- null;
 ::game <- null;
 
 ::initialized <- false;
@@ -60,20 +65,20 @@ include_scripts();
     calculate_tickrate();
 
     if (!initialized) {
+        
+        trace_orig_ply_white = EntityGroup[0];
+        trace_orig_ply_black = EntityGroup[1];
 
-        game = new_game()
+        lobby = new_lobby();
+        game = new_game();
+
         initialized = true;
-    }
-
-    if (player1 == null || player2 == null) {
-        reset_player_references();
     }
 
     update_player_traces();
 
-    if (player1 && player2) {
-        game.update();
-    }
+    if (lobby.waiting) { lobby.update(); }
+    else { game.update(); }
 
     dispatch_events();
 }
@@ -82,30 +87,10 @@ include_scripts();
     
     utils.remove_decals();
 
+    lobby.reset();
     game.reset();
 
-    if (player1) { player1.teleport(player1.spawn_pos); }
-    if (player2) { player2.teleport(player2.spawn_pos); }
-}
-
-::reset_player_references <- function () {
-
-    player1 = null;
-    player2 = null;
-
-    local target = null;
-    while ((target = Entities.FindByClassname(target, "*player*")) != null) {
-        if (target.GetClassname() == "player") {
-            if (player1 == null) {
-                player1 = new_player(target);
-                EntFireByHandle(EntityGroup[2], "Activate", "", 0.0, target, null);
-            }
-            else {
-                player2 = new_player(target);
-                EntFireByHandle(EntityGroup[3], "Activate", "", 0.0, target, null);
-            }
-        }
-    }
+    initialized = false;
 }
 
 /*
