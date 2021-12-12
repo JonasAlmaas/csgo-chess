@@ -1,7 +1,5 @@
 
 ::new_game <- function () {
-
-    if (IS_DEBUGGING) { console.log("Create: Game"); }
     
     local target = null;
     target = Entities.FindByName(target, "target_board");
@@ -32,8 +30,6 @@
         initialized = false,
 
         function reset() {
-            if (IS_DEBUGGING) { console.log("Reset: Game"); }
-
             foreach (cursor in cursors) {
                 cursor.disable();
             }
@@ -46,8 +42,7 @@
 
         // TODO: Implement this
         function soft_reset() {
-            if (IS_DEBUGGING) { console.log("Soft Reset: Game"); }
-
+    
             board.reset();
             board = new_board(board_pos);
 
@@ -98,21 +93,14 @@
                 cursors[1].teleport(hit_black + Vector(0, 0, GROUND_OFFSET * 2));
             }
 
-            if (IS_DEBUGGING) {
-                debug_draw.box(hit_white, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
-                debug_draw.box(hit_black, Vector(-2,-2,-2), Vector(2,2,2), [255,0,255,255]);
-
-                foreach (move in valid_moves) {
-                    debug_highlight_cell(board.pos, move, COLOR.VALID_MOVE);
-                }
-            }
-
             if (pawn_promotion_handler.waiting) {
                 if (turn == TEAM.WHITE) { pawn_promotion_handler.update(player_white, player_select()); }
                 else { pawn_promotion_handler.update(player_black, player_select()); }
             }
             else if (!game_over) {
-                if (IS_DEBUGGING_SINGLE_PLAYER) { play(hit_white); }
+                if (IS_DEBUGGING_SINGLE_PLAYER) {
+                    play(hit_white);
+                }
                 else {
                     if (turn == TEAM.WHITE) { play(hit_white); }
                     else { play(hit_black); }
@@ -138,7 +126,6 @@
                                 deselect();
                             }
                             else if (new_piece && (new_piece.team == turn)) {
-                                if (IS_DEBUGGING) { console.log("Selected pice of same team"); }
                                 select_piece(new_piece);
                             }
                             else {
@@ -156,19 +143,12 @@
         }
 
         function flip_turn() {
-            if (turn == TEAM.WHITE) {
-                turn = TEAM.BLACK;
-                if (IS_DEBUGGING) { console.log("Turn: Black"); }
-            }
-            else {
-                turn = TEAM.WHITE;
-                if (IS_DEBUGGING) { console.log("Turn: White"); }
-            }
+            if (turn == TEAM.WHITE) { turn = TEAM.BLACK; }
+            else { turn = TEAM.WHITE; }
         }
 
         function try_move(in_cell) {
             if (utils.list_vec_contains(in_cell, valid_moves)) {
-                if (IS_DEBUGGING) { console.log("Valid move"); }
                 active_piece.move_to(in_cell);
                 piece_moveing = true;
                 valid_moves = [];
@@ -189,7 +169,6 @@
             // Check if a piece should be captured by this move
             local captured_piece = pieces.get_from_cell(active_piece.cell, turn);
             if (captured_piece) {
-                if (IS_DEBUGGING) { console.log("A piece was captured"); }
                 captured_piece.capture();
             }
 
@@ -210,7 +189,6 @@
                             local should_capture_white = (turn == TEAM.BLACK) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_WHITE.cell)
                             local should_capture_black = (turn == TEAM.WHITE) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_BLACK.cell)
                             if (should_capture_white || should_capture_black) {
-                                if (IS_DEBUGGING) { console.log("En Passant!"); }
                                 en_passant_piece.capture();
                             }
                         }
@@ -219,7 +197,6 @@
 
                 // Check for "Pawn Promotion"
                 if (active_piece.cell.x == 7 || active_piece.cell.x == 0) {
-                    if (IS_DEBUGGING) { console.log("Pawn Promotion"); }
                     pawn_promotion_handler.open(active_piece);
                     return;
                 }
@@ -243,7 +220,6 @@
                         local castling_rook_piece = pieces.get_from_cell(castling_rook_cell);
                         if (castling_rook_piece) {
                             if (castling_rook_piece.times_moved == 0) {
-                                if (IS_DEBUGGING) { console.log("Castling!"); }
                                 active_piece = castling_rook_piece;
                                 active_piece.move_to(castling_rook_target);
                                 return;
@@ -281,15 +257,7 @@
             local ply1_select = (turn == TEAM.WHITE && PLAYER_WHITE_EVENTS.ATTACK);
             local ply2_select = (turn != TEAM.WHITE && PLAYER_BLACK_EVENTS.ATTACK);
 
-            if (ply1_select || ply2_select) {
-                if (IS_DEBUGGING) {
-                    if (ply1_select) { console.log("Player 1: Select"); }
-                    else { console.log("Player 2: Select"); }
-                }
-
-                return true;
-            }
-            return false;
+            return (ply1_select || ply2_select);
         }
 
         function select_piece(in_piece) {
@@ -298,12 +266,10 @@
             highlighter.update_selected_piece(in_piece.cell);
 
             if (valid_moves.len() > 0) {
-                if (IS_DEBUGGING) { console.log("Selected a new piece"); }
                 active_piece = in_piece;
                 highlighter.update_valid_moves(valid_moves, active_piece.type, new_simple_pieces_from_pieces(pieces));
             }
             else {
-                if (IS_DEBUGGING) { console.log("No valid moves"); }
                 active_piece = null;
                 highlighter.disable_valid_moves();
             }

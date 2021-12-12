@@ -17,8 +17,6 @@ enum PIECE_TYPE {
 ::LAST_MOVED_PIECE_WHITE <- null;
 ::LAST_MOVED_PIECE_BLACK <- null;
 
-::IS_DEBUGGING_SINGLE_PLAYER <- false;
-
 ::BOARD_SCALE <- 128;
 ::GROUND_OFFSET <- 0.1;
 
@@ -61,6 +59,17 @@ enum PIECE_TYPE {
 }
 
 /*
+    Info Targets
+*/
+
+local target_game_fall_off_white = null;
+local target_game_fall_off_black = null;
+target_game_fall_off_white = Entities.FindByName(target_game_fall_off_white, "target_game_fall_off_white");
+target_game_fall_off_black = Entities.FindByName(target_game_fall_off_black, "target_game_fall_off_black");
+::game_fall_off_white_pos <- target_game_fall_off_white.GetOrigin();
+::game_fall_off_black_pos <- target_game_fall_off_black.GetOrigin();
+
+/*
     FUNCTIONS
 */
 
@@ -85,32 +94,10 @@ enum PIECE_TYPE {
     return cursor;
 }
 
-::debug_highlight_cell <- function(in_board_pos, in_cell, in_color=[255,0,255], in_lines=20) {
-    in_lines += 1;
+::game_fall_off_white <- function () {
+    activator.SetOrigin(game_fall_off_white_pos);
+}
 
-    local offset = math.vec_mul(in_cell, BOARD_SCALE);
-    local c1 = in_board_pos + Vector(offset.x, -offset.y, GROUND_OFFSET);
-    local c2 = c1 + Vector(0, -BOARD_SCALE);
-    local c3 = c1 + Vector(BOARD_SCALE, -BOARD_SCALE);
-    local c4 = c1 + Vector(BOARD_SCALE);
-
-    local step_size = (BOARD_SCALE * 2) / in_lines;
-    local offset_pos = c1 + Vector(-BOARD_SCALE);
-
-    for (local i = 1; i < in_lines; i++) {
-        local p1 = offset_pos + Vector(i * step_size);
-        local p2 = p1 + Vector(1,-1);
-
-        local hit = math.intersection_2D(p1, p2, c2, c3) + Vector(0,0,c1.z);
-
-        if (p1.x < c1.x) { p1 = math.intersection_2D(p1, p2, c1, c2); }
-        if (hit.x > c3.x) { hit = math.intersection_2D(p1, p2, c3, c4); }
-        
-        p1.z = c1.z;
-        hit.z = c1.z;
-
-        debug_draw.line(p1, hit, in_color, false);
-    }
-
-    debug_draw.square_outline(c1, c2, c3, c4, in_color, false);
+::game_fall_off_black <- function () {
+    activator.SetOrigin(game_fall_off_black_pos);
 }

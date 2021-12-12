@@ -1,6 +1,5 @@
 
 ::new_highlighter <- function (in_board_pos) {
-    if (IS_DEBUGGING) { console.log("Create: Highlighter"); }
 
     local manager = {
         board_pos = in_board_pos,
@@ -12,7 +11,6 @@
         valid_moves_props = [],
 
         function reset() {
-            if (IS_DEBUGGING) { console.log("Reset: Highlighter"); }
             disable_selected_piece();
             disable_last_move();
             disable_valid_moves();

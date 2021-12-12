@@ -1,7 +1,5 @@
 
 ::new_board <- function (in_pos) {
-
-    if (IS_DEBUGGING) { console.log("Create: Board"); }
     
     local board = {
         pos = in_pos,
@@ -9,7 +7,6 @@
         text = new_board_text(in_pos + Vector(0, 0, GROUND_OFFSET)),
 
         function reset() {
-            if (IS_DEBUGGING) { console.log("Reset: Board"); }
             text.reset();
         }
         function get_relatvive_pos(p) {

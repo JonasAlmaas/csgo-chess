@@ -4,12 +4,6 @@
 */
 ::new_base_piece <- function (in_team, in_cell) {
 
-    if (IS_DEBUGGING) {
-        local color = "White";
-        if (in_team == TEAM.BLACK) { color = "Black"; }
-        console.log("Create: Piece [" + color + ", (" + in_cell.x + ", " + in_cell.y + ")]");
-    }
-
     local COLOR_WHITE = [200,200,200];
     local COLOR_BLACK = [45,45,45];
     local COLOR_ERROR = [255,0,255];

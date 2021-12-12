@@ -1,0 +1,4 @@
+Home button -> Restarts the session fully
+Restart button -> Soft restart of the game
+
+Make some icons for pawn promotion

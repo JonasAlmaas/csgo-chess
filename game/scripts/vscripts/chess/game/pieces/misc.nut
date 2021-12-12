@@ -38,8 +38,6 @@
 
 ::new_pieces <- function () {
 
-    if (IS_DEBUGGING) { console.log("Create: Pieces"); }
-
     local list = [];
 
     // Create Pawns
@@ -88,8 +86,6 @@
         pieces = list,
 
         function reset() {
-            if (IS_DEBUGGING) { console.log("Reset: Pieces"); }
-
             foreach (piece in pieces) {
                 piece.disable();
             }
