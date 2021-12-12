@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/blank"
+
+	$color2 "[0.25 0.25 0.25]"
+}
