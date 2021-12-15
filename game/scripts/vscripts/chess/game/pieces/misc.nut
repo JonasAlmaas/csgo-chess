@@ -78,10 +78,6 @@
     list.append(new_king(TEAM.WHITE, Vector(0,4)));
     list.append(new_king(TEAM.BLACK, Vector(7,4)));
 
-    foreach (piece in list) {
-        piece.hide();
-    }
-
     local table = {
         pieces = list,
 
@@ -90,21 +86,16 @@
                 piece.disable();
             }
         }
-        function show() {
-            foreach (piece in pieces) {
-                piece.show();
-            }
-        }
-        function update_pos(in_board_pos) {
+        function update_pos() {
             foreach (piece in pieces) {
                 local pos = null;
                 local angle = null;
                 if (piece.active) {
-                    pos = piece.get_world_pos(in_board_pos);
+                    pos = piece.get_world_pos();
                     angle = piece.angle;
                 }
                 else {
-                    pos = piece.get_captured_world_pos(in_board_pos);
+                    pos = piece.get_captured_world_pos();
                     if (piece.team == TEAM.WHITE) { angle = Vector(); }
                     else { angle = Vector(0,180); }
                 }
@@ -121,12 +112,14 @@
                         else {
                             return piece;
                         }
-                    };
+                    }
                 }
             }
             return null;
         }
     }
+
+    table.update_pos();
 
     return table;
 }

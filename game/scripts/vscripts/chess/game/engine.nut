@@ -59,10 +59,10 @@
         return null;
     }
 
-    function get_world_pos_from_cell(in_board_pos, in_cell) {
+    function get_world_pos_from_cell(in_cell) {
         local half_cell = BOARD_SCALE * 0.5;
         local offset = math.vec_mul(in_cell, BOARD_SCALE);
-        return in_board_pos + Vector(offset.x, -offset.y) + Vector(half_cell, -half_cell);
+        return BOARD_POS + Vector(offset.x, -offset.y) + Vector(half_cell, -half_cell);
     }
 
     function get_straight_moves(cell, team, in_simple_pieces) {

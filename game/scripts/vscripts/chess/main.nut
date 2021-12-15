@@ -29,7 +29,8 @@
     "game/board/text",
     "game/pieces/base",
     "game/pieces/misc",
-    "game/highlighter"
+    "game/highlighter",
+    "game/ingame_menu",
     "game/engine",
     "game/main",
     "game/pawn_promotion",
@@ -67,8 +68,8 @@ include_scripts();
 
     if (!initialized) {
         
-        trace_orig_ply_white = EntityGroup[0];
-        trace_orig_ply_black = EntityGroup[1];
+        trace_orig_ply_white = ENTITY_GROUP[0];
+        trace_orig_ply_black = ENTITY_GROUP[1];
 
         lobby = new_lobby();
         game = new_game();
@@ -91,7 +92,8 @@ include_scripts();
     lobby.reset();
     game.reset();
 
-    initialized = false;
+    player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles());
+    player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles());
 }
 
 /*

@@ -1,11 +1,10 @@
 
-::new_pawn_promotion_handler <- function (in_board_pos) {
+::new_pawn_promotion_handler <- function () {
     
     local handler = {
         active_piece = null,
-        waiting = false,
+        is_open = false,
 
-        board_pos = in_board_pos,
         half_cell = BOARD_SCALE * 0.5,
 
         ui_pos = Vector(),
@@ -17,7 +16,7 @@
         queen_prop = null,
 
         function reset() {
-            waiting = false;
+            is_open = false;
 
             if (background_prop) {
                 background_prop.disable();
@@ -126,10 +125,10 @@
 
         function open(piece) {
             active_piece = piece;
-            waiting = true;
+            is_open = true;
 
             local offset = math.vec_mul(active_piece.cell, BOARD_SCALE) + Vector(half_cell, half_cell);
-            ui_pos = board_pos + Vector(offset.x, -offset.y);
+            ui_pos = BOARD_POS + Vector(offset.x, -offset.y);
             local pos = null;
             local ang = null;
 
@@ -193,7 +192,7 @@
         }
 
         function close() {
-            waiting = false;
+            is_open = false;
 
             background_prop.hide();
             rook_prop.hide();

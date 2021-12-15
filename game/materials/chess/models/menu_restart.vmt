@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/menu_restart"
+
+	$translucent 1
+}

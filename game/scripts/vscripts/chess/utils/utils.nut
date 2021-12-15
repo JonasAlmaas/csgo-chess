@@ -23,4 +23,9 @@
         }
         return false;
     }
+    function get_entity_from_name(name) {
+        local target = null;
+        target = Entities.FindByName(target, name);
+        return target;
+    }
 }

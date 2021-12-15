@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9178"
-	"mapversion" "295"
+	"mapversion" "299"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -26,13 +26,13 @@ viewsettings
 	"bSnapToGrid" "1"
 	"bShowGrid" "1"
 	"bShowLogicalGrid" "0"
-	"nGridSpacing" "8"
+	"nGridSpacing" "32"
 	"bShow3DGrid" "0"
 }
 world
 {
 	"id" "1"
-	"mapversion" "295"
+	"mapversion" "299"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -2331,6 +2331,36 @@ world
 }
 entity
 {
+	"id" "20829"
+	"classname" "info_teleport_destination"
+	"angles" "0 270 0"
+	"targetname" "teleport_target_lobby_black"
+	"origin" "3072 2448 1792"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 8000]"
+	}
+}
+entity
+{
+	"id" "20843"
+	"classname" "info_teleport_destination"
+	"angles" "0 90 0"
+	"targetname" "teleport_target_lobby_white"
+	"origin" "3072 2160 1792"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 8000]"
+	}
+}
+entity
+{
 	"id" "18301"
 	"classname" "prop_static"
 	"angles" "0 90 0"
@@ -3025,7 +3055,7 @@ entity
 	"classname" "info_player_counterterrorist"
 	"angles" "0 270 0"
 	"enabled" "1"
-	"origin" "3072 2416 1792"
+	"origin" "3072 2448 1792"
 	editor
 	{
 		"color" "220 30 220"
@@ -3040,7 +3070,7 @@ entity
 	"classname" "info_player_terrorist"
 	"angles" "0 90 0"
 	"enabled" "1"
-	"origin" "3072 2192 1792"
+	"origin" "3072 2160 1792"
 	editor
 	{
 		"color" "220 30 220"
@@ -3381,7 +3411,7 @@ entity
 	"id" "14604"
 	"classname" "info_teleport_destination"
 	"angles" "0 180 0"
-	"targetname" "teleport_target_black"
+	"targetname" "teleport_target_game_black"
 	"origin" "4128 6528 2736"
 	editor
 	{
@@ -3396,7 +3426,7 @@ entity
 	"id" "14625"
 	"classname" "info_teleport_destination"
 	"angles" "0 0 0"
-	"targetname" "teleport_target_white"
+	"targetname" "teleport_target_game_white"
 	"origin" "2016 6528 2736"
 	editor
 	{
@@ -3485,15 +3515,15 @@ hidden
 				}
 				editor
 				{
-					"color" "0 218 159"
-					"visgroupshown" "0"
+					"color" "0 180 0"
+					"visgroupshown" "1"
 					"visgroupautoshown" "1"
 				}
 			}
 		}
 		editor
 		{
-			"color" "0 218 159"
+			"color" "0 180 0"
 			"visgroupid" "17"
 			"visgroupshown" "0"
 			"visgroupautoshown" "1"
@@ -10407,8 +10437,8 @@ cameras
 	"activecamera" "0"
 	camera
 	{
-		"position" "[2985.78 793.478 2596.06]"
-		"look" "[2986.35 805.228 2590.01]"
+		"position" "[2925.26 1259.6 2294.35]"
+		"look" "[2926.07 1272.51 2291.6]"
 	}
 }
 cordons

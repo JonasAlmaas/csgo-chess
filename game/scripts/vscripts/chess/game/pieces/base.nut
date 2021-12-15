@@ -30,9 +30,6 @@
         function enable() { prop.enable(); }
         function disable() { prop.disable(); }
         
-        function show() { prop.show(); }
-        function hide() { prop.hide(); }
-
         function teleport(pos, in_angle=null) { prop.teleport(pos, in_angle); }
 
         function set_color(color) { prop.set_color(color); }
@@ -52,15 +49,15 @@
             active = false;
         }
 
-        function get_world_pos(in_board_pos) {
+        function get_world_pos() {
             if (target_cell) {
                 if (!next_cell) {
                     get_next_cell();
                 }
 
                 if (next_cell) {
-                    local cell_pos = engine.get_world_pos_from_cell(in_board_pos, cell)
-                    local next_cell_pos = engine.get_world_pos_from_cell(in_board_pos, next_cell);
+                    local cell_pos = engine.get_world_pos_from_cell(cell)
+                    local next_cell_pos = engine.get_world_pos_from_cell(next_cell);
 
                     local calculated_time_per_cell = ((cell_pos - next_cell_pos).Length() / BOARD_SCALE) * time_per_cell
 
@@ -74,15 +71,15 @@
                 }
             }
 
-            return engine.get_world_pos_from_cell(in_board_pos, cell);
+            return engine.get_world_pos_from_cell(cell);
         }
 
-        function get_captured_world_pos(in_board_pos) {
+        function get_captured_world_pos() {
             if (team == TEAM.WHITE) {
-                return engine.get_world_pos_from_cell(in_board_pos, Vector(spawn_cell.y, spawn_cell.x - 3));
+                return engine.get_world_pos_from_cell(Vector(spawn_cell.y, spawn_cell.x - 3));
             }
             else {
-                return engine.get_world_pos_from_cell(in_board_pos, Vector(spawn_cell.y, spawn_cell.x + 3));
+                return engine.get_world_pos_from_cell(Vector(spawn_cell.y, spawn_cell.x + 3));
             }
         }
     }

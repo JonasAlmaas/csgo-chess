@@ -1,28 +1,34 @@
 
+/*
+    info Teleport Destination
+*/
+
+::teleport_target_game_white <- null;
+::teleport_target_game_black <- null;
+teleport_target_game_white = Entities.FindByName(teleport_target_game_white, "teleport_target_game_white");
+teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "teleport_target_game_black")
+
+
 ::new_game <- function () {
     
-    local target = null;
-    target = Entities.FindByName(target, "target_board");
-    local board_pos = target.GetOrigin();
-
     local half_board_size = BOARD_SCALE * 4;
-    local text_pos = board_pos + Vector(half_board_size, -half_board_size, 1152)
+    local text_pos = BOARD_POS + Vector(half_board_size, -half_board_size, 1152)
 
     local game = {
-        // Entities
         cursors = [],
         
-        board = new_board(board_pos),
-        pieces = new_pieces(),
-        highlighter = new_highlighter(board_pos),
-        pawn_promotion_handler = new_pawn_promotion_handler(board_pos),
+        board = null,
+        pieces = null,
+        highlighter = null,
+        pawn_promotion_handler = null,
+        ingame_menu = null,
 
         game_over = false,
 
-        turn = TEAM.WHITE,
+        turn = null,
         active_piece = null,
         piece_moveing = false,
-        valid_moves = [],
+        valid_moves = null,
 
         hit_white = Vector(),
         hit_black = Vector(),
@@ -38,31 +44,29 @@
             pieces.reset();
             highlighter.reset();
             pawn_promotion_handler.reset();
+            ingame_menu.reset();
         }
 
-        // TODO: Implement this
         function soft_reset() {
-    
-            board.reset();
-            board = new_board(board_pos);
+            reset();
+            init();
+        }
 
-            pieces.reset();
+        function init() {
+            board = new_board();
             pieces = new_pieces();
-            // TODO: Is this needed?
-            pieces.show();
-
-            highlighter.reset();
-            highlighter = new_highlighter(board_pos);
-
-            pawn_promotion_handler.reset();
-            pawn_promotion_handler = new_pawn_promotion_handler(board_pos);
+            highlighter = new_highlighter();
+            pawn_promotion_handler = new_pawn_promotion_handler();
+            ingame_menu = new_ingame_menu();
 
             game_over = false;
-
+        
             turn = TEAM.WHITE;
             active_piece = null;
             piece_moveing = false;
             valid_moves = [];
+
+            initialized = false;
         }
 
         function update() {
@@ -73,29 +77,25 @@
                 foreach (path in CURSOR_MODEL) {
                     cursors.append(new_cursor(path));
                 }
-
-                pieces.show();
+                
+                ingame_menu.show();
                 initialized = true;
             }
 
-            // Get player hits
-            hit_white = board.get_intersection(player_white.get_eyes(), player_white.get_forward());
-            hit_black = board.get_intersection(player_black.get_eyes(), player_black.get_forward());
+            update_player_hits();
+            update_cursors();
 
-            // Place cursors for both players
-            local hald_board_size = BOARD_SCALE * 4;
-            local board_center = board.pos + Vector(hald_board_size, -hald_board_size);
-            
-            if ((math.abs(board_center.x - hit_white.x) < 4096) && (math.abs(board_center.y - hit_white.y) < 4096)) {
-                cursors[0].teleport(hit_white + Vector(0, 0, GROUND_OFFSET * 2));
-            }
-            if ((math.abs(board_center.x - hit_black.x) < 4096) && (math.abs(board_center.y - hit_black.y) < 4096)) {
-                cursors[1].teleport(hit_black + Vector(0, 0, GROUND_OFFSET * 2));
-            }
+            // Ingame menu
+            if (ingame_menu.on_click_restart(player_white, player_black, PLAYER_WHITE_EVENTS.ATTACK, PLAYER_BLACK_EVENTS.ATTACK)) { soft_reset(); }
+            if (ingame_menu.on_click_home(player_white, player_black, PLAYER_WHITE_EVENTS.ATTACK, PLAYER_BLACK_EVENTS.ATTACK)) { HOT_RELOAD(); }
 
-            if (pawn_promotion_handler.waiting) {
-                if (turn == TEAM.WHITE) { pawn_promotion_handler.update(player_white, player_select()); }
-                else { pawn_promotion_handler.update(player_black, player_select()); }
+            if (pawn_promotion_handler.is_open) {
+                if (turn == TEAM.WHITE) {
+                    pawn_promotion_handler.update(player_white, player_select());
+                }
+                else {
+                    pawn_promotion_handler.update(player_black, player_select());
+                }
             }
             else if (!game_over) {
                 if (IS_DEBUGGING_SINGLE_PLAYER) {
@@ -107,7 +107,53 @@
                 }
             }
 
-            pieces.update_pos(board.pos);
+            pieces.update_pos();
+        }
+
+        function update_player_hits() {
+            hit_white = board.get_intersection(player_white.get_eyes(), player_white.get_forward());
+            hit_black = board.get_intersection(player_black.get_eyes(), player_black.get_forward());
+        }
+
+        function update_cursors() {
+            local hald_board_size = BOARD_SCALE * 4;
+            local board_center = BOARD_POS + Vector(hald_board_size, -hald_board_size);
+            
+            if ((math.abs(board_center.x - hit_white.x) < 8192) && (math.abs(board_center.y - hit_white.y) < 8192)) {
+                cursors[0].show();
+
+                if ((math.abs(board_center.x - hit_white.x) < BOARD_SCALE * 4)) {
+                    cursors[0].teleport(hit_white + Vector(0, 0, GROUND_OFFSET * 2), Vector());
+                }
+                else {
+                    local eyes = player_white.get_eyes();
+                    local forward = player_white.get_forward();
+                    local pos = ingame_menu.btn_restart_white.pos;
+                    local ang = ingame_menu.btn_restart_white.ang;
+                    cursors[0].teleport(tilted_plane_intersection(eyes, forward, pos, ang.z) + Vector(0, 0, GROUND_OFFSET * 2), ang);
+                }
+            }
+            else {
+                cursors[0].hide();
+            }
+
+            if ((math.abs(board_center.x - hit_black.x) < 8192) && (math.abs(board_center.y - hit_black.y) < 8192)) {
+                cursors[1].show();
+
+                if ((math.abs(board_center.x - hit_black.x) < BOARD_SCALE * 4)) {
+                    cursors[1].teleport(hit_black + Vector(0, 0, GROUND_OFFSET * 1.95), Vector());
+                }
+                else {
+                    local eyes = player_black.get_eyes();
+                    local forward = player_black.get_forward();
+                    local pos = ingame_menu.btn_restart_black.pos;
+                    local ang = ingame_menu.btn_restart_black.ang;
+                    cursors[1].teleport(tilted_plane_intersection(eyes, forward, pos, ang.z) + Vector(0, 0, GROUND_OFFSET * 2), ang);
+                }
+            }
+            else {
+                cursors[1].hide();
+            }
         }
 
         function play(hit) {
@@ -136,7 +182,7 @@
                 }
             }
             else {
-                if (new_piece && (new_piece.team == turn) && player_select()) {
+                if (is_inside_board && new_piece && (new_piece.team == turn) && player_select()) {
                     select_piece(new_piece);
                 }
             }
@@ -156,13 +202,6 @@
                 highlighter.update_selected_piece();
                 highlighter.update_last_move(active_piece.cell, in_cell);
             }
-        }
-
-        function deselect() {
-            active_piece = null;
-            valid_moves = [];
-            highlighter.disable_valid_moves();
-            highlighter.update_selected_piece();
         }
 
         function done_moveing() {
@@ -272,10 +311,18 @@
             else {
                 active_piece = null;
                 highlighter.disable_valid_moves();
-            }
-            
+            }    
+        }
+
+        function deselect() {
+            active_piece = null;
+            valid_moves = [];
+            highlighter.disable_valid_moves();
+            highlighter.update_selected_piece();
         }
     }
+
+    game.init();
 
     return game;
 }

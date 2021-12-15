@@ -17,10 +17,10 @@ fall_off_target = Entities.FindByName(fall_off_target, "target_lobby_fall_off");
     info Teleport Destination
 */
 
-::teleport_target_white <- null;
-::teleport_target_black <- null;
-teleport_target_white = Entities.FindByName(teleport_target_white, "teleport_target_white");
-teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_target_black")
+::teleport_target_lobby_white <- null;
+::teleport_target_lobby_black <- null;
+teleport_target_lobby_white = Entities.FindByName(teleport_target_lobby_white, "teleport_target_lobby_white");
+teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "teleport_target_lobby_black")
 
 
 ::new_lobby <- function () {
@@ -51,14 +51,13 @@ teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_tar
 
         function update() {
             if (players_in_white.len() > 0 && players_in_black.len() > 0) {
-
                 local time_left = floor(count_down_time - (Time() - time_count_down_start));
 
                 if (count_down_text_1 != null) { count_down_text_1.kill(); }
                 if (count_down_text_2 != null) { count_down_text_2.kill(); }
 
-                count_down_text_1 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_white, "center_center", lobby_count_down_white_pos, Vector(0,270));
-                count_down_text_2 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_black, "center_center", lobby_count_down_black_pos, Vector(0,90));
+                count_down_text_1 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_white, "center_center", lobby_count_down_white_pos, Vector(0,0));
+                count_down_text_2 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_black, "center_center", lobby_count_down_black_pos, Vector(0,180));
 
                 if (time_left <= 0) {
                     // Create players
@@ -88,8 +87,8 @@ teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_tar
                     EntFire("tr_lmm_ply2", "SetMeasureTarget", "ply2", 0.01, null);
 
                     // Teleport players to the map
-                    player_white.teleport(teleport_target_white.GetOrigin(), teleport_target_white.GetAngles());
-                    player_black.teleport(teleport_target_black.GetOrigin(), teleport_target_black.GetAngles());
+                    player_white.teleport(teleport_target_game_white.GetOrigin(), teleport_target_game_white.GetAngles());
+                    player_black.teleport(teleport_target_game_black.GetOrigin(), teleport_target_game_black.GetAngles());
 
                     waiting = false;
                 }
@@ -113,7 +112,7 @@ teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_tar
                 EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
                 EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
 
-                player_white.teleport(teleport_target_white.GetOrigin(), teleport_target_white.GetAngles());
+                player_white.teleport(teleport_target_game_white.GetOrigin(), teleport_target_game_white.GetAngles());
 
                 waiting = false;
             }
@@ -130,8 +129,6 @@ teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_tar
 }
 
 ::lobby_enter_zone_white <- function () {
-    lobby.players_in_black = remove_player_from_team(activator, lobby.players_in_black);
-
     if (!utils.list_contains(activator, lobby.players_in_white)) {
         lobby.players_in_white.append(activator);
     }
@@ -142,8 +139,6 @@ teleport_target_black = Entities.FindByName(teleport_target_black, "teleport_tar
 }
 
 ::lobby_enter_zone_black <- function () {
-    lobby.players_in_white = remove_player_from_team(activator, lobby.players_in_white);
-
     if (!utils.list_contains(activator, lobby.players_in_black)) {
         lobby.players_in_black.append(activator);
     }

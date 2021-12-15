@@ -43,6 +43,16 @@
     function vec_lerp(v1, v2, percent) {
         return v1 + vec_mul((v2 - v1), percent);
     }
+    function vec_angle_from_pos(orig_pos, look_pos) {
+        local relX = look_pos.x - orig_pos.x;
+        local relY = look_pos.y - orig_pos.y;
+        local relZ = look_pos.z - orig_pos.z;
+
+        local theta = acos(relZ / sqrt(pow(relX, 2) + pow(relY, 2) + pow(relZ, 2))) * (180 / PI) - 90;
+        local phi = atan2(relY, relX) * (180 / PI);
+
+        return Vector(theta, phi, 0);
+    }
     function vec_rotate(vec, theta) {
         theta = theta*(PI/180);
         local newX = vec.x*cos(theta) - vec.y*sin(theta);
