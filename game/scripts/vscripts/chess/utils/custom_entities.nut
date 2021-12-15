@@ -42,6 +42,7 @@
         enable();
         set_scale(1);
         set_color([255,255,255]);
+        teleport(Vector(), Vector());
     }
 
     prop.enable_shadows <- function () { ref.__KeyValueFromInt("disableshadowdepth", 0); }
@@ -73,6 +74,7 @@
         set_scale(1);
         set_color([255,255,255]);
         set_glow_color([255,255,255]);
+        teleport(Vector(), Vector());
     }
 
     prop.enable_shadows <- function () { ref.__KeyValueFromInt("disableshadowdepth", 0); }

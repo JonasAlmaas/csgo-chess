@@ -12,8 +12,8 @@
 
     local btn_restart_white_ang = Vector(0, 270,  90 + math.vec_angle_from_pos(btn_restart_white_pos, teleport_target_game_white.GetOrigin() + Vector(0,0,48)).x);
     local btn_restart_black_ang = Vector(0,  90,  90 + math.vec_angle_from_pos(btn_restart_black_pos, teleport_target_game_black.GetOrigin() + Vector(0,0,48)).x);
-    local btn_home_white_ang =    Vector(0,  90, -90 - math.vec_angle_from_pos(btn_home_white_pos,    teleport_target_game_white.GetOrigin() + Vector(0,0,48)).x);
-    local btn_home_black_ang =    Vector(0, 270, -90 - math.vec_angle_from_pos(btn_home_black_pos,    teleport_target_game_black.GetOrigin() + Vector(0,0,48)).x);
+    local btn_home_white_ang    = Vector(0,  90, -90 - math.vec_angle_from_pos(btn_home_white_pos,    teleport_target_game_white.GetOrigin() + Vector(0,0,48)).x);
+    local btn_home_black_ang    = Vector(0, 270, -90 - math.vec_angle_from_pos(btn_home_black_pos,    teleport_target_game_black.GetOrigin() + Vector(0,0,48)).x);
 
     local menu = {
 

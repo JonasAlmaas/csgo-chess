@@ -9,7 +9,7 @@
     local COLOR_ERROR = [255,0,255];
 
     local piece = {
-        active = true,
+        captured = false,
         
         team = in_team,
         type = PIECE_TYPE.NONE,
@@ -20,11 +20,10 @@
 
         cell = in_cell,
         spawn_cell = math.vec_clone(in_cell),
-        referece_cell = null,
         target_cell = null,
-        next_cell = null,
+        sorted_move_cells = [],
 
-        time_per_cell = 0.2,
+        speed = 500.0,
         time_last_cell = 0.0,
 
         function enable() { prop.enable(); }
@@ -41,36 +40,60 @@
 
         function move_to(in_move_to_cell) {
             times_moved++;
-            referece_cell = math.vec_clone(cell);
-            target_cell = in_move_to_cell;
+            target_cell = math.vec_clone(in_move_to_cell);
+            
+            sorted_move_cells = get_sorted_move_cells();
+            time_last_cell = Time();
+        }
+
+        function get_sorted_move_cells() {
+            
+            local dist_x = math.abs(cell.x - target_cell.x) * 1.0; 
+            local dist_y = math.abs(cell.y - target_cell.y) * 1.0;
+            
+            local dir_x = (cell.x - target_cell.x) / dist_x; 
+            local dir_y = (cell.y - target_cell.y) / dist_y;
+
+            local temp_list = [];
+            temp_list.append(cell);
+            temp_list.append(target_cell);
+
+            while (dist_x > 0 || dist_y > 0) {
+                
+                if (dist_x > 0 && dist_y > 0) { temp_list.insert(1, cell - Vector(dir_x * dist_x, dir_y * dist_y)); } 
+                else if (dist_x == 0) { temp_list.insert(1, cell - Vector(0, dir_y * dist_y)); }
+                else if (dist_y == 0) { temp_list.insert(1, cell - Vector(dir_x * dist_x, 0)); }
+
+                if (dist_x > 0) { dist_x -= 1.0; }
+                if (dist_y > 0) { dist_y -= 1.0; }
+
+            }
+            
+            return temp_list;
         }
 
         function capture() {
-            active = false;
+            captured = true;
         }
 
         function get_world_pos() {
+
             if (target_cell) {
-                if (!next_cell) {
-                    get_next_cell();
+                local cell_pos = engine.get_world_pos_from_cell(cell)
+                local next_cell_pos = engine.get_world_pos_from_cell(target_cell);
+
+                local calculated_speed = pow((next_cell_pos - cell_pos).Length() / speed, 0.5);
+
+                local percent = (Time() - time_last_cell) / calculated_speed;
+                if (percent >= 1) {
+                    percent = 1;
+                    cell = math.vec_clone(target_cell);
+                    target_cell = null;
+                } else {
+                    percent = math.interpolate_smooth(percent);
                 }
-
-                if (next_cell) {
-                    local cell_pos = engine.get_world_pos_from_cell(cell)
-                    local next_cell_pos = engine.get_world_pos_from_cell(next_cell);
-
-                    local calculated_time_per_cell = ((cell_pos - next_cell_pos).Length() / BOARD_SCALE) * time_per_cell
-
-                    local percent = (Time() - time_last_cell) / calculated_time_per_cell;
-                    if (percent >= 1) {
-                        cell = math.vec_clone(next_cell);
-                        next_cell = null;
-                    }
-
-                    return math.vec_lerp(cell_pos, next_cell_pos, percent);
-                }
+                return engine.get_world_pos_from_cell(math.get_bezier_point(sorted_move_cells, percent));
             }
-
             return engine.get_world_pos_from_cell(cell);
         }
 
@@ -172,22 +195,7 @@
 
         return moves;
     }
-
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        if (abs_offset.x == abs_offset.y) { next_cell = cell - Vector(offset.x / abs_offset.x, offset.y / abs_offset.y); }
-        else { next_cell = cell - Vector(offset.x / abs_offset.x); }
-
-        time_last_cell = Time();
-    }
-
+    
     return piece;
 }
 
@@ -202,21 +210,6 @@
 
     piece.get_all_moves <- function (in_simple_pieces) {
         return engine.get_straight_moves(cell, team, in_simple_pieces);
-    }
-
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-    
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        if (offset.x == 0) { next_cell = cell - Vector(0, offset.y / abs_offset.y); }
-        else if (offset.y == 0) { next_cell = cell - Vector(offset.x / abs_offset.x); }
-
-        time_last_cell = Time();
     }
 
     return piece;
@@ -261,23 +254,6 @@
         return moves;
     }
 
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-
-        local total_offset = referece_cell - target_cell;
-        local abs_total_offset = math.vec_abs(total_offset);
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        if (((abs_total_offset.x > abs_total_offset.y) && (abs_offset.x > 0)) || abs_offset.y == 0) { next_cell = cell - Vector(offset.x / abs_offset.x); }
-        else { next_cell = cell - Vector(0, offset.y / abs_offset.y); }
-
-        time_last_cell = Time();
-    }
-
     return piece;
 }
 
@@ -292,20 +268,6 @@
     
     piece.get_all_moves <- function (in_simple_pieces) {
         return engine.get_diagonal_moves(cell, team, in_simple_pieces);
-    }
-
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
-    
-        time_last_cell = Time();
     }
 
     return piece;
@@ -324,28 +286,6 @@
         local straight_moves = engine.get_straight_moves(cell, team, in_simple_pieces);
         local diagonal_moves = engine.get_diagonal_moves(cell, team, in_simple_pieces);
         return utils.list_merge(straight_moves, diagonal_moves);
-    }
-
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-    
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        if (offset.x == 0) {
-            next_cell = cell - Vector(0, offset.y / abs_offset.y);
-        }
-        else if (offset.y == 0) {
-            next_cell = cell - Vector(offset.x / abs_offset.x);
-        }
-        else {
-            next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
-        }
-
-        time_last_cell = Time();
     }
 
     return piece;
@@ -429,28 +369,6 @@
         }
 
         return moves;
-    }
-
-    piece.get_next_cell <- function () {
-        if (math.vec_equal(cell, target_cell)) {
-            target_cell = null;
-            return;
-        }
-
-        local offset = cell - target_cell;
-        local abs_offset = math.vec_abs(offset);
-
-        if (offset.x == 0) {
-            next_cell = cell - Vector(0, offset.y / abs_offset.y);
-        }
-        else if (offset.y == 0) {
-            next_cell = cell - Vector(offset.x / abs_offset.x);
-        }
-        else {
-            next_cell = Vector(cell.x - (offset.x / abs_offset.x), cell.y - (offset.y / abs_offset.x));
-        }
-        
-        time_last_cell = Time();
     }
 
     return piece;

@@ -65,7 +65,6 @@
                             active_piece.set_type(PIECE_TYPE.ROOK);
                             active_piece.set_model(PIECE_MODEL.ROOK);
                             active_piece.get_all_moves <- temp_piece.get_all_moves;
-                            active_piece.get_next_cell <- temp_piece.get_next_cell;
 
                             close();
                         }
@@ -81,7 +80,6 @@
                             active_piece.set_type(PIECE_TYPE.KNIGHT);
                             active_piece.set_model(PIECE_MODEL.KNIGHT);
                             active_piece.get_all_moves <- temp_piece.get_all_moves;
-                            active_piece.get_next_cell <- temp_piece.get_next_cell;
 
                             close();
                         }
@@ -97,7 +95,6 @@
                             active_piece.set_type(PIECE_TYPE.BISHOP);
                             active_piece.set_model(PIECE_MODEL.BISHOP);
                             active_piece.get_all_moves <- temp_piece.get_all_moves;
-                            active_piece.get_next_cell <- temp_piece.get_next_cell;
 
                             close();
                         }
@@ -113,7 +110,6 @@
                             active_piece.set_type(PIECE_TYPE.QUEEN);
                             active_piece.set_model(PIECE_MODEL.QUEEN);
                             active_piece.get_all_moves <- temp_piece.get_all_moves;
-                            active_piece.get_next_cell <- temp_piece.get_next_cell;
 
                             close();
                         }

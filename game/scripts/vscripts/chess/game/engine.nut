@@ -34,7 +34,7 @@
 
         if (king) {
             foreach (piece in in_simple_pieces.pieces) {
-                if (piece.active) {
+                if (!piece.captured) {
                     if (piece.team != team) {
                         local moves = piece.get_all_moves(in_simple_pieces);
                         if (moves.len() > 0) {
@@ -151,6 +151,10 @@
                     blocked_right = true;
                 }
             }
+            
+            if (blocked_up && blocked_down && blocked_left && blocked_right) {
+                break;
+            }
         }
         
         return moves;
@@ -242,6 +246,10 @@
                     blocked_down_left = true;
                 }
             }
+            
+            if (blocked_up_right && blocked_up_left && blocked_down_right && blocked_down_left) {
+                break;
+            }
         }
 
         return moves;
@@ -261,7 +269,7 @@
         }
 
         foreach (piece in in_simple_pieces.pieces) {
-            if (piece.active && (piece.team != in_team)) {
+            if (!piece.captured && (piece.team != in_team)) {
                 if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces).len() > 0) {
                     return false;
                 }

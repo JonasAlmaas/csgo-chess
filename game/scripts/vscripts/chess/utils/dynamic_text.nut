@@ -161,7 +161,7 @@ char_size_factor <- {
                     prop.disable_shadows();
 
                     offset_distance.x += char_info["offset_distance_step"];
-                    local offset = math.vec_rotate_3d(Vector(0, offset_distance.x, offset_distance.y), ang);
+                    local offset = math.vec_rotate_3D(Vector(0, offset_distance.x, offset_distance.y), ang);
                     prop.teleport(pos + offset, Vector(ang.x, ang.y, ang.z));
                     prop.set_model("models/text/" + font + char_info["sub_folder"] + char_info["char"] + ".mdl");
                     prop.set_scale(char_size);

@@ -115,7 +115,7 @@ target_game_fall_off_black = Entities.FindByName(target_game_fall_off_black, "ta
 */
 ::tilted_plane_intersection <- function (eyes, forward, pos, ang) {
 
-    local offsetXZ = math.vec_rotate_3d(Vector(0,1,0), Vector(0,0,ang));
+    local offsetXZ = math.vec_rotate_3D(Vector(0,1,0), Vector(0,0,ang));
     
     local pXZ = Vector();
     local pXY = Vector();

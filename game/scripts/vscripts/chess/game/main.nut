@@ -12,7 +12,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
 ::new_game <- function () {
     
     local half_board_size = BOARD_SCALE * 4;
-    local text_pos = BOARD_POS + Vector(half_board_size, -half_board_size, 1152)
+    local text_pos = BOARD_POS + Vector(half_board_size, -half_board_size, 1152);
 
     local game = {
         cursors = [],
@@ -122,7 +122,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if ((math.abs(board_center.x - hit_white.x) < 8192) && (math.abs(board_center.y - hit_white.y) < 8192)) {
                 cursors[0].show();
 
-                if ((math.abs(board_center.x - hit_white.x) < BOARD_SCALE * 4)) {
+                if ((math.abs(board_center.x - hit_white.x) < BOARD_SCALE * 6)) {
                     cursors[0].teleport(hit_white + Vector(0, 0, GROUND_OFFSET * 2), Vector());
                 }
                 else {
@@ -140,7 +140,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if ((math.abs(board_center.x - hit_black.x) < 8192) && (math.abs(board_center.y - hit_black.y) < 8192)) {
                 cursors[1].show();
 
-                if ((math.abs(board_center.x - hit_black.x) < BOARD_SCALE * 4)) {
+                if ((math.abs(board_center.x - hit_black.x) < BOARD_SCALE * 6)) {
                     cursors[1].teleport(hit_black + Vector(0, 0, GROUND_OFFSET * 1.95), Vector());
                 }
                 else {
@@ -148,7 +148,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     local forward = player_black.get_forward();
                     local pos = ingame_menu.btn_restart_black.pos;
                     local ang = ingame_menu.btn_restart_black.ang;
-                    cursors[1].teleport(tilted_plane_intersection(eyes, forward, pos, ang.z) + Vector(0, 0, GROUND_OFFSET * 2), ang);
+                    cursors[1].teleport(tilted_plane_intersection(eyes, forward, pos, -ang.z) + Vector(0, 0, GROUND_OFFSET * 2), ang);
                 }
             }
             else {
@@ -205,7 +205,6 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                 local player = "White";
                 if (turn == TEAM.BLACK) { player = "Black"; }
 
-                // console.color_test();
                 console.chat("\n| " + player + " : " + console.color.green + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.green + cell_to_text(in_cell));
                 // TODO: Look at the color for this one, I kinda like dark blue. Atm the map is way to bright for it
                 // console.chat("\n| " + player + " : " + console.color.dark_blue + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.dark_blue + cell_to_text(in_cell));

@@ -78,13 +78,26 @@
         return Vector(vec.x, newY, newZ);
     }
     // Rotate vector pitch, yaw, roll
-    function vec_rotate_3d(vec, ang){
+    function vec_rotate_3D(vec, ang){
         vec = vec_rotate_roll(vec, ang.z)
         vec = vec_rotate_pitch(vec, ang.x)
         vec = vec_rotate_yaw(vec, ang.y)
         return vec
     }
-
+    //Normalize sphere from cylinder
+    function vec_normalize_XY(vec) {
+        local norm = vec.Length2D();
+        return vec_div(vec, norm);
+    }
+    //Normalize sphere from sphere
+    function vec_normalize_XYZ(vec) {
+        local norm = vec.Length();
+        return vec_div(vec, norm);
+    }
+    function interpolate_cos(percent) { return 1 - cos(percent * PI * 0.5); }
+    function interpolate_sin(percent) { return sin(percent * PI * 0.5); }
+    function interpolate_smooth(percent) { return percent*percent * (3 - 2 * percent); }
+    function interpolate_smoother(percent) { return percent * percent * percent * (percent * (6 * percent - 15) + 10); }
     function sphere_to_cartesian(vec) {
         local theta = vec.y;
         local phi = vec.x + 90;
@@ -174,5 +187,24 @@
         local within_z = (p1.z >= min(c1.z, c2.z) && p1.z <= max(c1.z, c2.z));
 
         return (within_x && within_y && within_z);
+    }
+    /* Find bezier point from sorted control polygon */
+    function get_bezier_point(sorted_points, percent) {
+        return get_bezier_point_recursive(sorted_points, percent);
+    }
+    function get_bezier_point_recursive(sorted_points, percent) {
+        if(sorted_points.len() == 0) return null;
+        if(sorted_points.len() == 1) return sorted_points[0];
+
+        local new_control_polygon = [];
+        local last_p = null;
+
+        foreach(p in sorted_points){
+            if(last_p != null)
+                new_control_polygon.append(vec_lerp(last_p,p,percent))
+            last_p = p;
+        }
+        
+        return get_bezier_point_recursive(new_control_polygon, percent);
     }
 }

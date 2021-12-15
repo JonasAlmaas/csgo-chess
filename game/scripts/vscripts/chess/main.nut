@@ -94,6 +94,9 @@ include_scripts();
 
     player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles());
     player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles());
+
+    EntFireByHandle(ENTITY_GROUP[2], "Deactivate", "", 0.0, null, null);
+    EntFireByHandle(ENTITY_GROUP[3], "Deactivate", "", 0.0, null, null);
 }
 
 /*

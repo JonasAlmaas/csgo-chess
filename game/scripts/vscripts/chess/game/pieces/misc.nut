@@ -2,7 +2,7 @@
 ::new_simple_piece_from_piece <- function (in_piece) {
 
     local piece = {
-        active = in_piece.active,
+        captured = in_piece.captured,
         team = in_piece.team,
         type = in_piece.type,
         cell = math.vec_clone(in_piece.cell),
@@ -90,7 +90,7 @@
             foreach (piece in pieces) {
                 local pos = null;
                 local angle = null;
-                if (piece.active) {
+                if (!piece.captured) {
                     pos = piece.get_world_pos();
                     angle = piece.angle;
                 }
@@ -104,7 +104,7 @@
         }
         function get_from_cell(in_cell, in_team_to_ignore=null) {
             foreach(piece in pieces) {
-                if (piece.active) {
+                if (!piece.captured) {
                     if ((piece.cell.x == in_cell.x) && (piece.cell.y == in_cell.y)) {
                         if (in_team_to_ignore != null) {
                             if (piece.team != in_team_to_ignore) { return piece; }
