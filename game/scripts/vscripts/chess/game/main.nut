@@ -201,6 +201,14 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                 highlighter.disable_valid_moves();
                 highlighter.update_selected_piece();
                 highlighter.update_last_move(active_piece.cell, in_cell);
+
+                local player = "White";
+                if (turn == TEAM.BLACK) { player = "Black"; }
+
+                // console.color_test();
+                console.chat("\n| " + player + " : " + console.color.green + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.green + cell_to_text(in_cell));
+                // TODO: Look at the color for this one, I kinda like dark blue. Atm the map is way to bright for it
+                // console.chat("\n| " + player + " : " + console.color.dark_blue + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.dark_blue + cell_to_text(in_cell));
             }
         }
 
@@ -274,14 +282,15 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if (engine.is_check_mate(turn, new_simple_pieces_from_pieces(pieces))) {
                 game_over = true;
 
-                // TODO: Make something happen when you win!
-                if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
-                else { console.log("Check mate! Black team wins!"); }
+                local player = "White";
+                if (turn == TEAM.BLACK) { player = "Black"; }
 
-                // if (IS_DEBUGGING) {
-                //     if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
-                //     else { console.log("Check mate! Black team wins!"); }
-                // }
+                console.chat("\n| Check mate :" + console.color.green + " " + player + " team wins");
+
+                if (IS_DEBUGGING) {
+                    if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
+                    else { console.log("Check mate! Black team wins!"); }
+                }
             }
             else {
                 flip_turn();

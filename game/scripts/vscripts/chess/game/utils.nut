@@ -138,3 +138,7 @@ target_game_fall_off_black = Entities.FindByName(target_game_fall_off_black, "ta
 
     return Vector(pXZ.x, pXY.y, pXZ.y);
 }
+
+::cell_to_text <- function (cell) {
+    return "" + constants.alphabet.upper[cell.y] + (cell.x + 1);
+}
