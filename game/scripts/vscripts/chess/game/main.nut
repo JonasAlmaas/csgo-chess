@@ -218,8 +218,6 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         }
 
         function done_moveing() {
-            // Log the move
-            log.add(active_piece, is_castling);
             is_castling = false;
 
             // Reset in check variables
@@ -285,6 +283,9 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     }
                 }
             }
+
+            // Log the move
+            log.add(active_piece, is_castling);
 
             piece_moveing = false;
             active_piece = null;

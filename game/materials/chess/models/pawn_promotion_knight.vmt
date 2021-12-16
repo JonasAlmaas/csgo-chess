@@ -1,4 +1,6 @@
 VertexLitGeneric
 {
-	$basetexture "chess/models/blank"
+	$basetexture "chess/models/pawn_promotion_knight"
+
+	$translucent 1
 }

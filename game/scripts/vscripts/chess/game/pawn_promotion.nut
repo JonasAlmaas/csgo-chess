@@ -2,7 +2,7 @@
 ::new_pawn_promotion_handler <- function () {
     
     local handler = {
-        HOVERD_SCALE = 1.1,
+        scale = 0.75,
 
         active_piece = null,
         is_open = false,
@@ -41,15 +41,15 @@
             if (rel_horizontal <= half_cell) {
                 local index = floor(rel_vertical / BOARD_SCALE);
 
-                rook_prop.set_scale(BOARD_SCALE);
-                knight_prop.set_scale(BOARD_SCALE);
-                bishop_prop.set_scale(BOARD_SCALE);
-                queen_prop.set_scale(BOARD_SCALE);
+                rook_prop.set_scale(BOARD_SCALE * scale);
+                knight_prop.set_scale(BOARD_SCALE * scale);
+                bishop_prop.set_scale(BOARD_SCALE * scale);
+                queen_prop.set_scale(BOARD_SCALE * scale);
 
                 switch (index) {
                     case 1:
                     {
-                        rook_prop.set_scale(BOARD_SCALE * HOVERD_SCALE);
+                        rook_prop.set_scale(BOARD_SCALE);
                         if (player_select) {
                             local temp_piece = new_rook(3, Vector(0,0));
                             temp_piece.disable();
@@ -64,7 +64,7 @@
                     }
                     case 2:
                     {
-                        knight_prop.set_scale(BOARD_SCALE * HOVERD_SCALE);
+                        knight_prop.set_scale(BOARD_SCALE);
                         if (player_select) {
                             local temp_piece = new_knight(3, Vector(0,0));
                             temp_piece.disable();
@@ -79,7 +79,7 @@
                     }
                     case 3:
                     {
-                        bishop_prop.set_scale(BOARD_SCALE * HOVERD_SCALE);
+                        bishop_prop.set_scale(BOARD_SCALE);
                         if (player_select) {
                             local temp_piece = new_bishop(3, Vector(0,0));
                             temp_piece.disable();
@@ -94,7 +94,7 @@
                     }
                     case 4:
                     {
-                        queen_prop.set_scale(BOARD_SCALE * HOVERD_SCALE);
+                        queen_prop.set_scale(BOARD_SCALE);
                         if (player_select) {
                             local temp_piece = new_queen(3, Vector(0,0));
                             temp_piece.disable();
@@ -133,37 +133,37 @@
 
             if (!background_prop) {
                 background_prop = new_prop_dynamic();
-                background_prop.set_color([65,65,65]);
+                background_prop.set_color(COLOR.PAWN_PROMOTION_UI_BACKGROUND);
                 background_prop.disable_shadows();
                 background_prop.set_scale(BOARD_SCALE);
                 background_prop.set_model(PAWN_PROMOTION_MODEL.BACKGROUND);
             }
             if (!rook_prop) {
                 rook_prop = new_prop_dynamic();
-                rook_prop.set_color([30,200,30]);
+                rook_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 rook_prop.disable_shadows();
-                rook_prop.set_scale(BOARD_SCALE);
+                rook_prop.set_scale(BOARD_SCALE * scale);
                 rook_prop.set_model(PAWN_PROMOTION_MODEL.ROOK);
             }
             if (!knight_prop) {
                 knight_prop = new_prop_dynamic();
-                knight_prop.set_color([30,30,200]);
+                knight_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 knight_prop.disable_shadows();
-                knight_prop.set_scale(BOARD_SCALE);
+                knight_prop.set_scale(BOARD_SCALE * scale);
                 knight_prop.set_model(PAWN_PROMOTION_MODEL.KNIGHT);
             }
             if (!bishop_prop) {
                 bishop_prop = new_prop_dynamic();
-                bishop_prop.set_color([30,200,200]);
+                bishop_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 bishop_prop.disable_shadows();
-                bishop_prop.set_scale(BOARD_SCALE);
+                bishop_prop.set_scale(BOARD_SCALE * scale);
                 bishop_prop.set_model(PAWN_PROMOTION_MODEL.BISHOP);
             }
             if (!queen_prop) {
                 queen_prop = new_prop_dynamic();
-                queen_prop.set_color([200,30,30]);
+                queen_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 queen_prop.disable_shadows();
-                queen_prop.set_scale(BOARD_SCALE);
+                queen_prop.set_scale(BOARD_SCALE * scale);
                 queen_prop.set_model(PAWN_PROMOTION_MODEL.QUEEN);
             }
 
