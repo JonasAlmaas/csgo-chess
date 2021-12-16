@@ -1,9 +1,0 @@
-
-- Stale mate
-    1. You and the opponent will draw if you both repeat the exact same moves 3 times each
-    2. If you or your opponent can not move anything and is not in check, it will be a draw. 
-    3. If a player cant make any moves, but he is not in check
-
-- Make some icons for pawn promotion
-- Blink the cell the king is in if you try to make an illigual move whilst in check
-- Change the entity group thing

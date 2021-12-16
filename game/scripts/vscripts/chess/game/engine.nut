@@ -1,11 +1,11 @@
 
 ::engine <- {
     
-    function get_valid_moves(in_simple_piece, in_simple_pieces) {
+    function get_valid_moves(in_simple_piece, in_simple_pieces, log) {
         local valid_moves = [];
 
-        foreach (move in in_simple_piece.get_all_moves(in_simple_pieces)) {
-            if (!engine.move_is_self_check(in_simple_piece.team, in_simple_piece.cell, move, in_simple_pieces)) {
+        foreach (move in in_simple_piece.get_all_moves(in_simple_pieces, log)) {
+            if (!engine.move_is_self_check(in_simple_piece.team, in_simple_piece.cell, move, in_simple_pieces, log)) {
                 valid_moves.append(move);
             }
         }
@@ -13,7 +13,7 @@
         return valid_moves;
     }
 
-    function move_is_self_check(team, old_cell, new_cell, in_simple_pieces) {
+    function move_is_self_check(team, old_cell, new_cell, in_simple_pieces, log) {
         local simple_pieces = new_simple_pieces_from_pieces(in_simple_pieces);
 
         local piece_moved = simple_pieces.get_from_cell(old_cell);
@@ -24,23 +24,21 @@
 
         piece_moved.move_to(new_cell);
 
-        if (is_in_check(team, simple_pieces)) { return true; }
+        if (is_in_check(team, simple_pieces, log)) { return true; }
 
         return false;
     }
 
-    function is_in_check(in_team, in_simple_pieces) {
+    function is_in_check(in_team, in_simple_pieces, log) {
         local king = get_king_from_team(in_team, in_simple_pieces);
 
         if (king) {
             foreach (piece in in_simple_pieces.pieces) {
-                if (!piece.captured) {
-                    if (piece.team != in_team) {
-                        local moves = piece.get_all_moves(in_simple_pieces);
-                        if (moves.len() > 0) {
-                            foreach (move in moves) {
-                                if (math.vec_equal(move, king.cell)) { return true; }
-                            }
+                if (!piece.captured && piece.team != in_team) {
+                    local moves = piece.get_all_moves(in_simple_pieces, log);
+                    if (moves.len() > 0) {
+                        foreach (move in moves) {
+                            if (math.vec_equal(move, king.cell)) { return true; }
                         }
                     }
                 }
@@ -50,10 +48,10 @@
         return false;
     }
 
-    function is_in_check_mate(in_team, in_simple_pieces) {
+    function is_in_checkmate(in_team, in_simple_pieces, log) {
         foreach (piece in in_simple_pieces.pieces) {
             if (!piece.captured && (piece.team == in_team)) {
-                if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces).len() > 0) {
+                if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces, log).len() > 0) {
                     return false;
                 }
             }
@@ -69,6 +67,68 @@
             }
         }
         return null;
+    }
+
+    function is_stalemate_no_more_moves(team, in_simple_pieces, log) {
+        foreach (piece in in_simple_pieces.pieces) {
+            if (!piece. captured&& piece.team == team) {
+                if (get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces, log).len() > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function is_stalemate_threefold_repetition(team, log) {
+        local moves_made = log.moves.len();
+
+        local repeating_white = false;
+        local repeating_black = false;
+
+        if (moves_made > 6) {
+            local w_move1 = log.get_move(moves_made-1, TEAM.WHITE);
+            local w_move2 = log.get_move(moves_made-3, TEAM.WHITE);
+            local w_move3 = log.get_move(moves_made-5, TEAM.WHITE);
+            local b_move1 = null;
+            local b_move2 = null;
+            local b_move3 = null;
+
+            if (log.moves[moves_made-1].len() == 1) {
+                b_move1 = log.get_move(moves_made-2, TEAM.BLACK);
+                b_move2 = log.get_move(moves_made-4, TEAM.BLACK);
+                b_move3 = log.get_move(moves_made-6, TEAM.BLACK);
+            }
+            else {
+                b_move1 = log.get_move(moves_made-1, TEAM.BLACK);
+                b_move2 = log.get_move(moves_made-3, TEAM.BLACK);
+                b_move3 = log.get_move(moves_made-5, TEAM.BLACK);
+            }
+
+            // Check if white is repeating
+            if (math.vec_equal(w_move1.to, w_move2.to)) {
+                if (math.vec_equal(w_move2.to, w_move3.to)) {
+                    if (math.vec_equal(w_move1.from, w_move2.from)) {
+                        if (math.vec_equal(w_move2.from, w_move3.from)) {
+                            repeating_white = true;
+                        }
+                    }
+                }
+            }
+
+            // Check if black is repeating
+            if (math.vec_equal(b_move1.to, b_move2.to)) {
+                if (math.vec_equal(b_move2.to, b_move3.to)) {
+                    if (math.vec_equal(b_move1.from, b_move2.from)) {
+                        if (math.vec_equal(b_move2.from, b_move3.from)) {
+                            repeating_black = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return (repeating_white && repeating_black);
     }
 
     function get_world_pos_from_cell(in_cell) {

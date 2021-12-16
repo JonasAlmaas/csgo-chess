@@ -14,18 +14,16 @@ enum PIECE_TYPE {
     KING,
 }
 
-::LAST_MOVED_PIECE_WHITE <- null;
-::LAST_MOVED_PIECE_BLACK <- null;
-
-::BOARD_POS <- utils.get_entity_from_name("target_board").GetOrigin();
-::BOARD_SCALE <- 128;
 ::GROUND_OFFSET <- 0.15;
+::BOARD_SCALE <- 128;
+::BOARD_POS <- utils.get_entity_from_name("target_board").GetOrigin();
 
 ::COLOR <- {
     VALID_MOVE = [65, 145, 111],
     LAST_MOVE = [255, 198, 66],
     HOVERED = [0, 200, 111],
     SELECTED = [255, 227, 66],
+    IN_CHECK = [230, 72, 57],
 }
 
 /*

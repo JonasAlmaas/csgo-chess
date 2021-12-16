@@ -32,6 +32,7 @@
     "game/highlighter",
     "game/ingame_menu",
     "game/engine",
+    "game/log",
     "game/main",
     "game/pawn_promotion",
     "game/utils",
@@ -70,7 +71,7 @@ include_scripts();
 ::initialized <- false;
 
 ::update <- function () {
-
+    
     calculate_tickrate();
 
     if (!initialized) {

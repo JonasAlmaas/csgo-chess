@@ -22,18 +22,39 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         highlighter = null,
         pawn_promotion_handler = null,
         ingame_menu = null,
+        log = null,
 
         game_over = false,
 
         turn = null,
         active_piece = null,
         piece_moveing = false,
+        is_castling = false,
         valid_moves = null,
 
         hit_white = Vector(),
         hit_black = Vector(),
 
         initialized = false,
+
+        function init() {
+            board = new_board();
+            pieces = new_pieces();
+            highlighter = new_highlighter();
+            pawn_promotion_handler = new_pawn_promotion_handler();
+            ingame_menu = new_ingame_menu();
+            log = new_log();
+
+            game_over = false;
+        
+            turn = TEAM.WHITE;
+            active_piece = null;
+            piece_moveing = false;
+            is_castling = false;
+            valid_moves = [];
+
+            initialized = false;
+        }
 
         function reset() {
             foreach (cursor in cursors) {
@@ -45,28 +66,12 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             highlighter.reset();
             pawn_promotion_handler.reset();
             ingame_menu.reset();
+            log.reset();
         }
 
         function soft_reset() {
             reset();
             init();
-        }
-
-        function init() {
-            board = new_board();
-            pieces = new_pieces();
-            highlighter = new_highlighter();
-            pawn_promotion_handler = new_pawn_promotion_handler();
-            ingame_menu = new_ingame_menu();
-
-            game_over = false;
-        
-            turn = TEAM.WHITE;
-            active_piece = null;
-            piece_moveing = false;
-            valid_moves = [];
-
-            initialized = false;
         }
 
         function update() {
@@ -97,6 +102,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                 }
             }
 
+            highlighter.update();
             pieces.update_pos();
         }
 
@@ -212,6 +218,10 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         }
 
         function done_moveing() {
+            // Log the move
+            log.add(active_piece, is_castling);
+            is_castling = false;
+
             // Reset in check variables
             pieces.black_in_check = false;
             pieces.white_in_check = false;
@@ -221,10 +231,6 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if (captured_piece) {
                 captured_piece.capture();
             }
-
-            // Log move
-            if (turn == TEAM.WHITE) { LAST_MOVED_PIECE_WHITE = active_piece; }
-            else if (turn == TEAM.BLACK) { LAST_MOVED_PIECE_BLACK = active_piece; }
 
             if (active_piece.type == PIECE_TYPE.PAWN) {
                 // Check for "En Passant"
@@ -236,8 +242,8 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     local en_passant_piece = pieces.get_from_cell(en_passant_cell);
                     if (en_passant_piece) {
                         if (en_passant_piece.times_moved == 1) {
-                            local should_capture_white = (turn == TEAM.BLACK) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_WHITE.cell)
-                            local should_capture_black = (turn == TEAM.WHITE) && math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_BLACK.cell)
+                            local should_capture_white = (turn == TEAM.BLACK) && math.vec_equal(en_passant_piece.cell, log.get_last_move(TEAM.WHITE).to)
+                            local should_capture_black = (turn == TEAM.WHITE) && math.vec_equal(en_passant_piece.cell, log.get_last_move(TEAM.BLACK).to)
                             if (should_capture_white || should_capture_black) {
                                 en_passant_piece.capture();
                             }
@@ -272,6 +278,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                             if (castling_rook_piece.times_moved == 0) {
                                 active_piece = castling_rook_piece;
                                 active_piece.move_to(castling_rook_target);
+                                is_castling = true;
                                 return;
                             }
                         }
@@ -286,7 +293,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if (turn == TEAM.WHITE) other_team = TEAM.BLACK;
 
             // See if the opponent is in check
-            if (engine.is_in_check(other_team, new_simple_pieces_from_pieces(pieces))) {
+            if (engine.is_in_check(other_team, new_simple_pieces_from_pieces(pieces), log)) {
                 if (turn == TEAM.WHITE) {
                     pieces.black_in_check = true;
                 }
@@ -294,14 +301,14 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     pieces.white_in_check = true;
                 }
 
-                // See if the opponent is in a check mate
-                if (engine.is_in_check_mate(other_team, new_simple_pieces_from_pieces(pieces))) {
+                // See if the opponent is in a checkmate
+                if (engine.is_in_checkmate(other_team, new_simple_pieces_from_pieces(pieces), log)) {
                     end_game();
 
                     local player = "White";
                     if (turn == TEAM.BLACK) { player = "Black"; }
 
-                    console.chat("\n| Check mate :" + console.color.red + " " + player + " team wins");
+                    console.chat("\n| Checkmate :" + console.color.red + " " + player + " team wins");
                 }
                 else {
                     // Tell the players that there was a check
@@ -310,12 +317,17 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     console.chat("\n| Check :" + console.color.red + " " + player + " is in check");
                 }
             }
-
-            // See if it is a stale mate
-            // if (engine.is_stale_mate()) {
-            //     end_game();
-            //     console.chat("\n| Stale mate");
-            // }
+            else {
+                // See if it is a stalemate
+                if (engine.is_stalemate_no_more_moves(other_team, new_simple_pieces_from_pieces(pieces), log)) {
+                    end_game();
+                    console.chat("\n| Stalemate:" + console.color.red + " No more valid moves");
+                }
+                if (engine.is_stalemate_threefold_repetition(turn, log)) {
+                    end_game();
+                    console.chat("\n| Stalemate:" + console.color.red + " Threefold repetition");
+                }
+            }
 
             if (!game_over) {
                 flip_turn();
@@ -334,7 +346,16 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         }
 
         function select_piece(in_piece) {
-            valid_moves = engine.get_valid_moves(new_simple_piece_from_piece(in_piece), new_simple_pieces_from_pieces(pieces));
+            valid_moves = engine.get_valid_moves(new_simple_piece_from_piece(in_piece), new_simple_pieces_from_pieces(pieces), log);
+
+            if (valid_moves.len() == 0) {
+                if (turn == TEAM.WHITE && pieces.white_in_check) {
+                    highlighter.in_check_king(engine.get_king_from_team(turn, new_simple_pieces_from_pieces(pieces)).cell);
+                }
+                else if (turn == TEAM.BLACK && pieces.black_in_check) {
+                    highlighter.in_check_king(engine.get_king_from_team(turn, new_simple_pieces_from_pieces(pieces)).cell);
+                }
+            }
 
             highlighter.update_selected_piece(in_piece.cell);
 

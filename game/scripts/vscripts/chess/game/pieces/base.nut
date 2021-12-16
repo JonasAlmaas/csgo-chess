@@ -20,6 +20,7 @@
 
         cell = in_cell,
         spawn_cell = math.vec_clone(in_cell),
+        reference_cell = null,
         target_cell = null,
         sorted_move_cells = [],
 
@@ -41,6 +42,7 @@
         function move_to(in_move_to_cell) {
             times_moved++;
             target_cell = math.vec_clone(in_move_to_cell);
+            reference_cell = math.vec_clone(cell);
             
             sorted_move_cells = get_sorted_move_cells();
             time_last_cell = Time();
@@ -131,7 +133,7 @@
     piece.set_type(PIECE_TYPE.PAWN);
     piece.set_model(PIECE_MODEL.PAWN);
 
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         local moves = [];
 
         // Pawns can only move one direction
@@ -177,12 +179,12 @@
                         if (en_passant_piece.times_moved == 1) {
                             if (en_passant_piece.type = PIECE_TYPE.PAWN) {
                                 if (en_passant_piece.team == TEAM.WHITE) {
-                                    if (math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_WHITE.cell)) {
+                                    if (math.vec_equal(en_passant_piece.cell, log.get_last_move(TEAM.WHITE).to)) {
                                         moves.append(move);
                                     }
                                 }
                                 else {
-                                    if (math.vec_equal(en_passant_piece.cell, LAST_MOVED_PIECE_BLACK.cell)) {
+                                    if (math.vec_equal(en_passant_piece.cell, log.get_last_move(TEAM.BLACK).to)) {
                                         moves.append(move);
                                     }
                                 }
@@ -208,7 +210,7 @@
     piece.set_type(PIECE_TYPE.ROOK);
     piece.set_model(PIECE_MODEL.ROOK);
 
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         return engine.get_straight_moves(cell, team, in_simple_pieces);
     }
 
@@ -224,7 +226,7 @@
     piece.set_type(PIECE_TYPE.KNIGHT);
     piece.set_model(PIECE_MODEL.KNIGHT);
 
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         local moves = [];
 
         local possible_moves = [];
@@ -266,7 +268,7 @@
     piece.set_type(PIECE_TYPE.BISHOP);
     piece.set_model(PIECE_MODEL.BISHOP);
     
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         return engine.get_diagonal_moves(cell, team, in_simple_pieces);
     }
 
@@ -282,7 +284,7 @@
     piece.set_type(PIECE_TYPE.QUEEN);
     piece.set_model(PIECE_MODEL.QUEEN);
 
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         local straight_moves = engine.get_straight_moves(cell, team, in_simple_pieces);
         local diagonal_moves = engine.get_diagonal_moves(cell, team, in_simple_pieces);
         return utils.list_merge(straight_moves, diagonal_moves);
@@ -300,7 +302,7 @@
     piece.set_type(PIECE_TYPE.KING);
     piece.set_model(PIECE_MODEL.KING);
 
-    piece.get_all_moves <- function (in_simple_pieces) {
+    piece.get_all_moves <- function (in_simple_pieces, log) {
         local moves = [];
 
         local possible_moves = [];
@@ -333,7 +335,7 @@
         if (times_moved == 0 && !in_check) {
             // Right
             if (utils.list_vec_contains(possible_moves[3], moves)) {
-                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y + 1), in_simple_pieces)) {
+                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y + 1), in_simple_pieces, log)) {
                     local move = Vector(cell.x, cell.y + 2);
                     local move_to_piece = in_simple_pieces.get_from_cell(move);
                     if (!move_to_piece) {
@@ -349,7 +351,7 @@
             }
             // Left
             if (utils.list_vec_contains(possible_moves[7], moves)) {
-                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y - 1), in_simple_pieces)) {
+                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y - 1), in_simple_pieces, log)) {
                     local move = Vector(cell.x, cell.y - 2);
                     local move_to_piece = in_simple_pieces.get_from_cell(move);
                     if (!move_to_piece) {

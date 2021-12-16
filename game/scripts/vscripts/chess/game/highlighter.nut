@@ -10,11 +10,29 @@
         last_move_to_prop = null,
         valid_moves_props = [],
 
+        // check stuff
+        in_check_highlighter = false,
+        in_check_highlighter_prop = null,
+        in_check_highlighter_time = 0.0,
+        in_check_highlighter_duration = 0.5,
+
         function reset() {
             disable_selected_piece();
             disable_hovered_cell();
             disable_last_move();
             disable_valid_moves();
+
+            if (in_check_highlighter_prop) {
+                in_check_highlighter_prop.disable();
+            }
+        }
+        function update() {
+            if (in_check_highlighter_prop) {
+                if (Time() - in_check_highlighter_time >= in_check_highlighter_duration) {
+                    in_check_highlighter_prop.hide();
+                    in_check_highlighter_prop = false;
+                }
+            }
         }
         function disable_selected_piece() {
             if (selected_piece_prop) {
@@ -123,6 +141,25 @@
 
                 valid_moves_props.append(prop);
             }
+        }
+        function in_check_king(cell) {
+            in_check_highlighter = true;
+            in_check_highlighter_time = Time();
+
+            if (in_check_highlighter_prop) {
+                in_check_highlighter_prop.show();
+            }
+            else {
+                in_check_highlighter_prop = new_prop_dynamic();
+                in_check_highlighter_prop.set_color(COLOR.IN_CHECK);
+                in_check_highlighter_prop.disable_shadows();
+                in_check_highlighter_prop.set_scale(BOARD_SCALE);
+                in_check_highlighter_prop.set_model(HIGHLIGHT_MODEL.CELL_OUTLINE);
+            }
+
+            local offset = math.vec_mul(cell, BOARD_SCALE) + Vector(half_cell, half_cell);
+            local pos = BOARD_POS + Vector(offset.x, -offset.y, GROUND_OFFSET * 1.35);
+            in_check_highlighter_prop.teleport(pos);
         }
     }
     
