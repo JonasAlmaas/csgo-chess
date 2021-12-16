@@ -1,8 +1,6 @@
 ::MODULE_EXT <- ".nut";
 ::BASE_FOLDER <- "chess/";
 
-::ENTITY_GROUP <- EntityGroup;
-
 ::custom_entities <- {
     prop_dynamic = [],
     prop_dynamic_glow = [],

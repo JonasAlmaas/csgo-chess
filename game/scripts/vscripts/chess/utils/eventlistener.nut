@@ -30,8 +30,6 @@ event_template[EVENT_TYPE.TEAM_CHANGE] <- ["team_change", ["userid", "team", "ol
 /*
     Player trace
 */
-::trace_orig_ply_white <- null;
-::trace_orig_ply_black <- null;
 function update_player_traces() {
     if (player_white != null && trace_orig_ply_white != null) {
         player_white.forward_vector = trace_orig_ply_white.GetForwardVector();

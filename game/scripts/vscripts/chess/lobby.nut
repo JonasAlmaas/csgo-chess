@@ -76,8 +76,8 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     }
 
                     // +attack listener
-                    EntFireByHandle(ENTITY_GROUP[2], "Activate", "", 0.0, player_white.ref, null);
-                    EntFireByHandle(ENTITY_GROUP[3], "Activate", "", 0.0, player_black.ref, null);
+                    EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
+                    EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, player_black.ref, null);
 
                     // Bind trace targets
                     EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
@@ -107,7 +107,7 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     }
                 }
 
-                EntFireByHandle(ENTITY_GROUP[2], "Activate", "", 0.0, player_white.ref, null);
+                EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
 
                 EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
                 EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);

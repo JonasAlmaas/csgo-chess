@@ -7,7 +7,6 @@
 /*
     Global includes
 */
-
 ::SCRIPTS_MANIFEST_MISC <- [
     "lobby"
 ]
@@ -52,14 +51,12 @@
 include_scripts();
 
 /*
-    Entiry group
+    Entity group
 */
-
-// ::a <- EntityGroup[0];
-// ::b <- EntityGroup[1];
-// ::game_ui_ply_white <- EntityGroup[2];
-// ::game_ui_ply_black <- EntityGroup[3];
-// ::e <- EntityGroup[4];
+::trace_orig_ply_white <- null;
+::trace_orig_ply_black <- null;
+::game_ui_ply_white <- null;
+::game_ui_ply_black <- null;
 
 /*
     Global variables
@@ -77,9 +74,11 @@ include_scripts();
     calculate_tickrate();
 
     if (!initialized) {
-        
-        trace_orig_ply_white = ENTITY_GROUP[0];
-        trace_orig_ply_black = ENTITY_GROUP[1];
+
+        trace_orig_ply_white = EntityGroup[0];
+        trace_orig_ply_black = EntityGroup[1];
+        game_ui_ply_white = EntityGroup[2];
+        game_ui_ply_black = EntityGroup[3];
 
         lobby = new_lobby();
         game = new_game();
@@ -107,8 +106,8 @@ include_scripts();
 
     // To prevent everything for crashing
     if (!IS_DEBUGGING_SINGLE_PLAYER) {
-        EntFireByHandle(ENTITY_GROUP[2], "Deactivate", "", 0.0, null, null);
-        EntFireByHandle(ENTITY_GROUP[3], "Deactivate", "", 0.0, null, null);
+        EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.0, null, null);
+        EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.0, null, null);
     }
 }
 
