@@ -70,7 +70,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         }
 
         function update() {
-            
+
             if (!initialized) {
 
                 // Create cursors for both players
@@ -89,18 +89,8 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             if (ingame_menu.on_click_restart(player_white, player_black, PLAYER_WHITE_EVENTS.ATTACK, PLAYER_BLACK_EVENTS.ATTACK)) { soft_reset(); }
             if (ingame_menu.on_click_home(player_white, player_black, PLAYER_WHITE_EVENTS.ATTACK, PLAYER_BLACK_EVENTS.ATTACK)) { HOT_RELOAD(); }
 
-            if (pawn_promotion_handler.is_open) {
-                if (turn == TEAM.WHITE) {
-                    pawn_promotion_handler.update(player_white, player_select());
-                }
-                else {
-                    pawn_promotion_handler.update(player_black, player_select());
-                }
-            }
-            else if (!game_over) {
-                if (IS_DEBUGGING_SINGLE_PLAYER) {
-                    play(hit_white);
-                }
+            if (!game_over) {
+                if (IS_DEBUGGING_SINGLE_PLAYER) { play(hit_white); }
                 else {
                     if (turn == TEAM.WHITE) { play(hit_white); }
                     else { play(hit_black); }
@@ -161,6 +151,21 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             local cell = board.get_cell_from_pos(hit);
             local new_piece = pieces.get_from_cell(cell);
 
+            // Update hovered cell
+            if (is_inside_board) { highlighter.update_hovered_cell(cell); }
+            else { highlighter.disable_hovered_cell(); }
+
+            // Check if there is an ongoing pawn promotion
+            if (pawn_promotion_handler.is_open) {
+                if (turn == TEAM.WHITE) {
+                    pawn_promotion_handler.update(player_white, player_select());
+                }
+                else {
+                    pawn_promotion_handler.update(player_black, player_select());
+                }
+                return;
+            }
+
             if (active_piece) {
                 if (!active_piece.target_cell) {
                     if (piece_moveing) {
@@ -188,11 +193,6 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             }
         }
 
-        function flip_turn() {
-            if (turn == TEAM.WHITE) { turn = TEAM.BLACK; }
-            else { turn = TEAM.WHITE; }
-        }
-
         function try_move(in_cell) {
             if (utils.list_vec_contains(in_cell, valid_moves)) {
                 active_piece.move_to(in_cell);
@@ -212,6 +212,10 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         }
 
         function done_moveing() {
+            // Reset in check variables
+            pieces.black_in_check = false;
+            pieces.white_in_check = false;
+
             // Check if a piece should be captured by this move
             local captured_piece = pieces.get_from_cell(active_piece.cell, turn);
             if (captured_piece) {
@@ -278,20 +282,42 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             piece_moveing = false;
             active_piece = null;
 
-            if (engine.is_check_mate(turn, new_simple_pieces_from_pieces(pieces))) {
-                game_over = true;
+            local other_team = TEAM.WHITE;
+            if (turn == TEAM.WHITE) other_team = TEAM.BLACK;
 
-                local player = "White";
-                if (turn == TEAM.BLACK) { player = "Black"; }
+            // See if the opponent is in check
+            if (engine.is_in_check(other_team, new_simple_pieces_from_pieces(pieces))) {
+                if (turn == TEAM.WHITE) {
+                    pieces.black_in_check = true;
+                }
+                else {
+                    pieces.white_in_check = true;
+                }
 
-                console.chat("\n| Check mate :" + console.color.green + " " + player + " team wins");
+                // See if the opponent is in a check mate
+                if (engine.is_in_check_mate(other_team, new_simple_pieces_from_pieces(pieces))) {
+                    end_game();
 
-                if (IS_DEBUGGING) {
-                    if (turn == TEAM.WHITE) { console.log("Check mate! White team wins!"); }
-                    else { console.log("Check mate! Black team wins!"); }
+                    local player = "White";
+                    if (turn == TEAM.BLACK) { player = "Black"; }
+
+                    console.chat("\n| Check mate :" + console.color.red + " " + player + " team wins");
+                }
+                else {
+                    // Tell the players that there was a check
+                    local player = "White";
+                    if (turn == TEAM.WHITE) { player = "Black"; }
+                    console.chat("\n| Check :" + console.color.red + " " + player + " is in check");
                 }
             }
-            else {
+
+            // See if it is a stale mate
+            // if (engine.is_stale_mate()) {
+            //     end_game();
+            //     console.chat("\n| Stale mate");
+            // }
+
+            if (!game_over) {
                 flip_turn();
             }
         }
@@ -328,6 +354,17 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             highlighter.disable_valid_moves();
             highlighter.update_selected_piece();
         }
+
+        function flip_turn() {
+            if (turn == TEAM.WHITE) { turn = TEAM.BLACK; }
+            else { turn = TEAM.WHITE; }
+        }
+
+        function end_game() {
+            game_over = true;
+            highlighter.disable_hovered_cell()
+        }
+
     }
 
     game.init();

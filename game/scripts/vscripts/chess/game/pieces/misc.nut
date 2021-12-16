@@ -31,6 +31,8 @@
     local table = {
         pieces = list,
         get_from_cell = in_pieces.get_from_cell,
+        white_in_check = in_pieces.white_in_check,
+        black_in_check = in_pieces.black_in_check,
     }
 
     return table;
@@ -80,6 +82,9 @@
 
     local table = {
         pieces = list,
+        
+        white_in_check = false,
+        black_in_check = false,
 
         function reset() {
             foreach (piece in pieces) {

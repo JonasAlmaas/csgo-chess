@@ -327,40 +327,42 @@
             }
         }
 
-        // Castling
-        if (times_moved == 0) {
-            // TODO:
-            // Cant castle when in check
-            // Cant castle threw a check
+        local in_check = (team == TEAM.WHITE && in_simple_pieces.white_in_check) || (team == TEAM.BLACK && in_simple_pieces.black_in_check);
 
+        // Castling
+        if (times_moved == 0 && !in_check) {
             // Right
             if (utils.list_vec_contains(possible_moves[3], moves)) {
-                local move = Vector(cell.x, cell.y + 2);
-                local move_to_piece = in_simple_pieces.get_from_cell(move);
-                if (!move_to_piece) {
-                    local rook_cell = Vector(cell.x, cell.y + 3);
-                    local rook_piece = in_simple_pieces.get_from_cell(rook_cell);
-                    if (rook_piece) {
-                        if (rook_piece.times_moved == 0) {
-                            moves.append(move);
+                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y + 1), in_simple_pieces)) {
+                    local move = Vector(cell.x, cell.y + 2);
+                    local move_to_piece = in_simple_pieces.get_from_cell(move);
+                    if (!move_to_piece) {
+                        local rook_cell = Vector(cell.x, cell.y + 3);
+                        local rook_piece = in_simple_pieces.get_from_cell(rook_cell);
+                        if (rook_piece) {
+                            if (rook_piece.times_moved == 0) {
+                                moves.append(move);
+                            }
                         }
                     }
                 }
             }
             // Left
             if (utils.list_vec_contains(possible_moves[7], moves)) {
-                local move = Vector(cell.x, cell.y - 2);
-                local move_to_piece = in_simple_pieces.get_from_cell(move);
-                if (!move_to_piece) {
-                    // Moveing left is a bit strange
-                    local space_cell = Vector(cell.x, cell.y - 3);
-                    local space_piece = in_simple_pieces.get_from_cell(space_cell);
-                    if (!space_piece) {
-                        local rook_cell = Vector(cell.x, cell.y - 4);
-                        local rook_piece = in_simple_pieces.get_from_cell(rook_cell);
-                        if (rook_piece) {
-                            if (rook_piece.times_moved == 0) {
-                                moves.append(move);
+                if (!engine.move_is_self_check(team, cell, Vector(cell.x, cell.y - 1), in_simple_pieces)) {
+                    local move = Vector(cell.x, cell.y - 2);
+                    local move_to_piece = in_simple_pieces.get_from_cell(move);
+                    if (!move_to_piece) {
+                        // Moveing left is a bit strange
+                        local space_cell = Vector(cell.x, cell.y - 3);
+                        local space_piece = in_simple_pieces.get_from_cell(space_cell);
+                        if (!space_piece) {
+                            local rook_cell = Vector(cell.x, cell.y - 4);
+                            local rook_piece = in_simple_pieces.get_from_cell(rook_cell);
+                            if (rook_piece) {
+                                if (rook_piece.times_moved == 0) {
+                                    moves.append(move);
+                                }
                             }
                         }
                     }

@@ -29,13 +29,13 @@
         return false;
     }
 
-    function is_in_check(team, in_simple_pieces) {
-        local king = get_king_from_team(team, in_simple_pieces);
+    function is_in_check(in_team, in_simple_pieces) {
+        local king = get_king_from_team(in_team, in_simple_pieces);
 
         if (king) {
             foreach (piece in in_simple_pieces.pieces) {
                 if (!piece.captured) {
-                    if (piece.team != team) {
+                    if (piece.team != in_team) {
                         local moves = piece.get_all_moves(in_simple_pieces);
                         if (moves.len() > 0) {
                             foreach (move in moves) {
@@ -48,6 +48,18 @@
         }
 
         return false;
+    }
+
+    function is_in_check_mate(in_team, in_simple_pieces) {
+        foreach (piece in in_simple_pieces.pieces) {
+            if (!piece.captured && (piece.team == in_team)) {
+                if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces).len() > 0) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     function get_king_from_team(team, in_simple_pieces) {
@@ -257,25 +269,5 @@
 
     function is_cell_on_board(cell) {
         return (((cell.x >= 0) && (cell.x < 8)) && ((cell.y >= 0) && (cell.y < 8)));
-    }
-
-    function is_check_mate(in_team, in_simple_pieces) {
-        local opponent_team = TEAM.WHITE;
-        if (in_team == TEAM.WHITE) { opponent_team = TEAM.BLACK; }
-
-        // Check if the king still in play
-        if(!get_king_from_team(opponent_team, in_simple_pieces)) {
-            return true;
-        }
-
-        foreach (piece in in_simple_pieces.pieces) {
-            if (!piece.captured && (piece.team != in_team)) {
-                if (engine.get_valid_moves(new_simple_piece_from_piece(piece), in_simple_pieces).len() > 0) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 }

@@ -19,6 +19,9 @@
             if (ang) { ref.SetAngles(ang.x, ang.y, ang.z); }
         }
 
+        function get_pos() { return ref.GetOrigin(); }
+        function get_ang() { return ref.GetAngles(); }
+
         function show() { EntFireByHandle(ref, "Enable", "", 0.0, null, null); }
         function hide() { EntFireByHandle(ref, "Disable", "", 0.0, null, null); }
     }
@@ -41,6 +44,7 @@
     prop.reset <- function () {
         enable();
         set_scale(1);
+        enable_shadows();
         set_color([255,255,255]);
         teleport(Vector(), Vector());
     }
@@ -72,6 +76,7 @@
     prop.reset <- function () {
         enable();
         set_scale(1);
+        enable_shadows();
         set_color([255,255,255]);
         set_glow_color([255,255,255]);
         teleport(Vector(), Vector());

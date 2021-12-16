@@ -24,6 +24,7 @@ enum PIECE_TYPE {
 ::COLOR <- {
     VALID_MOVE = [65, 145, 111],
     LAST_MOVE = [255, 198, 66],
+    HOVERED = [0, 200, 111],
     SELECTED = [255, 227, 66],
 }
 

@@ -7,6 +7,7 @@
 /*
     Global includes
 */
+
 ::SCRIPTS_MANIFEST_MISC <- [
     "lobby"
 ]
@@ -50,6 +51,15 @@
 }
 include_scripts();
 
+/*
+    Entiry group
+*/
+
+// ::a <- EntityGroup[0];
+// ::b <- EntityGroup[1];
+// ::game_ui_ply_white <- EntityGroup[2];
+// ::game_ui_ply_black <- EntityGroup[3];
+// ::e <- EntityGroup[4];
 
 /*
     Global variables
@@ -95,8 +105,11 @@ include_scripts();
     player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles());
     player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles());
 
-    EntFireByHandle(ENTITY_GROUP[2], "Deactivate", "", 0.0, null, null);
-    EntFireByHandle(ENTITY_GROUP[3], "Deactivate", "", 0.0, null, null);
+    // To prevent everything for crashing
+    if (!IS_DEBUGGING_SINGLE_PLAYER) {
+        EntFireByHandle(ENTITY_GROUP[2], "Deactivate", "", 0.0, null, null);
+        EntFireByHandle(ENTITY_GROUP[3], "Deactivate", "", 0.0, null, null);
+    }
 }
 
 /*

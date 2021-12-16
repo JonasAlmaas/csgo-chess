@@ -17,6 +17,8 @@
 
     local menu = {
 
+        HOVERD_SCALE = 1.25,
+
         btn_restart_white = new_ingame_menu_btn(btn_restart_white_pos, btn_restart_white_ang, MENU_MODEL.RESTART),
         btn_restart_black = new_ingame_menu_btn(btn_restart_black_pos, btn_restart_black_ang, MENU_MODEL.RESTART),
         btn_home_white = new_ingame_menu_btn(btn_home_white_pos, btn_home_white_ang, MENU_MODEL.HOME),
@@ -47,10 +49,10 @@
             local hit_white = btn_restart_white.hit(player_white);
             local hit_black = btn_restart_black.hit(player_black);
 
-            if (hit_white) { btn_restart_white.set_scale(BOARD_SCALE * 1.5); }
+            if (hit_white) { btn_restart_white.set_scale(BOARD_SCALE * HOVERD_SCALE); }
             else           { btn_restart_white.set_scale(BOARD_SCALE); }
             
-            if (hit_black) { btn_restart_black.set_scale(BOARD_SCALE * 1.5); }
+            if (hit_black) { btn_restart_black.set_scale(BOARD_SCALE * HOVERD_SCALE); }
             else           { btn_restart_black.set_scale(BOARD_SCALE); }
 
             return (hit_white && select_white) || (hit_black && select_black);
@@ -60,10 +62,10 @@
             local hit_white = btn_home_white.hit(player_white);
             local hit_black = btn_home_black.hit(player_black);
 
-            if (hit_white) { btn_home_white.set_scale(BOARD_SCALE * 1.5); }
+            if (hit_white) { btn_home_white.set_scale(BOARD_SCALE * HOVERD_SCALE); }
             else           { btn_home_white.set_scale(BOARD_SCALE); }
             
-            if (hit_black) { btn_home_black.set_scale(BOARD_SCALE * 1.5); }
+            if (hit_black) { btn_home_black.set_scale(BOARD_SCALE * HOVERD_SCALE); }
             else           { btn_home_black.set_scale(BOARD_SCALE); }
 
             return (hit_white && select_white) || (hit_black && select_black);

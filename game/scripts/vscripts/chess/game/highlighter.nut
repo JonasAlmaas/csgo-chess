@@ -5,20 +5,27 @@
         half_cell = BOARD_SCALE * 0.5,
 
         selected_piece_prop = null,
+        hoverd_cell_prop = null,
         last_move_from_prop = null,
         last_move_to_prop = null,
         valid_moves_props = [],
 
         function reset() {
             disable_selected_piece();
+            disable_hovered_cell();
             disable_last_move();
             disable_valid_moves();
-
         }
         function disable_selected_piece() {
             if (selected_piece_prop) {
                 selected_piece_prop.disable();
                 selected_piece_prop = null;
+            }
+        }
+        function disable_hovered_cell() {
+            if (hoverd_cell_prop) {
+                hoverd_cell_prop.disable();
+                hoverd_cell_prop = null;
             }
         }
         function disable_last_move() {
@@ -55,6 +62,18 @@
             else {
                 selected_piece_prop.hide();
             }
+        }
+        function update_hovered_cell(cell) {
+            if (!hoverd_cell_prop) {
+                hoverd_cell_prop = new_prop_dynamic();
+                hoverd_cell_prop.set_color(COLOR.HOVERED);
+                hoverd_cell_prop.disable_shadows();
+                hoverd_cell_prop.set_scale(BOARD_SCALE);
+                hoverd_cell_prop.set_model(HIGHLIGHT_MODEL.CELL_OUTLINE);
+            }
+            local offset = math.vec_mul(cell, BOARD_SCALE) + Vector(half_cell, half_cell);
+            local pos = BOARD_POS + Vector(offset.x, -offset.y, GROUND_OFFSET * 1.275);
+            hoverd_cell_prop.teleport(pos);
         }
         function update_last_move(from_cell, to_cell) {
             if (!last_move_from_prop) {
