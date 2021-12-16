@@ -2,18 +2,12 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9178"
-	"mapversion" "301"
+	"mapversion" "307"
 	"formatversion" "100"
 	"prefab" "0"
 }
 visgroups
 {
-	visgroup
-	{
-		"name" "Basalt"
-		"visgroupid" "5"
-		"color" "163 192 129"
-	}
 	visgroup
 	{
 		"name" "Dev"
@@ -24,15 +18,15 @@ visgroups
 viewsettings
 {
 	"bSnapToGrid" "1"
-	"bShowGrid" "0"
+	"bShowGrid" "1"
 	"bShowLogicalGrid" "0"
-	"nGridSpacing" "128"
+	"nGridSpacing" "16"
 	"bShow3DGrid" "0"
 }
 world
 {
 	"id" "1"
-	"mapversion" "301"
+	"mapversion" "307"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -2331,6 +2325,240 @@ world
 }
 entity
 {
+	"id" "20999"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_128a.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "2989.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "21053"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_128b.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "3021.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "21068"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_96a.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "3053.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "21091"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_96b.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "3085.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "21118"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_64a.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "3117.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "21141"
+	"classname" "prop_static"
+	"angles" "0 0 0"
+	"disableflashlight" "0"
+	"disableselfshadowing" "0"
+	"disableshadowdepth" "0"
+	"disableshadows" "0"
+	"disablevertexlighting" "0"
+	"disableX360" "0"
+	"drawinfastreflection" "0"
+	"enablelightbounce" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"ignorenormals" "0"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/chess/basalt_single_64b.mdl"
+	"preventpropcombine" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"screenspacefade" "0"
+	"shadowdepthnocache" "0"
+	"skin" "0"
+	"solid" "6"
+	"uniformscale" "1"
+	"origin" "3149.68 5690.21 1841"
+	editor
+	{
+		"color" "255 255 0"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
 	"id" "20829"
 	"classname" "info_teleport_destination"
 	"angles" "0 270 0"
@@ -3516,7 +3744,7 @@ hidden
 				editor
 				{
 					"color" "0 180 0"
-					"visgroupshown" "1"
+					"visgroupshown" "0"
 					"visgroupautoshown" "1"
 				}
 			}
@@ -3660,1382 +3888,6 @@ entity
 		"visgroupshown" "1"
 		"visgroupautoshown" "1"
 		"logicalpos" "[0 3000]"
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "6847"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "520 1160 1200"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8546"
-		"classname" "prop_static"
-		"angles" "0 300 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_02.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "475.52 1061.24 1168"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8550"
-		"classname" "prop_static"
-		"angles" "0 180 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "296 1144 1344"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8585"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "328 1080 1312"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8609"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "318.896 1224 1344"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8625"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "268.934 1176.46 1374.8"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8661"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "276.091 1143.32 1392"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8926"
-		"classname" "prop_static"
-		"angles" "0 270 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "423.972 1023.41 1190.33"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "8973"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "468.491 1071.46 1235.87"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9005"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "506.29 1093.04 1263.85"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9029"
-		"classname" "prop_static"
-		"angles" "0 9.5 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "488.392 1079 1246.88"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9165"
-		"classname" "prop_static"
-		"angles" "0 240 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_02.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "473.349 1259.15 1200"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9224"
-		"classname" "prop_static"
-		"angles" "0 15 -180"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "490.937 1107.6 1081.89"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9260"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "494.459 1149.79 1103.97"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9304"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "456.792 1080.99 1064.09"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9363"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "503.936 1203.83 1105.43"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9391"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "505.624 1183.78 1087.92"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9419"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "456.91 1241.84 1251.36"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9435"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "501.669 1221.76 1267.3"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9447"
-		"classname" "prop_static"
-		"angles" "0 8 -180"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "503.267 1202.42 1267.3"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9474"
-		"classname" "prop_static"
-		"angles" "0 8 -180"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_01.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "507.51 1112.09 1267.3"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9518"
-		"classname" "prop_static"
-		"angles" "0 103 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "479.955 1226.55 1089.25"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9558"
-		"classname" "prop_static"
-		"angles" "0 342 -180"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "476.449 1180.19 1071.66"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9618"
-		"classname" "prop_static"
-		"angles" "0 60 180"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_04.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "448.911 1241.62 1085.72"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9662"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "468.181 1143.93 975.051"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9701"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_05.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "445.618 1181.93 978.088"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9729"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_02.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "457.376 1154.79 960.824"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9749"
-		"classname" "prop_static"
-		"angles" "0 99.5 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_cluster_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "412.249 1059.42 1079.7"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "9930"
-		"classname" "prop_static"
-		"angles" "0 0 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "440.817 1078.91 1008.39"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "10002"
-		"classname" "prop_static"
-		"angles" "0 120 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "450.983 1094.72 992.388"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "10042"
-		"classname" "prop_static"
-		"angles" "0 120 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "460.389 1113.28 998.479"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
-	}
-}
-hidden
-{
-	entity
-	{
-		"id" "10074"
-		"classname" "prop_static"
-		"angles" "0 120 0"
-		"disableflashlight" "0"
-		"disableselfshadowing" "0"
-		"disableshadowdepth" "0"
-		"disableshadows" "0"
-		"disablevertexlighting" "0"
-		"disableX360" "0"
-		"drawinfastreflection" "0"
-		"enablelightbounce" "0"
-		"fademaxdist" "0"
-		"fademindist" "-1"
-		"fadescale" "1"
-		"ignorenormals" "0"
-		"maxcpulevel" "0"
-		"maxgpulevel" "0"
-		"mincpulevel" "0"
-		"mingpulevel" "0"
-		"model" "models/props_fjall/basalt02_03.mdl"
-		"preventpropcombine" "0"
-		"renderamt" "255"
-		"rendercolor" "255 255 255"
-		"screenspacefade" "0"
-		"shadowdepthnocache" "0"
-		"skin" "0"
-		"solid" "0"
-		"uniformscale" "1"
-		"origin" "460.389 1130.29 978.766"
-		editor
-		{
-			"color" "255 255 0"
-			"visgroupid" "5"
-			"visgroupshown" "0"
-			"visgroupautoshown" "1"
-			"logicalpos" "[0 0]"
-		}
 	}
 }
 entity
@@ -10437,8 +9289,8 @@ cameras
 	"activecamera" "0"
 	camera
 	{
-		"position" "[2766.56 3491.76 2735.73]"
-		"look" "[2766.92 3504.8 2733.52]"
+		"position" "[2942.96 5096.48 2342.94]"
+		"look" "[2943.32 5109.45 2340.37]"
 	}
 }
 cordons
