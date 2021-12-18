@@ -87,8 +87,8 @@ include_scripts();
             if (target.GetClassname() == "player") {
                 EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, target, null);
                 EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, target, null);
-                EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.1, null, null);
-                EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.1, null, null);
+                EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.01, null, null);
+                EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.01, null, null);
                 break;
             }
         }
@@ -114,8 +114,8 @@ include_scripts();
     lobby.reset();
     game.reset();
 
-    player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles());
-    player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles());
+    if (player_white) { player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles()); }
+    if (player_black) { player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles()); }
 }
 
 /*
