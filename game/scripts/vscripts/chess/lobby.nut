@@ -37,7 +37,7 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
         waiting = true,
 
         // Square zone
-        zone_radius = 330,
+        zone_radius = 320,
 
         font_size = 100,
         text_color_white = [40,40,40],
