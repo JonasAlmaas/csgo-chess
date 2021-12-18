@@ -88,7 +88,6 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                 count_down_text_1 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_white, "center_center", lobby_count_down_white_pos, Vector(0,0));
                 count_down_text_2 = new_dynamic_text("" + time_left, font_size, "kanit_semibold", text_color_black, "center_center", lobby_count_down_black_pos, Vector(0,180));
 
-                return;
                 if (time_left <= 0) {
                     // Create players
                     player_white = new_player(temp_player_white);
