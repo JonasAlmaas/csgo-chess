@@ -64,6 +64,9 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     local target = null;
                     while ((target = Entities.FindByClassname(target, "*player*")) != null) {
                         if (target.GetClassname() == "player") {
+                            // Reset the player name
+                            EntFireByHandle(target, "AddOutput", "targetname", 0.0, null, null);
+                            
                             local pos = target.GetOrigin();
 
                             if (math.vec_equal(pos, players_in_white[0].GetOrigin())) {
@@ -79,11 +82,12 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
                     EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, player_black.ref, null);
 
-                    // Bind trace targets
+                    // Give the players names
                     EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
-                    EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
-
                     EntFireByHandle(player_black.ref, "AddOutput", "targetname ply2", 0.0, null, null);
+
+                    // Bind trace targets
+                    EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
                     EntFire("tr_lmm_ply2", "SetMeasureTarget", "ply2", 0.01, null);
 
                     // Teleport players to the map

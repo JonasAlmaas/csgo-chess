@@ -159,7 +159,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
 
             // Update hovered cell
             if (is_inside_board) { highlighter.update_hovered_cell(cell); }
-            else { highlighter.disable_hovered_cell(); }
+            else { highlighter.hide_hovered_cell(); }
 
             // Check if there is an ongoing pawn promotion
             if (pawn_promotion_handler.is_open) {

@@ -2,7 +2,7 @@
     Global constants
 */
 ::IS_DEBUGGING <- false;
-::IS_DEBUGGING_SINGLE_PLAYER <- true;
+::IS_DEBUGGING_SINGLE_PLAYER <- false;
 
 /*
     Global includes
@@ -81,6 +81,18 @@ include_scripts();
         game_ui_ply_white = EntityGroup[2];
         game_ui_ply_black = EntityGroup[3];
 
+        // Reset game_ui entities
+        local target = null;
+        while ((target = Entities.FindByClassname(target, "*player*")) != null) {
+            if (target.GetClassname() == "player") {
+                EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, target, null);
+                EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, target, null);
+                EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.1, null, null);
+                EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.1, null, null);
+                break;
+            }
+        }
+
         lobby = new_lobby();
         game = new_game();
 
@@ -104,12 +116,6 @@ include_scripts();
 
     player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles());
     player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles());
-
-    // To prevent everything for crashing
-    if (!IS_DEBUGGING_SINGLE_PLAYER) {
-        EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.0, null, null);
-        EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.0, null, null);
-    }
 }
 
 /*

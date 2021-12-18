@@ -62,6 +62,11 @@
             }
             valid_moves_props = [];
         }
+        function hide_hovered_cell() {
+            if (hoverd_cell_prop) {
+                hoverd_cell_prop.hide();
+            }
+        }
         function update_selected_piece(cell=null) {
             if (!selected_piece_prop && cell) {
                 selected_piece_prop = new_prop_dynamic();
@@ -89,6 +94,7 @@
                 hoverd_cell_prop.set_scale(BOARD_SCALE);
                 hoverd_cell_prop.set_model(HIGHLIGHT_MODEL.CELL_OUTLINE);
             }
+            hoverd_cell_prop.show();
             local offset = math.vec_mul(cell, BOARD_SCALE) + Vector(half_cell, half_cell);
             local pos = BOARD_POS + Vector(offset.x, -offset.y, GROUND_OFFSET * 1.275);
             hoverd_cell_prop.teleport(pos);

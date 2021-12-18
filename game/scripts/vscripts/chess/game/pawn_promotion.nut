@@ -167,6 +167,12 @@
                 queen_prop.set_model(PAWN_PROMOTION_MODEL.QUEEN);
             }
 
+            background_prop.show();
+            rook_prop.show();
+            knight_prop.show();
+            bishop_prop.show();
+            queen_prop.show();
+
             background_prop.teleport(ui_pos, ang);
             rook_prop.teleport(pos + Vector(0,0,BOARD_SCALE), ang);
             knight_prop.teleport(pos + Vector(0,0,BOARD_SCALE * 2), ang);
