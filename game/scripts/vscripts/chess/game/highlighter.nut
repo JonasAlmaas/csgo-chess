@@ -17,14 +17,13 @@
         in_check_highlighter_duration = 0.5,
 
         function reset() {
-            disable_selected_piece();
-            disable_hovered_cell();
-            disable_last_move();
             disable_valid_moves();
 
-            if (in_check_highlighter_prop) {
-                in_check_highlighter_prop.disable();
-            }
+            if (selected_piece_prop) { selected_piece_prop.disable(); }
+            if (hoverd_cell_prop) { hoverd_cell_prop.disable(); }
+            if (last_move_from_prop) { last_move_from_prop.disable(); }
+            if (last_move_to_prop) { last_move_to_prop.disable(); }
+            if (in_check_highlighter_prop) { in_check_highlighter_prop.disable(); }
         }
         function update() {
             if (in_check_highlighter_prop) {
@@ -32,28 +31,6 @@
                     in_check_highlighter_prop.hide();
                     in_check_highlighter_prop = false;
                 }
-            }
-        }
-        function disable_selected_piece() {
-            if (selected_piece_prop) {
-                selected_piece_prop.disable();
-                selected_piece_prop = null;
-            }
-        }
-        function disable_hovered_cell() {
-            if (hoverd_cell_prop) {
-                hoverd_cell_prop.disable();
-                hoverd_cell_prop = null;
-            }
-        }
-        function disable_last_move() {
-            if (last_move_from_prop) {
-                last_move_from_prop.disable();
-                last_move_from_prop = null;
-            }
-            if (last_move_to_prop) {
-                last_move_to_prop.disable();
-                last_move_to_prop = null;
             }
         }
         function disable_valid_moves() {

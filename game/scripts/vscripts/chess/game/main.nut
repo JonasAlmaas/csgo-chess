@@ -60,6 +60,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             foreach (cursor in cursors) {
                 cursor.disable();
             }
+            cursors = [];
 
             board.reset();
             pieces.reset();
@@ -384,7 +385,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
 
         function end_game() {
             game_over = true;
-            highlighter.disable_hovered_cell()
+            highlighter.hide_hovered_cell()
         }
 
     }

@@ -2,7 +2,7 @@
     Global constants
 */
 ::IS_DEBUGGING <- false;
-::IS_DEBUGGING_SINGLE_PLAYER <- false;
+::IS_DEBUGGING_SINGLE_PLAYER <- true;
 
 /*
     Global includes
@@ -58,6 +58,7 @@ include_scripts();
 ::trace_orig_ply_black <- null;
 ::game_ui_ply_white <- null;
 ::game_ui_ply_black <- null;
+::point_viewcontrol <- null;
 
 /*
     Global variables
@@ -80,6 +81,7 @@ include_scripts();
         trace_orig_ply_black = EntityGroup[1];
         game_ui_ply_white = EntityGroup[2];
         game_ui_ply_black = EntityGroup[3];
+        point_viewcontrol = EntityGroup[4];
 
         // Reset game_ui entities
         local target = null;

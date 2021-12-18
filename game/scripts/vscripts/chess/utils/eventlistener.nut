@@ -15,12 +15,15 @@ event_template[EVENT_TYPE.PLAYER_SAY] <- ["player_say", ["userid","text"]];
 event_template[EVENT_TYPE.PLAYER_SPAWN] <- ["player_spawn", ["userid","teamnum"]];
 event_template[EVENT_TYPE.TEAM_CHANGE] <- ["team_change", ["userid", "team", "oldteam", "disconnect", "autoteam", "silent", "isbot"]];
 
-::PLAYER_WHITE_EVENTS <- {
-    ATTACK = false,
+function new_event_preset() {
+    local preset = {
+        ATTACK = false,
+    }
+    return preset;
 }
-::PLAYER_BLACK_EVENTS <- {
-    ATTACK = false,
-}
+
+::PLAYER_WHITE_EVENTS <- new_event_preset();
+::PLAYER_BLACK_EVENTS <- new_event_preset();
 
 ::dispatch_events <- function() {
     PLAYER_WHITE_EVENTS.ATTACK = false;
@@ -40,15 +43,31 @@ function update_player_traces() {
     }
 }
 
-::OnGameEvent_player_attack <- function (player_number) {
+/*
+    Custom Events
+*/
+::OnBeginAttack <- function (player_number) {
     if (player_number == 1) { PLAYER_WHITE_EVENTS.ATTACK = true; }
     else if (player_number == 2) { PLAYER_BLACK_EVENTS.ATTACK = true; }
 }
 
+::OnBeginAttack2 <- function (player_number) {
+    // Begin zoom
+    if (player_number == 1) { player_white.set_fov(50); }
+    else if (player_number == 2) { player_black.set_fov(50); }
+}
+
+::OnEndAttack2 <- function (player_number) {
+    // End zoom
+    if (player_number == 1) { player_white.set_fov(90); }
+    else if (player_number == 2) { player_black.set_fov(90); }
+}
+
+/*
+    Game Events
+*/
 ::OnGameEvent_team_change <- function (userid, team, oldteam, disconnect, autoteam, silent, isbot) {
-    if (disconnect) {
-        reset_session();
-    }
+    if (disconnect) { HOT_RELOAD(); }
 }
 
 ::OnEventFired <- function(EVENT_ID) {

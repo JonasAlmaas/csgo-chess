@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "9178"
-	"mapversion" "309"
+	"mapversion" "335"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -20,13 +20,13 @@ viewsettings
 	"bSnapToGrid" "1"
 	"bShowGrid" "1"
 	"bShowLogicalGrid" "0"
-	"nGridSpacing" "32"
+	"nGridSpacing" "8"
 	"bShow3DGrid" "0"
 }
 world
 {
 	"id" "1"
-	"mapversion" "309"
+	"mapversion" "335"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -1863,7 +1863,7 @@ world
 		{
 			"id" "37"
 			"plane" "(-48 -48 -32) (-48 48 -32) (48 48 -32)"
-			"material" "DEV/REFLECTIVITY_60B"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
 			"rotation" "0"
@@ -1983,8 +1983,8 @@ world
 		{
 			"id" "47"
 			"plane" "(-48 -48 -32) (48 -48 -32) (48 -48 64)"
-			"material" "TOOLS/TOOLSSKYBOX"
-			"uaxis" "[-1 0 0 64] 0.25"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[-1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
 			"lightmapscale" "16"
@@ -2070,8 +2070,8 @@ world
 		{
 			"id" "2162"
 			"plane" "(48 48 -32) (-48 48 -32) (-48 48 64)"
-			"material" "TOOLS/TOOLSSKYBOX"
-			"uaxis" "[1 0 0 -64] 0.25"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
 			"lightmapscale" "16"
@@ -2102,9 +2102,9 @@ world
 		{
 			"id" "56"
 			"plane" "(-48 48 64) (-48 -48 64) (48 -48 64)"
-			"material" "TOOLS/TOOLSSKYBOX"
-			"uaxis" "[0 1 0 64] 0.25"
-			"vaxis" "[-1 0 0 64] 0.25"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[0 1 0 0] 0.25"
+			"vaxis" "[-1 0 0 0] 0.25"
 			"rotation" "0"
 			"lightmapscale" "16"
 			"smoothing_groups" "0"
@@ -2200,8 +2200,8 @@ world
 		{
 			"id" "64"
 			"plane" "(-48 48 -32) (-48 -48 -32) (-48 -48 64)"
-			"material" "TOOLS/TOOLSSKYBOX"
-			"uaxis" "[0 1 0 64] 0.25"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
 			"lightmapscale" "16"
@@ -2265,8 +2265,8 @@ world
 		{
 			"id" "69"
 			"plane" "(48 -48 -32) (48 48 -32) (48 48 64)"
-			"material" "TOOLS/TOOLSSKYBOX"
-			"uaxis" "[0 -1 0 -64] 0.25"
+			"material" "TOOLS/TOOLSNODRAW"
+			"uaxis" "[0 -1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
 			"lightmapscale" "16"
@@ -2321,6 +2321,30 @@ world
 			"visgroupshown" "1"
 			"visgroupautoshown" "1"
 		}
+	}
+}
+entity
+{
+	"id" "21656"
+	"classname" "point_viewcontrol"
+	"acceleration" "500"
+	"angles" "0 0 0"
+	"deceleration" "500"
+	"fov" "90"
+	"fov_rate" "0"
+	"interpolatepositiontoplayer" "0"
+	"spawnflags" "136"
+	"speed" "0"
+	"targetname" "point_viewcontrol"
+	"trackspeed" "40"
+	"wait" "10"
+	"origin" "-40 -8 -24"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
 	}
 }
 entity
@@ -3713,10 +3737,11 @@ entity
 {
 	"id" "14034"
 	"classname" "logic_script"
-	"Group00" "tr_orig_ply1"
-	"Group01" "tr_orig_ply2"
-	"Group02" "game_ui_ply1"
-	"Group03" "game_ui_ply2"
+	"Group00" "tr_orig_ply_white"
+	"Group01" "tr_orig_ply_black"
+	"Group02" "game_ui_ply_white"
+	"Group03" "game_ui_ply_black"
+	"Group04" "point_viewcontrol"
 	"targetname" "main_script"
 	"vscripts" "chess/entrypoint.nut"
 	"origin" "-40 40 -24"
@@ -3742,7 +3767,7 @@ entity
 	{
 		"OnEventFired" "event_team_changeRunScriptCodeOnEventFired(EVENT_TYPE.TEAM_CHANGE)0-1"
 	}
-	"origin" "-40 -8 -24"
+	"origin" "-40 8 -24"
 	editor
 	{
 		"color" "220 30 220"
@@ -3757,11 +3782,13 @@ entity
 	"classname" "game_ui"
 	"FieldOfView" "-1.0"
 	"spawnflags" "0"
-	"targetname" "game_ui_ply1"
+	"targetname" "game_ui_ply_white"
 	"vscripts" "chess/entrypoint.nut"
 	connections
 	{
-		"PressedAttack" "game_ui_ply1RunScriptCodeOnGameEvent_player_attack(1)0-1"
+		"PressedAttack" "game_ui_ply_whiteRunScriptCodeOnBeginAttack(1)0-1"
+		"PressedAttack2" "game_ui_ply_whiteRunScriptCodeOnBeginAttack2(1)0-1"
+		"UnpressedAttack2" "game_ui_ply_whiteRunScriptCodeOnEndAttack2(1)0-1"
 	}
 	"origin" "-40 -40 -24"
 	editor
@@ -3778,11 +3805,13 @@ entity
 	"classname" "game_ui"
 	"FieldOfView" "-1.0"
 	"spawnflags" "0"
-	"targetname" "game_ui_ply2"
+	"targetname" "game_ui_ply_black"
 	"vscripts" "chess/entrypoint.nut"
 	connections
 	{
-		"PressedAttack" "game_ui_ply2RunScriptCodeOnGameEvent_player_attack(2)0-1"
+		"PressedAttack" "game_ui_ply_blackRunScriptCodeOnBeginAttack(2)0-1"
+		"PressedAttack2" "game_ui_ply_blackRunScriptCodeOnBeginAttack2(2)0-1"
+		"UnpressedAttack2" "game_ui_ply_blackRunScriptCodeOnEndAttack2(2)0-1"
 	}
 	"origin" "-40 -24 -24"
 	editor
@@ -9016,8 +9045,8 @@ entity
 	"skin" "0"
 	"solid" "0"
 	"spawnflags" "256"
-	"targetname" "tr_orig_ply1"
-	"origin" "-40 -40 16"
+	"targetname" "tr_orig_ply_white"
+	"origin" "-40 -40 24"
 	editor
 	{
 		"color" "220 30 220"
@@ -9031,8 +9060,8 @@ entity
 	"id" "1949"
 	"classname" "info_target"
 	"angles" "0 0 0"
-	"targetname" "tr_spn_ply1"
-	"origin" "-40 -40 16"
+	"targetname" "tr_spn_ply_white"
+	"origin" "-40 -40 24"
 	editor
 	{
 		"color" "220 30 220"
@@ -9045,14 +9074,14 @@ entity
 {
 	"id" "2046"
 	"classname" "logic_measure_movement"
-	"MeasureReference" "tr_spn_ply1"
-	"MeasureTarget" "tr_spn_ply1"
+	"MeasureReference" "tr_spn_ply_white"
+	"MeasureTarget" "tr_spn_ply_white"
 	"MeasureType" "1"
-	"Target" "tr_orig_ply1"
-	"targetname" "tr_lmm_ply1"
-	"TargetReference" "tr_spn_ply1"
+	"Target" "tr_orig_ply_white"
+	"targetname" "tr_lmm_ply_white"
+	"TargetReference" "tr_spn_ply_white"
 	"TargetScale" "1000"
-	"origin" "-40 -40 0"
+	"origin" "-40 -40 8"
 	editor
 	{
 		"color" "220 30 220"
@@ -9066,8 +9095,8 @@ entity
 	"id" "2457"
 	"classname" "info_target"
 	"angles" "0 0 0"
-	"targetname" "tr_spn_ply2"
-	"origin" "-40 -24 16"
+	"targetname" "tr_spn_ply_black"
+	"origin" "-40 -24 24"
 	editor
 	{
 		"color" "220 30 220"
@@ -9092,8 +9121,8 @@ entity
 	"skin" "0"
 	"solid" "0"
 	"spawnflags" "256"
-	"targetname" "tr_orig_ply2"
-	"origin" "-40 -24 16"
+	"targetname" "tr_orig_ply_black"
+	"origin" "-40 -24 24"
 	editor
 	{
 		"color" "220 30 220"
@@ -9106,14 +9135,14 @@ entity
 {
 	"id" "2508"
 	"classname" "logic_measure_movement"
-	"MeasureReference" "tr_spn_ply2"
-	"MeasureTarget" "tr_spn_ply2"
+	"MeasureReference" "tr_spn_ply_black"
+	"MeasureTarget" "tr_spn_ply_black"
 	"MeasureType" "1"
-	"Target" "tr_orig_ply2"
-	"targetname" "tr_lmm_ply2"
-	"TargetReference" "tr_spn_ply2"
+	"Target" "tr_orig_ply_black"
+	"targetname" "tr_lmm_ply_black"
+	"TargetReference" "tr_spn_ply_black"
 	"TargetScale" "1000"
-	"origin" "-40 -24 0"
+	"origin" "-40 -24 8"
 	editor
 	{
 		"color" "220 30 220"
@@ -9127,8 +9156,8 @@ cameras
 	"activecamera" "0"
 	camera
 	{
-		"position" "[3333.95 2816.4 2045.15]"
-		"look" "[3326.79 2806.24 2040.63]"
+		"position" "[50.26 -31.2079 49.0436]"
+		"look" "[39.0275 -26.7605 43.6649]"
 	}
 }
 cordons

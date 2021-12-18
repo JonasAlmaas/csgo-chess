@@ -63,6 +63,9 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
         function update() {
 
             // Check if players are within zones
+            temp_player_white = null;
+            temp_player_black = null;
+
             local player = null;
             while ((player = Entities.FindByClassname(player, "*player*")) != null) {
                 if (player.GetClassname() == "player") {
@@ -72,10 +75,7 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     local offset_black = math.vec_abs(lobby_center_zone_black_pos - pos);
 
                     if (offset_white.x <= zone_radius && offset_white.y <= zone_radius) { temp_player_white = player; }
-                    else if (player == temp_player_white) { temp_player_white = null; }
-
                     if (offset_black.x <= zone_radius && offset_black.y <= zone_radius) { temp_player_black = player; }
-                    else if (player == temp_player_black) { temp_player_black = null; }
                 }
             }
 
@@ -102,8 +102,8 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     EntFireByHandle(player_black.ref, "AddOutput", "targetname ply2", 0.0, null, null);
 
                     // Bind trace targets
-                    EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
-                    EntFire("tr_lmm_ply2", "SetMeasureTarget", "ply2", 0.01, null);
+                    EntFire("tr_lmm_ply_white", "SetMeasureTarget", "ply1", 0.01, null);
+                    EntFire("tr_lmm_ply_black", "SetMeasureTarget", "ply2", 0.01, null);
 
                     // Teleport players to the map
                     player_white.teleport(teleport_target_game_white.GetOrigin(), teleport_target_game_white.GetAngles());
@@ -120,7 +120,7 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                 EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
 
                 EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
-                EntFire("tr_lmm_ply1", "SetMeasureTarget", "ply1", 0.01, null);
+                EntFire("tr_lmm_ply_white", "SetMeasureTarget", "ply1", 0.01, null);
 
                 player_white.teleport(teleport_target_game_white.GetOrigin(), teleport_target_game_white.GetAngles());
 
