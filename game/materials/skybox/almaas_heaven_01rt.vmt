@@ -1,0 +1,7 @@
+UnlitGeneric
+{
+	$basetexture "skybox/almaas_heaven_01rt"
+
+	$ignorez 1
+	$nofog 1
+}

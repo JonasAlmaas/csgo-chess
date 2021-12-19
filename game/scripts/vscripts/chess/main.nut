@@ -2,7 +2,7 @@
     Global constants
 */
 ::IS_DEBUGGING <- false;
-::IS_DEBUGGING_SINGLE_PLAYER <- true;
+::IS_DEBUGGING_SINGLE_PLAYER <- false;
 
 /*
     Global includes
@@ -79,30 +79,10 @@ include_scripts();
 
     if (!initialized) {
 
+        get_entity_group();
+        reset_game_ui();
+        reset_radar_overlay();
         greet_player();
-
-        trace_orig_ply_white = EntityGroup[0];
-        trace_orig_ply_black = EntityGroup[1];
-        game_ui_ply_white = EntityGroup[2];
-        game_ui_ply_black = EntityGroup[3];
-        point_viewcontrol = EntityGroup[4];
-        radar_overlay = EntityGroup[5];
-
-        // Reset game_ui entities
-        local target = null;
-        while ((target = Entities.FindByClassname(target, "*player*")) != null) {
-            if (target.GetClassname() == "player") {
-                EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, target, null);
-                EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, target, null);
-                EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.01, null, null);
-                EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.01, null, null);
-                break;
-            }
-        }
-
-        // Reset radar overlay
-        EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
-        EntFireByHandle(radar_overlay, "StopOverlays", "", 0.05, null, null);
 
         lobby = new_lobby();
         game = new_game();
@@ -118,8 +98,34 @@ include_scripts();
     dispatch_events();
 }
 
+::get_entity_group <- function () {
+    trace_orig_ply_white = EntityGroup[0];
+    trace_orig_ply_black = EntityGroup[1];
+    game_ui_ply_white = EntityGroup[2];
+    game_ui_ply_black = EntityGroup[3];
+    point_viewcontrol = EntityGroup[4];
+    radar_overlay = EntityGroup[5];
+}
+
+::reset_game_ui <- function () {
+    local target = null;
+    while ((target = Entities.FindByClassname(target, "*player*")) != null) {
+        if (target.GetClassname() == "player") {
+            EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, target, null);
+            EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, target, null);
+            EntFireByHandle(game_ui_ply_white, "Deactivate", "", 0.01, null, null);
+            EntFireByHandle(game_ui_ply_black, "Deactivate", "", 0.01, null, null);
+            break;
+        }
+    }
+}
+
+::reset_radar_overlay <- function () {
+    EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
+    EntFireByHandle(radar_overlay, "StopOverlays", "", 0.05, null, null);
+}
+
 ::greet_player <- function () {
-    // console.color_test();
     console.chat("\n " + console.color.grey + " -----------------------");
     console.chat("\n " + console.color.grey + " ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎Chess");
     console.chat("\n " + console.color.red + " ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ By Almaas");
@@ -132,6 +138,9 @@ include_scripts();
 
     lobby.reset();
     game.reset();
+
+    player_white.set_fov(90);
+    player_black.set_fov(90);
 
     if (player_white) { player_white.teleport(teleport_target_lobby_white.GetOrigin(), teleport_target_lobby_white.GetAngles()); }
     if (player_black) { player_black.teleport(teleport_target_lobby_black.GetOrigin(), teleport_target_lobby_black.GetAngles()); }
