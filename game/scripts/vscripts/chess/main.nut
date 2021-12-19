@@ -79,6 +79,8 @@ include_scripts();
 
     if (!initialized) {
 
+        greet_player();
+
         trace_orig_ply_white = EntityGroup[0];
         trace_orig_ply_black = EntityGroup[1];
         game_ui_ply_white = EntityGroup[2];
@@ -114,6 +116,14 @@ include_scripts();
     else { game.update(); }
 
     dispatch_events();
+}
+
+::greet_player <- function () {
+    // console.color_test();
+    console.chat("\n " + console.color.grey + " -----------------------");
+    console.chat("\n " + console.color.grey + " ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎Chess");
+    console.chat("\n " + console.color.red + " ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‏‏‎ ‎‏‏‎ By Almaas");
+    console.chat("\n " + console.color.grey + " -----------------------");
 }
 
 ::reset_session <- function () {

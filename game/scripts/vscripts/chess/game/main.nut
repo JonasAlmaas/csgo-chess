@@ -48,7 +48,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             log = new_log();
 
             game_over = false;
-        
+
             turn = TEAM.WHITE;
             active_piece = null;
             piece_moveing = false;
@@ -86,6 +86,8 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                 foreach (path in CURSOR_MODEL) {
                     cursors.append(new_cursor(path));
                 }
+
+                radar.update(pieces.pieces);
                 
                 ingame_menu.show();
                 initialized = true;
@@ -215,9 +217,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                 local player = "White";
                 if (turn == TEAM.BLACK) { player = "Black"; }
 
-                console.chat("\n| " + player + " : " + console.color.green + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.green + cell_to_text(in_cell));
-                // TODO: Look at the color for this one, I kinda like dark blue. Atm the map is way to bright for it
-                // console.chat("\n| " + player + " : " + console.color.dark_blue + cell_to_text(active_piece.cell) + console.color.white + " -> " + console.color.dark_blue + cell_to_text(in_cell));
+                console.chat("\n " + console.color.grey + player + " : " + console.color.dark_blue + cell_to_text(active_piece.cell) + console.color.grey + " -> " + console.color.dark_blue + cell_to_text(in_cell));
             }
         }
 
@@ -290,6 +290,8 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
 
             // Log the move
             log.add(active_piece, is_castling);
+            
+            radar.update(pieces.pieces);
 
             piece_moveing = false;
             active_piece = null;
@@ -313,24 +315,24 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
                     local player = "White";
                     if (turn == TEAM.BLACK) { player = "Black"; }
 
-                    console.chat("\n| Checkmate :" + console.color.red + " " + player + " team wins");
+                    console.chat("\n " + console.color.grey + "Checkmate :" + console.color.red + " " + player + " team wins");
                 }
                 else {
                     // Tell the players that there was a check
                     local player = "White";
                     if (turn == TEAM.WHITE) { player = "Black"; }
-                    console.chat("\n| Check :" + console.color.red + " " + player + " is in check");
+                    console.chat("\n " + console.color.grey + "Check :" + console.color.red + " " + player + " is in check");
                 }
             }
             else {
                 // See if it is a stalemate
                 if (engine.is_stalemate_no_more_moves(other_team, new_simple_pieces_from_pieces(pieces), log)) {
                     end_game();
-                    console.chat("\n| Stalemate:" + console.color.red + " No more valid moves");
+                    console.chat("\n " + console.color.grey + "Stalemate:" + console.color.red + " No more valid moves");
                 }
                 if (engine.is_stalemate_threefold_repetition(turn, log)) {
                     end_game();
-                    console.chat("\n| Stalemate:" + console.color.red + " Threefold repetition");
+                    console.chat("\n " + console.color.grey + "Stalemate:" + console.color.red + " Threefold repetition");
                 }
             }
 
