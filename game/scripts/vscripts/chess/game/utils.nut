@@ -16,6 +16,7 @@ enum PIECE_TYPE {
 
 ::GROUND_OFFSET <- 0.15;
 ::BOARD_SCALE <- 128;
+::RADAR_BOARD_SCALE <- 32;
 ::BOARD_POS <- utils.get_entity_from_name("target_board").GetOrigin();
 
 ::COLOR <- {
@@ -42,8 +43,8 @@ enum PIECE_TYPE {
 }
 
 ::CURSOR_MODEL <- {
-    BLACK = "models/chess/ui/cursor_black.mdl",
     WHITE = "models/chess/ui/cursor_white.mdl",
+    BLACK = "models/chess/ui/cursor_black.mdl",
 }
 
 ::HIGHLIGHT_MODEL <- {
@@ -52,12 +53,27 @@ enum PIECE_TYPE {
     VALID_MOVE = "models/chess/ui/valid_move.mdl",
 }
 
+::PIECE_ICON_MODELS <- {
+    WHITE = {
+        PAWN = "models/chess/ui/icon_white_pawn.mdl",
+        ROOK = "models/chess/ui/icon_white_rook.mdl",
+        KNIGHT = "models/chess/ui/icon_white_knight.mdl",
+        BISHOP = "models/chess/ui/icon_white_bishop.mdl",
+        QUEEN = "models/chess/ui/icon_white_queen.mdl",
+        KING = "models/chess/ui/icon_white_king.mdl",
+    }
+    BLACK = {
+        PAWN = "models/chess/ui/icon_black_pawn.mdl",
+        ROOK = "models/chess/ui/icon_black_rook.mdl",
+        KNIGHT = "models/chess/ui/icon_black_knight.mdl",
+        BISHOP = "models/chess/ui/icon_black_bishop.mdl",
+        QUEEN = "models/chess/ui/icon_black_queen.mdl",
+        KING = "models/chess/ui/icon_black_king.mdl",
+    }
+}
+
 ::PAWN_PROMOTION_MODEL <- {
     BACKGROUND = "models/chess/ui/pawn_promotion_background.mdl",
-    ROOK = "models/chess/ui/pawn_promotion_rook.mdl",
-    KNIGHT = "models/chess/ui/pawn_promotion_knight.mdl",
-    BISHOP = "models/chess/ui/pawn_promotion_bishop.mdl",
-    QUEEN = "models/chess/ui/pawn_promotion_queen.mdl",
 }
 
 ::MENU_MODEL <- {
@@ -87,11 +103,13 @@ target_game_fall_off_black = Entities.FindByName(target_game_fall_off_black, "ta
 }
 
 ::precache_chess <- function() {
-    precache_manifest(PIECE_MODEL);             // Pieces
-    precache_manifest(CURSOR_MODEL);            // Cursors
-    precache_manifest(HIGHLIGHT_MODEL);         // Highlight
-    precache_manifest(PAWN_PROMOTION_MODEL);    // Pawn Promotion
-    precache_manifest(MENU_MODEL);              // Menu
+    precache_manifest(PIECE_MODEL);                 // Pieces
+    precache_manifest(CURSOR_MODEL);                // Cursors
+    precache_manifest(HIGHLIGHT_MODEL);             // Highlight
+    precache_manifest(PIECE_ICON_MODELS.WHITE);     // Piece icons white
+    precache_manifest(PIECE_ICON_MODELS.BLACK);     // Piece icons black
+    precache_manifest(PAWN_PROMOTION_MODEL);        // Pawn promotion
+    precache_manifest(MENU_MODEL);                  // Menu
 }
 
 ::new_cursor <- function (model_path) {

@@ -3,7 +3,7 @@
     
     local board = {
 
-        text = new_board_text(BOARD_POS + Vector(0, 0, GROUND_OFFSET)),
+        text = new_board_text(BOARD_POS + Vector(0, 0, GROUND_OFFSET), BOARD_SCALE),
 
         function reset() {
             text.reset();

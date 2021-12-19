@@ -1,0 +1,16 @@
+UnlitGeneric
+{
+	$basetexture "chess/rt_overlay_mask"
+
+	$detail "_rt_camera"
+	$detailblendmode 8
+	$detailscale 1
+
+	$alphatest 1
+
+	$basetexturetransform "center 0.07 0.125 scale 2.95 1.72 rotate 0 translate 0 0"
+
+	$color2 "[0.85 0.85 0.85]"
+
+	$detailtexturetransform "center 0.0 0.0 scale 6 3.45 rotate 0 translate 0.72 0.822"
+}

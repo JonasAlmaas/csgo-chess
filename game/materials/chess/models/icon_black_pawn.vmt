@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/icon_black_pawn"
+
+	$translucent 1
+}

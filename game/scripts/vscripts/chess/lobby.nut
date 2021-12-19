@@ -97,6 +97,9 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
                     EntFireByHandle(game_ui_ply_black, "Activate", "", 0.0, player_black.ref, null);
 
+                    // Enable overview radar
+                    EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
+
                     // Give the players names
                     EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
                     EntFireByHandle(player_black.ref, "AddOutput", "targetname ply2", 0.0, null, null);
@@ -118,6 +121,8 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                 player_black = new_player(temp_player_white);
 
                 EntFireByHandle(game_ui_ply_white, "Activate", "", 0.0, player_white.ref, null);
+
+                EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
 
                 EntFireByHandle(player_white.ref, "AddOutput", "targetname ply1", 0.0, null, null);
                 EntFire("tr_lmm_ply_white", "SetMeasureTarget", "ply1", 0.01, null);

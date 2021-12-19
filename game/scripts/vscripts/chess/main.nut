@@ -35,6 +35,7 @@
     "game/log",
     "game/main",
     "game/pawn_promotion",
+    "game/radar",
     "game/utils",
 ]
 
@@ -59,6 +60,7 @@ include_scripts();
 ::game_ui_ply_white <- null;
 ::game_ui_ply_black <- null;
 ::point_viewcontrol <- null;
+::radar_overlay <- null;
 
 /*
     Global variables
@@ -82,6 +84,7 @@ include_scripts();
         game_ui_ply_white = EntityGroup[2];
         game_ui_ply_black = EntityGroup[3];
         point_viewcontrol = EntityGroup[4];
+        radar_overlay = EntityGroup[5];
 
         // Reset game_ui entities
         local target = null;
@@ -94,6 +97,10 @@ include_scripts();
                 break;
             }
         }
+
+        // Reset radar overlay
+        EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
+        EntFireByHandle(radar_overlay, "StopOverlays", "", 0.05, null, null);
 
         lobby = new_lobby();
         game = new_game();

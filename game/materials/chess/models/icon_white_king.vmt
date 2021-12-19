@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	$basetexture "chess/models/icon_white_king"
+
+	$translucent 1
+}

@@ -143,28 +143,28 @@
                 rook_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 rook_prop.disable_shadows();
                 rook_prop.set_scale(BOARD_SCALE * scale);
-                rook_prop.set_model(PAWN_PROMOTION_MODEL.ROOK);
+                rook_prop.set_model(PIECE_ICON_MODELS.WHITE.ROOK);
             }
             if (!knight_prop) {
                 knight_prop = new_prop_dynamic();
                 knight_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 knight_prop.disable_shadows();
                 knight_prop.set_scale(BOARD_SCALE * scale);
-                knight_prop.set_model(PAWN_PROMOTION_MODEL.KNIGHT);
+                knight_prop.set_model(PIECE_ICON_MODELS.WHITE.KNIGHT);
             }
             if (!bishop_prop) {
                 bishop_prop = new_prop_dynamic();
                 bishop_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 bishop_prop.disable_shadows();
                 bishop_prop.set_scale(BOARD_SCALE * scale);
-                bishop_prop.set_model(PAWN_PROMOTION_MODEL.BISHOP);
+                bishop_prop.set_model(PIECE_ICON_MODELS.WHITE.BISHOP);
             }
             if (!queen_prop) {
                 queen_prop = new_prop_dynamic();
                 queen_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 queen_prop.disable_shadows();
                 queen_prop.set_scale(BOARD_SCALE * scale);
-                queen_prop.set_model(PAWN_PROMOTION_MODEL.QUEEN);
+                queen_prop.set_model(PIECE_ICON_MODELS.WHITE.QUEEN);
             }
 
             background_prop.show();

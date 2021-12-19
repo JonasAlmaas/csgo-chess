@@ -22,6 +22,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         highlighter = null,
         pawn_promotion_handler = null,
         ingame_menu = null,
+        radar = null,
         log = null,
 
         game_over = false,
@@ -43,6 +44,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             highlighter = new_highlighter();
             pawn_promotion_handler = new_pawn_promotion_handler();
             ingame_menu = new_ingame_menu();
+            radar = new_radar();
             log = new_log();
 
             game_over = false;
@@ -67,6 +69,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             highlighter.reset();
             pawn_promotion_handler.reset();
             ingame_menu.reset();
+            radar.reset();
             log.reset();
         }
 

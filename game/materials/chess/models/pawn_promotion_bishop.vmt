@@ -1,6 +1,0 @@
-VertexLitGeneric
-{
-	$basetexture "chess/models/pawn_promotion_bishop"
-
-	$translucent 1
-}
