@@ -20,8 +20,7 @@ enum PIECE_TYPE {
 ::BOARD_POS <- utils.get_entity_from_name("target_board").GetOrigin();
 
 ::COLOR <- {
-    PAWN_PROMOTION_UI = [185, 185, 185],
-    PAWN_PROMOTION_UI_BACKGROUND = [65,65,65],
+    PAWN_PROMOTION_BACKGROUND = [65,65,65],
     VALID_MOVE = [65, 145, 111],
     LAST_MOVE = [255, 198, 66],
     HOVERED = [0, 200, 111],

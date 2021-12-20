@@ -185,7 +185,7 @@
 
             if (!background_prop) {
                 background_prop = new_prop_dynamic();
-                background_prop.set_color(COLOR.PAWN_PROMOTION_UI_BACKGROUND);
+                background_prop.set_color(COLOR.PAWN_PROMOTION_BACKGROUND);
                 background_prop.disable_shadows();
                 background_prop.set_scale(1);
                 background_prop.set_model(PAWN_PROMOTION_MODEL.BACKGROUND);
