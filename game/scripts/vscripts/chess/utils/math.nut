@@ -34,6 +34,16 @@
     function vec_div(vec, divisor) {
         return Vector(vec.x / divisor, vec.y / divisor, vec.z / divisor);
     }
+    function vec_vec_div(v1, v2) {
+        return Vector(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
+    }
+    function vec_vec_div_safe(v1, v2) {
+        local x, y, z = 0;
+        if (v2.x != 0) { x = v1.x / v2.x; }
+        if (v2.y != 0) { y = v1.y / v2.y; }
+        if (v2.z != 0) { z = v1.z / v2.z; }
+        return Vector(x, y, z);
+    }
     function vec_clone(v) {
         return Vector(v.x, v.y, v.z);
     }
