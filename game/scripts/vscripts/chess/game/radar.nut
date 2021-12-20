@@ -11,7 +11,7 @@ target_radar_board = Entities.FindByName(target_radar_board, "target_radar_board
     local radar = {
 
         piece_models = [],
-        text = new_board_text(radar_board_pos, RADAR_BOARD_SCALE),
+        text = new_board_text(radar_board_pos, RADAR_BOARD_SCALE, [20,20,20]),
 
         function reset() {
             disable_pieces();
