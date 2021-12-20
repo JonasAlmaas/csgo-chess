@@ -2,7 +2,7 @@
     Global constants
 */
 ::IS_DEBUGGING <- false;
-::IS_DEBUGGING_SINGLE_PLAYER <- true;
+::IS_DEBUGGING_SINGLE_PLAYER <- false;
 
 /*
     Global includes

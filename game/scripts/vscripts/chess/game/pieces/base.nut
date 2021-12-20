@@ -103,7 +103,8 @@
                     foreach (piece in piece_list) {
                         if (!piece.captured && math.vec_equal(target_cell, piece.cell)) {
                             local offset = target_cell - reference_cell;
-                            piece.captureing_piece_dir = math.vec_normalize_XY(Vector(offset.x / math.abs(offset.x), -offset.y / math.abs(offset.y)));
+                            offset.y = -offset.y;
+                            piece.captureing_piece_dir = math.vec_normalize_XY(math.vec_vec_div_safe(offset, math.vec_abs(offset)));
                             piece.captureing_piece_size = prop.ref.GetBoundingMaxs().x * BOARD_SCALE;
                             piece.captureing_piece_distance_from_target = (engine.get_world_pos_from_cell(target_cell) - pos).Length();
                             break;

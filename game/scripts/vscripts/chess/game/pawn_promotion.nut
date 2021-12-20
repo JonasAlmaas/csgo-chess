@@ -4,7 +4,6 @@
     local handler = {
         model_scale = 0.75,
 
-
         active_piece = null,
         is_open = false,
 
@@ -68,17 +67,17 @@
                     }
                 }
 
-                rook_prop.teleport(button_pos + Vector(0,0,BOARD_SCALE * percent));
-                knight_prop.teleport(button_pos + Vector(0,0,(BOARD_SCALE * percent) *  2));
-                bishop_prop.teleport(button_pos + Vector(0,0,(BOARD_SCALE * percent) * 3));
-                queen_prop.teleport(button_pos + Vector(0,0,(BOARD_SCALE * percent) * 4));
+                local scale = BOARD_SCALE * percent;
+                rook_prop.teleport(button_pos   + Vector(0, 0, scale * 1.5));
+                knight_prop.teleport(button_pos + Vector(0, 0, scale * 2.5));
+                bishop_prop.teleport(button_pos + Vector(0, 0, scale * 3.5));
+                queen_prop.teleport(button_pos  + Vector(0, 0, scale * 4.5));
 
-                local scale = (BOARD_SCALE * model_scale) * percent
-                background_prop.set_scale(BOARD_SCALE * percent);
-                rook_prop.set_scale(scale);
-                knight_prop.set_scale(scale);
-                bishop_prop.set_scale(scale);
-                queen_prop.set_scale(scale);
+                background_prop.set_scale(scale);
+                rook_prop.set_scale(scale * model_scale);
+                knight_prop.set_scale(scale * model_scale);
+                bishop_prop.set_scale(scale * model_scale);
+                queen_prop.set_scale(scale * model_scale);
 
                 return;
             }
@@ -175,48 +174,54 @@
             if (active_piece.cell.x == 0) {
                 ang = Vector(270, 180);
                 background_pos += Vector(-half_cell);
-                button_pos = background_pos + Vector(0.75,0,half_cell);
+                button_pos = background_pos + Vector(0.75);
             }
             else {
                 ang = Vector(270);
                 background_pos += Vector(half_cell);
-                button_pos = background_pos + Vector(-0.75,0,half_cell);
+                button_pos = background_pos + Vector(-0.75);
             }
 
             if (!background_prop) {
                 background_prop = new_prop_dynamic();
                 background_prop.set_color(COLOR.PAWN_PROMOTION_BACKGROUND);
                 background_prop.disable_shadows();
-                background_prop.set_scale(1);
-                background_prop.set_model(PAWN_PROMOTION_MODEL.BACKGROUND);
             }
             if (!rook_prop) {
                 rook_prop = new_prop_dynamic();
-                rook_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 rook_prop.disable_shadows();
-                rook_prop.set_scale(1);
-                rook_prop.set_model(PIECE_ICON_MODELS.WHITE.ROOK);
             }
             if (!knight_prop) {
                 knight_prop = new_prop_dynamic();
-                knight_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 knight_prop.disable_shadows();
-                knight_prop.set_scale(1);
-                knight_prop.set_model(PIECE_ICON_MODELS.WHITE.KNIGHT);
             }
             if (!bishop_prop) {
                 bishop_prop = new_prop_dynamic();
-                bishop_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 bishop_prop.disable_shadows();
-                bishop_prop.set_scale(1);
-                bishop_prop.set_model(PIECE_ICON_MODELS.WHITE.BISHOP);
             }
             if (!queen_prop) {
                 queen_prop = new_prop_dynamic();
-                queen_prop.set_color(COLOR.PAWN_PROMOTION_UI);
                 queen_prop.disable_shadows();
-                queen_prop.set_scale(1);
+            }
+
+            background_prop.set_scale(1);
+            rook_prop.set_scale(1);
+            knight_prop.set_scale(1);
+            bishop_prop.set_scale(1);
+            queen_prop.set_scale(1);
+
+            background_prop.set_model(PAWN_PROMOTION_MODEL.BACKGROUND);
+            if (piece.team == TEAM.WHITE) {
+                rook_prop.set_model(PIECE_ICON_MODELS.WHITE.ROOK);
+                knight_prop.set_model(PIECE_ICON_MODELS.WHITE.KNIGHT);
+                bishop_prop.set_model(PIECE_ICON_MODELS.WHITE.BISHOP);
                 queen_prop.set_model(PIECE_ICON_MODELS.WHITE.QUEEN);
+            }
+            else {
+                rook_prop.set_model(PIECE_ICON_MODELS.BLACK.ROOK);
+                knight_prop.set_model(PIECE_ICON_MODELS.BLACK.KNIGHT);
+                bishop_prop.set_model(PIECE_ICON_MODELS.BLACK.BISHOP);
+                queen_prop.set_model(PIECE_ICON_MODELS.BLACK.QUEEN);
             }
 
             background_prop.show();
