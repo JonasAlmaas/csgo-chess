@@ -96,7 +96,7 @@
                 local pos = null;
                 local angle = null;
                 if (!piece.captured) {
-                    pos = piece.get_world_pos();
+                    pos = piece.get_world_pos(pieces);
                     angle = piece.angle;
                 }
                 else {

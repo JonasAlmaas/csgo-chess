@@ -10,6 +10,9 @@
 
     local piece = {
         captured = false,
+        captureing_piece_dir = null,
+        captureing_piece_size = null,
+        captureing_piece_distance_from_target = null,
         
         team = in_team,
         type = PIECE_TYPE.NONE,
@@ -68,7 +71,6 @@
 
                 if (dist_x > 0) { dist_x -= 1.0; }
                 if (dist_y > 0) { dist_y -= 1.0; }
-
             }
             
             return temp_list;
@@ -78,7 +80,7 @@
             captured = true;
         }
 
-        function get_world_pos() {
+        function get_world_pos(piece_list) {
 
             if (target_cell) {
                 local cell_pos = engine.get_world_pos_from_cell(cell)
@@ -94,8 +96,32 @@
                 } else {
                     percent = math.interpolate_smooth(percent);
                 }
-                return engine.get_world_pos_from_cell(math.get_bezier_point(sorted_move_cells, percent));
+
+                local pos = engine.get_world_pos_from_cell(math.get_bezier_point(sorted_move_cells, percent));
+
+                if (target_cell) {
+                    foreach (piece in piece_list) {
+                        if (!piece.captured && math.vec_equal(target_cell, piece.cell)) {
+                            local offset = target_cell - reference_cell;
+                            piece.captureing_piece_dir = math.vec_normalize_XY(Vector(offset.x / math.abs(offset.x), -offset.y / math.abs(offset.y)));
+                            piece.captureing_piece_size = prop.ref.GetBoundingMaxs().x * BOARD_SCALE;
+                            piece.captureing_piece_distance_from_target = (engine.get_world_pos_from_cell(target_cell) - pos).Length();
+                            break;
+                        }
+                    }
+                }
+
+                return pos;
             }
+            else if (captureing_piece_dir != null) {
+                local combined_size = captureing_piece_size + (prop.ref.GetBoundingMaxs().x * BOARD_SCALE);
+                if (captureing_piece_distance_from_target <= combined_size) {
+                    local percent = 1 - (captureing_piece_distance_from_target / combined_size);
+                    local offset = math.vec_mul(captureing_piece_dir, combined_size * percent);
+                    return engine.get_world_pos_from_cell(cell) + offset;
+                }
+            }
+
             return engine.get_world_pos_from_cell(cell);
         }
 
