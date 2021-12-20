@@ -7,9 +7,6 @@
 /*
     Global includes
 */
-::SCRIPTS_MANIFEST_MISC <- [
-    "lobby"
-]
 
 ::SCRIPTS_MANIFEST_UTILITIES <- [
     "utils/console",
@@ -22,6 +19,10 @@
     "utils/math",
     "utils/player",
     "utils/utils",
+]
+
+::SCRIPTS_MANIFEST_MISC <- [
+    "lobby"
 ]
 
 ::SCRIPTS_MANIFEST_GAME <- [
@@ -46,8 +47,8 @@
             DoIncludeScript(BASE_FOLDER + script + MODULE_EXT, null);
         }
     }
-    include_manifest(SCRIPTS_MANIFEST_MISC)
     include_manifest(SCRIPTS_MANIFEST_UTILITIES)
+    include_manifest(SCRIPTS_MANIFEST_MISC)
     include_manifest(SCRIPTS_MANIFEST_GAME)
 }
 include_scripts();
