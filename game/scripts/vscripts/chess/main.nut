@@ -71,9 +71,12 @@ include_scripts();
 ::lobby <- null;
 ::game <- null;
 
+::can_update <- true;
 ::initialized <- false;
 
 ::update <- function () {
+    
+    if (!can_update) return;
     
     calculate_tickrate();
 

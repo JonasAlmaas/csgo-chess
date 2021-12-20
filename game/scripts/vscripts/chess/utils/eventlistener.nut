@@ -67,8 +67,8 @@ function update_player_traces() {
     Game Events
 */
 ::OnGameEvent_team_change <- function (userid, team, oldteam, disconnect, autoteam, silent, isbot) {
-    // TODO: Test this!
-    if (disconnect) { HOT_RELOAD(); }
+    can_update = false;
+    console.run("mp_restartgame 1");
 }
 
 ::OnEventFired <- function(EVENT_ID) {

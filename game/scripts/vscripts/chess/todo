@@ -1,13 +1,4 @@
-Check if a player disconecting doesn't crash everything
-
 Try getting different radars for each player
     Dont know how to yet
 
 Add sounds
-
-Timer
-    Many thinking has to be done here!
-
-Get the event from right before the round ends
-    Use it to reset the fov
-    And reset other entities, if it works that is
