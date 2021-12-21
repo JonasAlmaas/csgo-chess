@@ -39,7 +39,6 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         initialized = false,
 
         function init() {
-            board = new_board();
             pieces = new_pieces();
             highlighter = new_highlighter();
             pawn_promotion_handler = new_pawn_promotion_handler();
@@ -64,7 +63,7 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
             }
             cursors = [];
 
-            board.reset();
+            if (board) board.reset();
             pieces.reset();
             highlighter.reset();
             pawn_promotion_handler.reset();
@@ -81,6 +80,8 @@ teleport_target_game_black = Entities.FindByName(teleport_target_game_black, "te
         function update() {
 
             if (!initialized) {
+
+                board = new_board();
 
                 // Create cursors for both players
                 foreach (path in CURSOR_MODEL) {
