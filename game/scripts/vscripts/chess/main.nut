@@ -2,7 +2,7 @@
     Global constants
 */
 ::IS_DEBUGGING <- false;
-::IS_DEBUGGING_SINGLE_PLAYER <- false;
+::IS_DEBUGGING_SINGLE_PLAYER <- true;
 
 /*
     Global includes
@@ -126,7 +126,7 @@ include_scripts();
 
 ::reset_radar_overlay <- function () {
     EntFireByHandle(radar_overlay, "StartOverlays", "", 0.0, null, null);
-    EntFireByHandle(radar_overlay, "StopOverlays", "", 0.05, null, null);
+    EntFireByHandle(radar_overlay, "StopOverlays", "", 0.075, null, null);
 }
 
 ::greet_player <- function () {

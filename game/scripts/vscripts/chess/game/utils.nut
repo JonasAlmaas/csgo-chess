@@ -42,8 +42,8 @@ enum PIECE_TYPE {
 }
 
 ::CURSOR_MODEL <- {
-    WHITE = "models/chess/ui/cursor_white.mdl",
     BLACK = "models/chess/ui/cursor_black.mdl",
+    WHITE = "models/chess/ui/cursor_white.mdl",
 }
 
 ::HIGHLIGHT_MODEL <- {
