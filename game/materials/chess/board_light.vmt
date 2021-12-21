@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	$basetexture "chess/models/blank"
+
+	$color "[0.66 0.52 0.38]"
+}

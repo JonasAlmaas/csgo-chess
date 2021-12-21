@@ -1,7 +1,8 @@
 
-::new_board_text <- function (in_pos, scale, text_color) {
+::new_board_text <- function (in_pos, scale) {
     
-    local text_size = scale * 0.65;
+    local text_size = scale * 0.5;
+    local text_color = [50,50,50];
 
     local text_list = [];
 

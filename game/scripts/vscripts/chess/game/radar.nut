@@ -11,11 +11,9 @@ target_radar_board = Entities.FindByName(target_radar_board, "target_radar_board
     local radar = {
 
         piece_models = [],
-        text = new_board_text(radar_board_pos, RADAR_BOARD_SCALE, [20,20,20]),
 
         function reset() {
             disable_pieces();
-            text.reset();
         }
         function disable_pieces() {
             foreach (piece in piece_models) {
@@ -30,7 +28,7 @@ target_radar_board = Entities.FindByName(target_radar_board, "target_radar_board
                 if (!piece.captured) {
                     local prop = new_prop_dynamic();
                     prop.disable_shadows();
-                    prop.set_scale(RADAR_BOARD_SCALE);
+                    prop.set_scale(RADAR_BOARD_SCALE * 0.85);
 
                     switch (piece.type) {
                         case PIECE_TYPE.PAWN:

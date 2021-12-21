@@ -21,10 +21,10 @@ enum PIECE_TYPE {
 
 ::COLOR <- {
     PAWN_PROMOTION_BACKGROUND = [65,65,65],
-    VALID_MOVE = [65, 145, 111],
+    VALID_MOVE = [161, 147, 132],
     LAST_MOVE = [255, 198, 66],
-    HOVERED = [0, 200, 111],
-    SELECTED = [255, 227, 66],
+    HOVERED = [82, 149, 191],
+    SELECTED = [0, 200, 111],
     IN_CHECK = [230, 72, 57],
 }
 
