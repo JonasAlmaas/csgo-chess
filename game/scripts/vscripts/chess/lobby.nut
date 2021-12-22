@@ -51,6 +51,7 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
         temp_player_black = null,
 
         time_count_down_start = null,
+        time_last_message = 0.0,
 
         function reset() {
             waiting = true;
@@ -66,9 +67,12 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
             temp_player_white = null;
             temp_player_black = null;
 
+            local player_count = 0;
             local player = null;
             while ((player = Entities.FindByClassname(player, "*player*")) != null) {
                 if (player.GetClassname() == "player") {
+                    player_count += 1;
+
                     local pos = player.GetOrigin();
 
                     local offset_white = math.vec_abs(lobby_center_zone_white_pos - pos);
@@ -77,6 +81,16 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
                     if (offset_white.x <= zone_radius && offset_white.y <= zone_radius) { temp_player_white = player; }
                     if (offset_black.x <= zone_radius && offset_black.y <= zone_radius) { temp_player_black = player; }
                 }
+            }
+
+            if (Time() - time_last_message >= 5) {
+                if (player_count < 2) {
+                    console.chat("\n " + console.color.grey + "Waiting for a second player...")
+                }
+                else if (!(temp_player_white && temp_player_black)) {
+                    console.chat("\n " + console.color.grey + "Select starting teams by moving over to the column on you choice")
+                }
+                time_last_message = Time();
             }
 
             if (count_down_text_1) { count_down_text_1.kill(); }
