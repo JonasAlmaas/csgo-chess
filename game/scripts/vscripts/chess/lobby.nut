@@ -40,8 +40,8 @@ teleport_target_lobby_black = Entities.FindByName(teleport_target_lobby_black, "
         zone_radius = 320,
 
         font_size = 100,
-        text_color_white = [40,40,40],
-        text_color_black = [190,190,190],
+        text_color_white = [156, 107, 91],
+        text_color_black = [239, 213, 187],
         count_down_time = 6.0,
 
         count_down_text_1 = null,
