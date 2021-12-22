@@ -1,4 +1,4 @@
 VertexLitGeneric
 {
-	$basetexture "chess/models/blank"
+	$basetexture "chess/models/chess_pieces_c"
 }

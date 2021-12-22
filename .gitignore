@@ -38,6 +38,9 @@
 !source_files/sound/**/*.mp3
 !source_files/sound/**/*.wav
 
+# except Workshop stuff
+!source_files/workshop/**
+
 # except files
 !.gitignore
 !.gitattributes
