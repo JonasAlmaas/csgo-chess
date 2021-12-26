@@ -46,6 +46,9 @@
 !.gitattributes
 !/**.txt
 
+# ignore some files
+**/*.unpacked
+
 # ignore autosave
 **/.autosave/
 source_files/models/basalt_columns/Exports/basalt column_zbrushpostmax.fbx
